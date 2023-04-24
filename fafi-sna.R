@@ -8,6 +8,7 @@ library(AnthroTools)
 library(scales)
 library(ggpubr)
 library(info.centrality)
+library(CINNA)
 library(glue)
 
 the.palette <<- c("FL" = "#6929c4", "NC" = "#1192e8", "PA" = "#005d5d",
@@ -48,7 +49,7 @@ calculate.salience <- function(the.frame, the.grouping, the.file) {
   the.salience <- CalculateSalience(anthro.frame, GROUPING = "GROUPING")
   }
   code.salience <- SalienceByCode(the.salience, dealWithDoubles = "MAX")
-  write_csv(analysis.network.data, the.filename, append = FALSE)
+  write_csv(code.salience, the.filename, append = FALSE)
   return(code.salience)
 }
 
@@ -101,8 +102,8 @@ calculate.centrality <- function(the.frame, the.salience, the.file) {
   data.coreness <- coreness(the.graph, mode = "all")
   #data.nef <- network.efficiency(the.graph)
   #data.info <- info.centrality.network(the.graph)
-  data.har <- harmonic_centrality(the.graph)
-  data.grp <- group_centrality(the.graph)
+  #data.har <- harmonic_centrality(the.graph)
+  #data.grp <- group_centrality(the.graph)
   data.lbc <- local_bridging_centrality(the.graph)
   #data.alpha <- alpha_centrality(the.graph)
   #data.auth <- authority_score(the.graph)
@@ -114,8 +115,8 @@ calculate.centrality <- function(the.frame, the.salience, the.file) {
                                       coreness = data.coreness,
                                       #efficiency = data.nef,
                                       #info = data.info,
-                                      harmonic = data.har,
-                                      group = data.grp,
+                                      #harmonic = data.har,
+                                      #group = data.grp,
                                       lbc = data.lbc)
   analysis.network.data$actor <- rownames(analysis.network.data)
   rownames(analysis.network.data) <- NULL
@@ -129,32 +130,20 @@ calculate.centrality <- function(the.frame, the.salience, the.file) {
 
 calculate.keyactors <- function(the.frame, the.file) {
   the.filename <- glue("output/keyactors_{the.file}.pdf")
-  table.filename <- glue("output/table_{the.file}_keyactors.pdf")
+  table.filename <- glue("output/table_{the.file}_keyactors.csv")
   key.frame <- the.frame %>%
-    select(betweenness, eigen)
+    select(actor, betweenness, eigen)
   key.frame$scaled_betweenness <-
     rescale(key.frame$betweenness, to = c(0.01, 0.99))
   key.frame$scaled_eigen <- rescale(key.frame$eigen, to = c(0, 1))
-  key.frame$interaction_score <-
-    (key.frame$scaled_betweenness * key.frame$scaled_eigen)
-  key.frame$interaction_score <-
-    rescale(key.frame$interaction_score, to = c(0, 1))
-  key.frame$actor <- rownames(key.frame)
-  rownames(key.frame) <- NULL
-  #key.frame$cluster <- the.cluster
-  key.res <- lm(eigen ~ betweenness, data = key.frame)$residuals
-  key.frame <- transform(key.frame, residuals = key.res)
+#  key.frame$interaction_score <-
+#    (key.frame$scaled_betweenness * key.frame$scaled_eigen)
+#  key.frame$interaction_score <-
+#    rescale(key.frame$interaction_score, to = c(0, 1))
+#  key.res <- lm(eigen ~ betweenness, data = key.frame)$residuals
+#  key.frame <- transform(key.frame, residuals = key.res)
   key.frame <- key.frame %>%
-    select(
-      actor,
-      betweenness,
-      scaled_betweenness,
-      eigen,
-      scaled_eigen,
-      interaction_score,
-      residuals
-    ) #%>%
-    #filter(!manuscriptID %in% analysis.cluster.frame$manuscriptID)
+    select(actor, betweenness, scaled_betweenness, eigen, scaled_eigen)
   node.data <- data.frame(actor = key.frame$actor) %>%
     mutate(color_code = substr(key.frame$actor, 1, 2))
   key.frame <- key.frame %>%
@@ -193,9 +182,9 @@ calculate.keyactors <- function(the.frame, the.file) {
       show.legend = FALSE,
       color = "color_code",
       palette = the.palette,
-      legend = "none",
       conf.int = FALSE, 
-      cor.coef = FALSE
+      cor.coef = FALSE,
+      legend = "none"
     ) +
     #geom_smooth(method = "lm", color = "#EEEEEE", se = FALSE, fullrange = TRUE, linetype = "solid") +
     #scale_color_gradient2(low = iu.gradient$low[the.cluster],
@@ -236,7 +225,7 @@ calculate.keyactors <- function(the.frame, the.file) {
   #print(key.plot)
   key.frame <- key.frame %>%
     #dplyr::group_by(keystatus) %>%
-    arrange(desc(keystatus), desc(interaction_score), actor)# %>%
+    arrange(desc(keystatus), actor)# %>%
   #slice(1:20) %>% ungroup()
   ggsave(key.plot, filename = the.filename, width = 11.5, height = 8, units = "in", dpi = 300)
   write_csv(key.frame, table.filename, append = FALSE)
@@ -359,25 +348,25 @@ full.key <- calculate.keyactors(full.cent, "full")
 
 pates.cent <- calculate.centrality(pates.frame, pates.salience, "pates")
 
-#pates.key <- calculate.keyactors(pates.cent)
+pates.key <- calculate.keyactors(pates.cent, "pates")
 
 ncfl.cent <- calculate.centrality(ncfl.frame, ncfl.salience, "ncfl")
 
-#ncfl.key <- calculate.keyactors(ncfl.full.cent)
+ncfl.key <- calculate.keyactors(ncfl.cent, "ncfl")
 
 nc.cent <- ncfl.frame |>
   select("from", "to") |>
   dplyr::filter(from == "NC01" | from == "NC02" | from == "NC03") |>
   calculate.centrality(nc.salience, "nc")
 
-#nc.key <- calculate.keyactors(nc.cent)
+nc.key <- calculate.keyactors(nc.cent, "nc")
 
 fl.cent <- ncfl.frame |>
   select("from", "to") |>
   dplyr::filter(from == "FL01" | from == "FL02" | from == "FL03") |>
   calculate.centrality(fl.salience, "fl")
 
-#fl.key <- calculate.keyactors(fl.cent)
+fl.key <- calculate.keyactors(fl.cent, "fl")
 
 
 
