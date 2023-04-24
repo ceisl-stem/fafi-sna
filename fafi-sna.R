@@ -134,7 +134,7 @@ calculate.keyactors <- function(the.frame, the.file) {
   key.frame <- the.frame %>%
     select(actor, betweenness, eigen)
   key.frame$scaled_betweenness <-
-    rescale(key.frame$betweenness, to = c(0.01, 0.99))
+    rescale(key.frame$betweenness, to = c(0, 1))
   key.frame$scaled_eigen <- rescale(key.frame$eigen, to = c(0, 1))
 #  key.frame$interaction_score <-
 #    (key.frame$scaled_betweenness * key.frame$scaled_eigen)
@@ -159,6 +159,14 @@ calculate.keyactors <- function(the.frame, the.file) {
                                     scaled_betweenness > key.ymedian) ~ "Gatekeeper"
     )) %>%
     na.omit()
+  
+  pt.count <- key.frame %>%
+    count(keystatus) %>%
+    filter(keystatus == "Pulse-Taker") %>%
+    pull(n)
+  
+  pt.count <- ifelse(is.numeric(pt.count), pt.count, 0)
+  pt.count <- pt.count %>% replace_na(0)
   
   key.xmin <- min(key.frame$scaled_betweenness) - 0.1
   key.xmax <- max(key.frame$scaled_betweenness) + 0.1
@@ -211,17 +219,12 @@ calculate.keyactors <- function(the.frame, the.file) {
       ),
       color = "#330D2B",
       fill = "#DECADC"
-    ) +
-    geom_label(
-      aes(
-        x = key.xmin,
-        y = key.ymax,
-        label = "Pulse-Takers",
-        hjust = 0
-      ),
-      color = "#330D2B",
-      fill = "#DECADC"
     )
+  if(pt.count != 0) {
+    key.plot <- key.plot +
+      geom_label(aes(x = key.xmin, y = key.ymax, label = "Pulse-Takers", hjust = 0),
+        color = "#330D2B", fill = "#DECADC")
+  }
   #print(key.plot)
   key.frame <- key.frame %>%
     #dplyr::group_by(keystatus) %>%
