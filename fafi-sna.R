@@ -1,6 +1,6 @@
 library(readr)
-library(dplyr)
 library(tidyr)
+library(dplyr)
 library(igraph)
 library(tidygraph)
 library(ggraph)
@@ -10,6 +10,7 @@ library(ggpubr)
 library(info.centrality)
 library(CINNA)
 library(glue)
+library(rio)
 
 the.palette <<- c("FL" = "#6929c4", "NC" = "#1192e8", "PA" = "#005d5d",
                   "CF" = "#9f1853", "FF" = "#fa4d56", "IL" = "#570408",
@@ -235,23 +236,25 @@ calculate.keyactors <- function(the.frame, the.file) {
   return(key.frame)
 }
 
-pates.frame <- read_csv("data/pates-sna-01.csv", show_col_types = FALSE) |>
+pates.frame <- import("https://osf.io/download/62qpa/", format = "csv") |>
   mutate_all(toupper) |>
   pivot_longer(cols = starts_with("Q"),
                names_to = "question",
                values_to = "to") |>
-  na.omit() |>
-  select("question", "from" = "id", "to") |>
-  separate(col = question, into = c("question", "order"), sep = "_")
+  drop_na() |>
+  dplyr::select("question", "from" = "id", "to") |>
+  separate(col = question, into = c("question", "order"), sep = "_") |>
+  dplyr::filter(to != "")
 
-ncfl.frame <- read_csv("data/ncfl-sna-01.csv", show_col_types = FALSE) |>
+ncfl.frame <- import("https://osf.io/download/ghz3c/", format = "csv") |>
   mutate_all(toupper) |>
   pivot_longer(cols = starts_with("Q"),
                names_to = "question",
                values_to = "to") |>
-  na.omit() |>
-  select("question", "from" = "ID", "to") |>
-  separate(col = question, into = c("question", "order"), sep = "_")
+  drop_na() |>
+  dplyr::select("question", "from" = "ID", "to") |>
+  separate(col = question, into = c("question", "order"), sep = "_") |>
+  dplyr::filter(to != "")
 
 full.frame <- rbind(pates.frame, ncfl.frame)
 
