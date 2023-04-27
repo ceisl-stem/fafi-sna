@@ -21,6 +21,16 @@ the.palette <<- c("FL" = "#6929c4", "NC" = "#1192e8", "PA" = "#005d5d",
                   "ST" = "#b28600", "UA" = "#009d9a", "UF" = "#012749",
                   "US" = "#8a3800")
 
+the.abbrev <<- data.frame(color_code = c("FL", "NC", "FF", "IL", "OR", "OT", "SA",
+                                     "ST", "UA", "UF", "US", "PA", "CF"),
+                          full = c("Family Leader", "Neighborhood Caucus Member",
+                                   "Friend or Family", "Institutional Leader",
+                                   "Other Resource", "Other Therapist",
+                                   "School Administrator", "School Teacher",
+                                   "University Advisor", "University Faculty",
+                                   "University Staff", "Teacher Education Student",
+                                   "Child"))
+
 #recolor.icon <- function(the.color) {
 #  the.icon <- image_colorize(person.icon, 100, the.palette[the.color])
 #  the.icon <- as.raster(the.icon)
@@ -84,16 +94,21 @@ get_icon <- function(the.code) {
 }
 
 draw.graph <- function(the.graph, the.salience, the.file) {
+  the.salience <- full.salience
   the.filename <- glue("output/sna_{the.file}-plot.pdf")
   the.salience <- the.salience %>%
     select(CODE, SmithsS) %>%
     dplyr::rename("name" = "CODE")
   node.data <- data.frame(name = V(the.graph)$name) %>%
+    mutate(id_no = substr(V(the.graph)$name, 3, 4)) %>%
     mutate(color_code = substr(V(the.graph)$name, 1, 2)) %>%
     dplyr::left_join(the.salience) %>%
+    dplyr::left_join(the.abbrev) %>%
+    mutate(label = glue("{full} {id_no}")) %>%
     replace_na(list(SmithsS = 0.01))
   V(the.graph)$color_code <- node.data$color_code
   V(the.graph)$size_code <- (node.data$SmithsS) * 100
+  V(the.graph)$label <- node.data$label
   the.plot <- the.graph |>
     ggraph(layout = "fr") +
     geom_edge_fan(color = "#A7A9AB") +
@@ -102,7 +117,7 @@ draw.graph <- function(the.graph, the.salience, the.file) {
                         show.legend = FALSE) +
     scale_size_continuous(range = c(2.5,10)) +
     scale_color_manual(values = the.palette) +
-    geom_node_text(aes(label = name), repel = TRUE) +
+    geom_node_text(aes(label = label), repel = TRUE) +
     labs(edge_width = "Letters") +
     theme_graph()
   #print(the.plot)
@@ -177,7 +192,10 @@ calculate.keyactors <- function(the.frame, the.file) {
   node.data <- data.frame(actor = key.frame$actor) %>%
     mutate(color_code = substr(key.frame$actor, 1, 2))
   key.frame <- key.frame %>%
-    left_join(node.data, by = "actor")
+    left_join(node.data, by = "actor") %>%
+    mutate(id_no = substr(key.frame$actor, 3, 4)) %>%
+    dplyr::left_join(the.abbrev) %>%
+    mutate(label = glue("{full} {id_no}"))
   key.ymedian <- median(key.frame$eigen)
   key.xmedian <- median(key.frame$betweenness)
   key.ymean <- mean(key.frame$eigen)
@@ -220,7 +238,7 @@ calculate.keyactors <- function(the.frame, the.file) {
       key.frame,
       x = "betweenness",
       y = "eigen",
-      label = "actor",
+      label = "label",
       label.rectangle = FALSE,
       repel = TRUE,
       theme = theme_minimal(),
