@@ -1,4 +1,5 @@
 library(readr)
+#library(ggimage)
 library(tidyr)
 library(dplyr)
 library(igraph)
@@ -11,6 +12,8 @@ library(info.centrality)
 library(CINNA)
 library(glue)
 library(rio)
+#library(magick)
+library(intergraph)
 
 the.palette <<- c("FL" = "#6929c4", "NC" = "#1192e8", "PA" = "#005d5d",
                   "CF" = "#9f1853", "FF" = "#fa4d56", "IL" = "#570408",
@@ -18,6 +21,28 @@ the.palette <<- c("FL" = "#6929c4", "NC" = "#1192e8", "PA" = "#005d5d",
                   "ST" = "#b28600", "UA" = "#009d9a", "UF" = "#012749",
                   "US" = "#8a3800")
 
+#recolor.icon <- function(the.color) {
+#  the.icon <- image_colorize(person.icon, 100, the.palette[the.color])
+#  the.icon <- as.raster(the.icon)
+#  return(the.icon)
+#}
+
+#person.icon <<- image_read("person-icon.png")
+
+#icon.list <<- list("FL" = recolor.icon("FL"), "NC" = recolor.icon("NC"),
+#                  "FF" = recolor.icon("FF"), "IL" = recolor.icon("IL"),
+#                  "OR" = recolor.icon("OR"), "OT" = recolor.icon("OT"),
+#                  "SA" = recolor.icon("SA"), "ST" = recolor.icon("ST"),
+#                  "UA" = recolor.icon("UA"), "UF" = recolor.icon("UF"),
+#                  "US" = recolor.icon("US"))
+#icon.frame <<- data.frame(code = c("FL", "NC", "FF", "IL", "OR", "OT", "SA",
+#                                   "ST", "UA", "UF", "US"),
+#                          icon = list(recolor.icon("FL"), recolor.icon("NC"),
+#                                      recolor.icon("FF"), recolor.icon("IL"),
+#                                      recolor.icon("OR"), recolor.icon("OT"),
+#                                      recolor.icon("SA"), recolor.icon("ST"),
+#                                      recolor.icon("UA"), recolor.icon("UF"),
+#                                      recolor.icon("US")))
 
 set.graph <- function(the.frame) {
   the.graph <- the.frame |>
@@ -54,6 +79,10 @@ calculate.salience <- function(the.frame, the.grouping, the.file) {
   return(code.salience)
 }
 
+get_icon <- function(the.code) {
+  icon.list[[the.code]]
+}
+
 draw.graph <- function(the.graph, the.salience, the.file) {
   the.filename <- glue("output/sna_{the.file}-plot.pdf")
   the.salience <- the.salience %>%
@@ -65,20 +94,20 @@ draw.graph <- function(the.graph, the.salience, the.file) {
     replace_na(list(SmithsS = 0.01))
   V(the.graph)$color_code <- node.data$color_code
   V(the.graph)$size_code <- (node.data$SmithsS) * 100
-  
-  the.graph <- the.graph |>
+  the.plot <- the.graph |>
     ggraph(layout = "fr") +
-    geom_edge_fan() +
+    geom_edge_fan(color = "#A7A9AB") +
     geom_node_point(aes(color = color_code,
                         size = size_code),
-                    show.legend = F) +
+                        show.legend = FALSE) +
     scale_size_continuous(range = c(2.5,10)) +
     scale_color_manual(values = the.palette) +
     geom_node_text(aes(label = name), repel = TRUE) +
     labs(edge_width = "Letters") +
     theme_graph()
-  ggsave(the.graph, filename = the.filename, width = 11.5, height = 8, units = "in", dpi = 300)
-  return(the.graph)
+  #print(the.plot)
+  ggsave(the.plot, filename = the.filename, width = 11.5, height = 8, units = "in", dpi = 300)
+  return(the.plot)
 }
 
 calculate.centrality <- function(the.frame, the.salience, the.file) {
@@ -134,59 +163,72 @@ calculate.keyactors <- function(the.frame, the.file) {
   table.filename <- glue("output/table_{the.file}_keyactors.csv")
   key.frame <- the.frame %>%
     select(actor, betweenness, eigen)
-  key.frame$scaled_betweenness <-
-    rescale(key.frame$betweenness, to = c(0, 1))
-  key.frame$scaled_eigen <- rescale(key.frame$eigen, to = c(0, 1))
-#  key.frame$interaction_score <-
-#    (key.frame$scaled_betweenness * key.frame$scaled_eigen)
-#  key.frame$interaction_score <-
-#    rescale(key.frame$interaction_score, to = c(0, 1))
-#  key.res <- lm(eigen ~ betweenness, data = key.frame)$residuals
-#  key.frame <- transform(key.frame, residuals = key.res)
-  key.frame <- key.frame %>%
-    select(actor, betweenness, scaled_betweenness, eigen, scaled_eigen)
+  #key.frame$scaled_betweenness <-
+  #  rescale(key.frame$betweenness, to = c(-1, 1))
+  #key.frame$scaled_eigen <- rescale(key.frame$eigen, to = c(-1, 1))
+  #key.frame$interaction_score <-
+  #  (key.frame$scaled_betweenness * key.frame$scaled_eigen)
+  #key.frame$interaction_score <-
+  #  rescale(key.frame$interaction_score, to = c(-1, 1))
+  key.res <- lm(eigen ~ betweenness, data = key.frame)$residuals
+  key.frame <- transform(key.frame, residuals = key.res)
+  #key.frame <- key.frame %>%
+  #  select(actor, betweenness, eigen)
   node.data <- data.frame(actor = key.frame$actor) %>%
     mutate(color_code = substr(key.frame$actor, 1, 2))
   key.frame <- key.frame %>%
     left_join(node.data, by = "actor")
   key.ymedian <- median(key.frame$eigen)
-  key.xmedian <- median(key.frame$scaled_betweenness)
+  key.xmedian <- median(key.frame$betweenness)
+  key.ymean <- mean(key.frame$eigen)
+  key.xmean <- mean(key.frame$betweenness)
+  key.xmin <- min(key.frame$betweenness)# - 0.1
+  key.xmax <- max(key.frame$betweenness)# + 0.1
+  key.ymin <- min(key.frame$eigen)# - 0.1
+  key.ymax <- max(key.frame$eigen)# + 0.1
+  key.xmid <- (key.xmin + key.xmax)/2
+  key.ymid <- (key.ymin + key.ymax)/2
   key.frame <- key.frame %>%
-    mutate(keystatus = case_when((scaled_eigen > key.ymedian &
-                                    scaled_betweenness > key.xmedian) ~ "Hub",
-                                 (scaled_eigen > key.ymedian &
-                                    scaled_betweenness < key.xmedian) ~ "Pulse-Taker",
-                                 (scaled_eigen < key.ymedian &
-                                    scaled_betweenness > key.ymedian) ~ "Gatekeeper"
-    )) %>%
+    mutate(keystatus = case_when((eigen > key.ymean & betweenness > key.xmean) ~ "Sage",
+                                 (eigen > key.ymean & betweenness < key.xmean) ~ "Steward",
+                                 (eigen < key.ymean & betweenness > key.xmean) ~ "Weaver")) %>%
     na.omit()
   
-  pt.count <- key.frame %>%
-    count(keystatus) %>%
-    filter(keystatus == "Pulse-Taker") %>%
-    pull(n)
+#  pt.count <- key.frame %>%
+#    count(keystatus) %>%
+#    filter(keystatus == "Pulse-Taker") %>%
+#    pull(n)
+#  pt.count <- ifelse(is.numeric(pt.count), pt.count, 0)
+#  pt.count <- pt.count %>% replace_na(0)
+
+#  wv.count <- key.frame %>%
+#    count(keystatus) %>%
+#    filter(keystatus == "Weaver") %>%
+#    pull(n)
+#  wv.count <- ifelse(is.numeric(wv.count), wv.count, 0)
+#  wv.count <- wv.count %>% replace_na(0)
   
-  pt.count <- ifelse(is.numeric(pt.count), pt.count, 0)
-  pt.count <- pt.count %>% replace_na(0)
-  
-  key.xmin <- min(key.frame$scaled_betweenness) - 0.1
-  key.xmax <- max(key.frame$scaled_betweenness) + 0.1
-  key.ymin <- min(key.frame$scaled_eigen) - 0.1
-  key.ymax <- max(key.frame$scaled_eigen) + 0.1
-  
+#  hb.count <- key.frame %>%
+#    count(keystatus) %>%
+#    filter(keystatus == "Hub") %>%
+#    pull(n)
+#  hb.count <- ifelse(is.numeric(hb.count), hb.count, 0)
+#  hb.count <- hb.count %>% replace_na(0)
+    
   key.plot <-
     ggscatter(
       key.frame,
-      x = "scaled_betweenness",
-      y = "scaled_eigen",
+      x = "betweenness",
+      y = "eigen",
       label = "actor",
       label.rectangle = FALSE,
       repel = TRUE,
       theme = theme_minimal(),
-      xlab = "Betweenness Centrality (scaled)",
-      ylab = "Eigenvector Centrality (scaled)",
+      xlab = "Betweenness Centrality",
+      ylab = "Eigenvector Centrality",
       point = TRUE,
-      ylim = c(key.ymin, key.ymax),
+      #size = "residuals",
+      ylim = c(0, 1),
       xlim = c(key.xmin, key.xmax),
       show.legend = FALSE,
       color = "color_code",
@@ -195,38 +237,28 @@ calculate.keyactors <- function(the.frame, the.file) {
       cor.coef = FALSE,
       legend = "none"
     ) +
-    #geom_smooth(method = "lm", color = "#EEEEEE", se = FALSE, fullrange = TRUE, linetype = "solid") +
-    #scale_color_gradient2(low = iu.gradient$low[the.cluster],
-    #                      high = iu.gradient$high[the.cluster],
-    #                      mid = iu.gradient$mid[the.cluster]) +
-    geom_hline(yintercept = key.ymedian) +
-    geom_vline(xintercept = key.xmedian) +
-    geom_label(
-      aes(
-        x = key.xmax,
-        y = key.ymin,
-        label = "Gatekeepers",
-        hjust = 1
-      ),
-      color = "#330D2B",
-      fill = "#DECADC"
-    ) +
-    geom_label(
-      aes(
-        x = key.xmax,
-        y = key.ymax,
-        label = "Hubs",
-        hjust = 1
-      ),
-      color = "#330D2B",
-      fill = "#DECADC"
-    )
-  if(pt.count != 0) {
-    key.plot <- key.plot +
-      geom_label(aes(x = key.xmin, y = key.ymax, label = "Pulse-Takers", hjust = 0),
-        color = "#330D2B", fill = "#DECADC")
-  }
-  #print(key.plot)
+    geom_hline(yintercept = key.ymean, color = "#243142", alpha = 0.2) +
+    geom_vline(xintercept = key.xmean, color = "#243142", alpha = 0.2) +
+    geom_label(aes(x = (key.xmean - key.xmin)/2, y = (key.ymean + key.ymax)/2, label = "Stewards", hjust = 0.5),
+               color = "#243142", fill = "#EEEEEE") +
+    geom_label(aes(x = (key.xmean + key.xmax)/2, y = (key.ymean - key.ymin)/2,
+                   label = "Weavers", hjust = 0.5), color = "#243142", fill = "#EEEEEE") +
+    geom_label(aes(x = (key.xmean + key.xmax)/2, y = (key.ymean + key.ymax)/2,
+                   label = "Sages", hjust = 0.5), color = "#243142", fill = "#EEEEEE")
+#  if(pt.count != 0) {
+#    key.plot <- key.plot +
+#      geom_label(aes(x = (key.xmean - key.xmin)/2, y = (key.ymean + key.ymax)/2, label = "Pulse-Takers", hjust = 0.5),
+#        color = "#243142", fill = "#EEEEEE")
+#  }
+#  if(wv.count != 0) {
+#    geom_label(aes(x = (key.xmean + key.xmax)/2, y = (key.ymean - key.ymin)/2,
+#        label = "Weavers", hjust = 0.5), color = "#243142", fill = "#EEEEEE")
+#  }
+#  if(hb.count != 0) {
+#    geom_label(aes(x = (key.xmean + key.xmax)/2, y = (key.ymean + key.ymax)/2,
+#                   label = "Hubs", hjust = 0.5), color = "#243142", fill = "#EEEEEE")
+#  }
+#  print(key.plot)
   key.frame <- key.frame %>%
     #dplyr::group_by(keystatus) %>%
     arrange(desc(keystatus), actor)# %>%
@@ -278,7 +310,6 @@ fl.salience <- ncfl.frame |>
 #  count(from, to, name = "weight")
 #geom_edge_link(aes(edge_width = weight)) + 
 #scale_edge_width_continuous(range = c(0.1, .6)) +
-
 
 full.graph <- set.graph(full.frame)
 full.plot <- draw.graph(full.graph, full.salience, "full")
@@ -360,19 +391,19 @@ ncfl.cent <- calculate.centrality(ncfl.frame, ncfl.salience, "ncfl")
 
 ncfl.key <- calculate.keyactors(ncfl.cent, "ncfl")
 
-nc.cent <- ncfl.frame |>
-  select("from", "to") |>
-  dplyr::filter(from == "NC01" | from == "NC02" | from == "NC03") |>
-  calculate.centrality(nc.salience, "nc")
+#nc.cent <- ncfl.frame |>
+#  select("from", "to") |>
+#  dplyr::filter(from == "NC01" | from == "NC02" | from == "NC03") |>
+#  calculate.centrality(nc.salience, "nc")
 
-nc.key <- calculate.keyactors(nc.cent, "nc")
+#nc.key <- calculate.keyactors(nc.cent, "nc")
 
-fl.cent <- ncfl.frame |>
-  select("from", "to") |>
-  dplyr::filter(from == "FL01" | from == "FL02" | from == "FL03") |>
-  calculate.centrality(fl.salience, "fl")
+#fl.cent <- ncfl.frame |>
+#  select("from", "to") |>
+#  dplyr::filter(from == "FL01" | from == "FL02" | from == "FL03") |>
+#  calculate.centrality(fl.salience, "fl")
 
-fl.key <- calculate.keyactors(fl.cent, "fl")
+#fl.key <- calculate.keyactors(fl.cent, "fl")
 
 
 
