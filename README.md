@@ -12,7 +12,7 @@ This project also seeks to humanize some of the language around social network a
  * **Stewards** (typically, "gatekeepers")
  * **Weavers** (typically, "pulsetakers")
 
-In addition, we look at a variety of centralities as a way to understanding the ways in which the structures of the network can inform the *dispositions*, *agency*, *reputation*, and *access* in working across networks.
+In addition, we look at a variety of centralities as a way to understanding the ways in which the structures of the network can illuminate the *dispositions*, *agency*, *reputation*, and *access* in working across networks.
 
 Funded in part by a [National Association of Family, School, and Community Engagement Minigrant](https://nafsce.org/page/MiniGrant).
 
