@@ -1,6 +1,6 @@
-# Family as Faculty as Infrastructure Social Network Analysis
-
 ![FAFI](family_as_faculty.png)
+
+# Family as Faculty as Infrastructure Social Network Analysis
 
 Funded in part by a [National Association of Family, School, and Community Engagement Minigrant](https://nafsce.org/page/MiniGrant).
 
