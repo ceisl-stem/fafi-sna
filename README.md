@@ -2,7 +2,17 @@
 
 # Family as Faculty as Infrastructure Social Network Analysis
 
-Funded through a Family Engagement and Educator Preparation Innovation Project grant from the National Association for Family, School, and Community Engagement (NAFSCE) and integrated with the SLRP project, FAFI prepares and engages family and community members—particularly those representing intersectionally marginalized identities—as instructors for pre-admissions teacher education students. Family and community members are provided with voice and input in the teacher preparation process and teacher education students develop the dispositions and practices to hear and learn from families.
+FAFI prepares and engages family and community members—particularly those representing intersectionally marginalized identities—as instructors for pre-admissions teacher education students. Family and community members are provided with voice and input in the teacher preparation process and teacher education students develop the dispositions and practices to hear and learn from families.
+
+This component of the larger project examines the ways in which participants interact across their networks and engage in working together to support and facilitate learning for children. This is the [R code](https://www.r-project.org/) that drives the social network analysis. Utilized packages are listed in the code itself.
+
+This project also seeks to humanize some of the language around social network analysis. For example, the descriptive labels for a key actor analysis have been reframed as:
+
+ * **Sages** (typically, "hubs")
+ * **Stewards** (typically, "gatekeepers")
+ * **Weavers** (typically, "pulsetakers")
+
+In addition, we look at a variety of centralities as a way to understanding the ways in which the structures of the network can inform the *dispositions*, *agency*, *reputation*, and *access* in working across networks.
 
 Funded in part by a [National Association of Family, School, and Community Engagement Minigrant](https://nafsce.org/page/MiniGrant).
 
