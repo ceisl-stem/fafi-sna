@@ -79,8 +79,12 @@ library(AnthroTools)
 
 ### Other R Libraries
 
-The other libraries utilized for this analysis . readr [@wickham2023readr].
-rio [@chan2021rio]. Glue [@hester2022glue], tidyr [@wickham2023tidyr], and dplyr [@wickham2023dplyr].
+The other libraries utilized for this analysis provide extensions for base R in 
+working with data. The readr package [@wickham2023readr] allows for efficient and
+straightforward reading and writing of local csv files, while the rio [@chan2021rio]
+package allows for the reading of web-based csv files as the datasets for this project
+are stored in an [OSF repository](https://osf.io/y3xz4/?view_only=b810bc6716624ed0bc843833ee2cf61e). The glue [@hester2022glue], tidyr [@wickham2023tidyr], and dplyr [@wickham2023dplyr]
+packages are used to process data.
 
 ```{r standard-libraries, message = FALSE, warning = FALSE, echo = TRUE}
 library(readr)
@@ -92,15 +96,22 @@ library(dplyr)
 
 ## Define Constants
 
-Use the [IBM Carbon Design System color pallete](https://carbondesignsystem.com/data-visualization/color-palettes/).
+The following constants are utilized across the project. The [IBM Carbon Design System color pallete](https://carbondesignsystem.com/data-visualization/color-palettes/), a large
+color-blind friendly data-oriented color palette, is used to represent various types of
+participants. `the.palette` links these participant types with color codes.
 
-```{r constants, message = FALSE, warning = FALSE, echo = TRUE}
+```{r color-constants, message = FALSE, warning = FALSE, echo = TRUE}
 the.palette <<- c("FL" = "#6929c4", "NC" = "#1192e8", "PA" = "#005d5d",
                   "CF" = "#9f1853", "FF" = "#fa4d56", "IL" = "#570408",
                   "OR" = "#198038", "OT" = "#002d9c", "SA" = "#ee538b",
                   "ST" = "#b28600", "UA" = "#009d9a", "UF" = "#012749",
                   "US" = "#8a3800")
+```
 
+Relatedly, `the.abbrev` dataframe provides links between the abbreviations for the
+participant types and the full descriptions of these participant types.
+
+```{r abbrev-constants, message = FALSE, warning = FALSE, echo = TRUE}
 the.abbrev <<- data.frame(color_code = c("FL", "NC", "FF", "IL", "OR", "OT", "SA",
                                      "ST", "UA", "UF", "US", "PA", "CF"),
                           full = c("Family Leader", "NC Member", "Friend/Family",

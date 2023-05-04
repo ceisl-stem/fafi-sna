@@ -1604,8 +1604,12 @@ provides functionality for working with freelist data and calculating Smith’s 
 </div>
 </div>
 <h3 id="other-r-libraries">Other R Libraries</h3>
-<p>The other libraries utilized for this analysis . readr <span class="citation" data-cites="wickham2023readr">(<a href="#ref-wickham2023readr" role="doc-biblioref">Wickham, Hester, and Bryan 2023</a>)</span>.
-rio <span class="citation" data-cites="chan2021rio">(<a href="#ref-chan2021rio" role="doc-biblioref">Chan et al. 2021</a>)</span>. Glue <span class="citation" data-cites="hester2022glue">(<a href="#ref-hester2022glue" role="doc-biblioref">Hester and Bryan 2022</a>)</span>, tidyr <span class="citation" data-cites="wickham2023tidyr">(<a href="#ref-wickham2023tidyr" role="doc-biblioref">Wickham, Vaughan, and Girlich 2023</a>)</span>, and dplyr <span class="citation" data-cites="wickham2023dplyr">(<a href="#ref-wickham2023dplyr" role="doc-biblioref">Wickham et al. 2023</a>)</span>.</p>
+<p>The other libraries utilized for this analysis provide extensions for base R in
+working with data. The readr package <span class="citation" data-cites="wickham2023readr">(<a href="#ref-wickham2023readr" role="doc-biblioref">Wickham, Hester, and Bryan 2023</a>)</span> allows for efficient and
+straightforward reading and writing of local csv files, while the rio <span class="citation" data-cites="chan2021rio">(<a href="#ref-chan2021rio" role="doc-biblioref">Chan et al. 2021</a>)</span>
+package allows for the reading of web-based csv files as the datasets for this project
+are stored in an <a href="https://osf.io/y3xz4/?view_only=b810bc6716624ed0bc843833ee2cf61e">OSF repository</a>. The glue <span class="citation" data-cites="hester2022glue">(<a href="#ref-hester2022glue" role="doc-biblioref">Hester and Bryan 2022</a>)</span>, tidyr <span class="citation" data-cites="wickham2023tidyr">(<a href="#ref-wickham2023tidyr" role="doc-biblioref">Wickham, Vaughan, and Girlich 2023</a>)</span>, and dplyr <span class="citation" data-cites="wickham2023dplyr">(<a href="#ref-wickham2023dplyr" role="doc-biblioref">Wickham et al. 2023</a>)</span>
+packages are used to process data.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://readr.tidyverse.org'>readr</a></span><span class='op'>)</span></span>
@@ -1616,16 +1620,23 @@ rio <span class="citation" data-cites="chan2021rio">(<a href="#ref-chan2021rio" 
 </div>
 </div>
 <h2 id="define-constants">Define Constants</h2>
-<p>Use the <a href="https://carbondesignsystem.com/data-visualization/color-palettes/">IBM Carbon Design System color pallete</a>.</p>
+<p>The following constants are utilized across the project. The <a href="https://carbondesignsystem.com/data-visualization/color-palettes/">IBM Carbon Design System color pallete</a>, a large
+color-blind friendly data-oriented color palette, is used to represent various types of
+participants. <code>the.palette</code> links these participant types with color codes.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>the.palette</span> <span class='op'>&lt;&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"FL"</span> <span class='op'>=</span> <span class='st'>"#6929c4"</span>, <span class='st'>"NC"</span> <span class='op'>=</span> <span class='st'>"#1192e8"</span>, <span class='st'>"PA"</span> <span class='op'>=</span> <span class='st'>"#005d5d"</span>,</span>
 <span>                  <span class='st'>"CF"</span> <span class='op'>=</span> <span class='st'>"#9f1853"</span>, <span class='st'>"FF"</span> <span class='op'>=</span> <span class='st'>"#fa4d56"</span>, <span class='st'>"IL"</span> <span class='op'>=</span> <span class='st'>"#570408"</span>,</span>
 <span>                  <span class='st'>"OR"</span> <span class='op'>=</span> <span class='st'>"#198038"</span>, <span class='st'>"OT"</span> <span class='op'>=</span> <span class='st'>"#002d9c"</span>, <span class='st'>"SA"</span> <span class='op'>=</span> <span class='st'>"#ee538b"</span>,</span>
 <span>                  <span class='st'>"ST"</span> <span class='op'>=</span> <span class='st'>"#b28600"</span>, <span class='st'>"UA"</span> <span class='op'>=</span> <span class='st'>"#009d9a"</span>, <span class='st'>"UF"</span> <span class='op'>=</span> <span class='st'>"#012749"</span>,</span>
-<span>                  <span class='st'>"US"</span> <span class='op'>=</span> <span class='st'>"#8a3800"</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='va'>the.abbrev</span> <span class='op'>&lt;&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>color_code <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"FL"</span>, <span class='st'>"NC"</span>, <span class='st'>"FF"</span>, <span class='st'>"IL"</span>, <span class='st'>"OR"</span>, <span class='st'>"OT"</span>, <span class='st'>"SA"</span>,</span>
+<span>                  <span class='st'>"US"</span> <span class='op'>=</span> <span class='st'>"#8a3800"</span><span class='op'>)</span></span></code></pre>
+</div>
+</div>
+<p>Relatedly, <code>the.abbrev</code> dataframe provides links between the abbreviations for the
+participant types and the full descriptions of these participant types.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>the.abbrev</span> <span class='op'>&lt;&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>color_code <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"FL"</span>, <span class='st'>"NC"</span>, <span class='st'>"FF"</span>, <span class='st'>"IL"</span>, <span class='st'>"OR"</span>, <span class='st'>"OT"</span>, <span class='st'>"SA"</span>,</span>
 <span>                                     <span class='st'>"ST"</span>, <span class='st'>"UA"</span>, <span class='st'>"UF"</span>, <span class='st'>"US"</span>, <span class='st'>"PA"</span>, <span class='st'>"CF"</span><span class='op'>)</span>,</span>
 <span>                          full <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Family Leader"</span>, <span class='st'>"NC Member"</span>, <span class='st'>"Friend/Family"</span>,</span>
 <span>                                   <span class='st'>"Institutional Leader"</span>, <span class='st'>"Other Resource"</span>, <span class='st'>"Therapist"</span>,</span>
