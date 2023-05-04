@@ -11,6 +11,10 @@ author:
   - name: Cristina Santamaría Graff
     affiliation: IU School of Education-Indianapolis
     affiliation_url: https://education.iupui.edu/
+  - name: Akaash Arora
+    affiliation: IU School of Education-Indianapolis
+  - name: Román Graff
+    affiliation: Ivy Tech Community College-Indianapolis
 slug: price2023fafsisna
 date: "`r Sys.Date()`"
 output:
@@ -41,27 +45,33 @@ I'm a bricoleur.
 ## Load Libraries
 
 Libraries are packages that are loaded in to extend the functionality to the base R
-programming language. This project 
+programming language. This project makes use of three different categories of libraries:
+**Network Graph Libraries**, a **Quantitative Anthropology Library**, and **Other R Libraries**.
 
 ### Network Graph Libraries
 
-The igraph library [@csard2006igraph], [@thomas2023tidygraph], [@pedersen2022ggraph]
+Network Graph Libraries allow for the construction, analysis, and visualization of
+social network data. The igraph library [@csard2006igraph] is the main social network
+analysis engine, while tidygraph [@thomas2023tidygraph] and ggraph [@pedersen2022ggraph]
+provide functionality for processing and visualizing social network graphs, respectively.
+Centiserve [@jalili2017centiserve] and CINNA [@ashtiani2019cinna] provide extended
+centrality algorithms.
 
 ```{r graph-libraries, message = FALSE, warning = FALSE, echo = TRUE}
 library(igraph)
 library(tidygraph)
 library(ggraph)
-library(igraphdata)
-library(influenceR)
 library(centiserve)
-library(info.centrality)
 library(CINNA)
 library(ggpubr)
 ```
 
 ### Quantitative Anthropology Library
 
-Blah AnthroTools blah [@purzycki2017anthrotools].
+Since participants are asked for names and roles, the [data collection process](https://osf.io/5tay8/?view_only=d3b7267695b443d9b6ff773579e77896) is 
+essentially a freelisting protocol [@quinlanFreelistingMethod2018]. Under that
+assumption, Smith's Salience (S) Score can be calculated. AnthroTools [@purzycki2017anthrotools]
+provides functionality for working with freelist data and calculating Smith's S.
 
 ```{r anthro-libraries, message = FALSE, warning = FALSE, echo = TRUE}
 library(AnthroTools)
@@ -69,18 +79,18 @@ library(AnthroTools)
 
 ### Other R Libraries
 
+The other libraries utilized for this analysis . readr [@wickham2023readr].
+rio [@chan2021rio]. Glue [@hester2022glue], tidyr [@wickham2023tidyr], and dplyr [@wickham2023dplyr].
+
 ```{r standard-libraries, message = FALSE, warning = FALSE, echo = TRUE}
-library(scales)
 library(readr)
-library(glue)
 library(rio)
+library(glue)
 library(tidyr)
 library(dplyr)
 ```
 
 ## Define Constants
-
-Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
 
 Use the [IBM Carbon Design System color pallete](https://carbondesignsystem.com/data-visualization/color-palettes/).
 
@@ -101,7 +111,7 @@ the.abbrev <<- data.frame(color_code = c("FL", "NC", "FF", "IL", "OR", "OT", "SA
 
 ## Define Functions
 
-### Initial Network Graph Functions
+### Initialize Network Graph
 
 ```{r function-set-graph, echo = TRUE}
 set.graph <- function(the.frame, the.salience) {
@@ -156,30 +166,13 @@ draw.graph <- function(the.graph, the.salience, the.file) {
 calculate.centrality <- function(the.graph, the.salience, the.file) {
   the.salience <- the.salience |>
     select("actor" = "CODE", "SmithsS")
-  data.in <- igraph::degree(the.graph, mode = "in")
-  data.out <- igraph::degree(the.graph, mode = "out")
-  data.betweenness <- igraph::betweenness(the.graph, directed = FALSE)
-  data.laplacian <- laplacian(the.graph, mode = "in")
-  data.leverage <- leverage(the.graph)
-  data.infocent <- info.centrality.vertex(the.graph)
-  data.leaderrank <- leaderrank(the.graph)
-  data.constraint <- constraint(the.graph)
-  data.katz <- katzcent(the.graph)
-  data.latora <- closeness.latora(the.graph)
-  data.bottleneck <- bottleneck(the.graph)
-  analysis.network.data <- data.frame(indegree = data.in,
-                                      outdegree = data.out,
-                                      betweenness = data.betweenness,
-                                      leaderrank = data.leaderrank,
-                                      laplace = data.laplacian,
-                                      leverage = data.leverage,
-                                      infocent = data.infocent,
-                                      constraint = data.constraint,
-                                      latora = data.latora,
-                                      bottleneck = data.bottleneck,
-                                      katz = data.katz)
-  #cor.test <- cor(analysis.network.data)
-  #corrplot::corrplot(cor.test, method = "square", type = "lower")
+  analysis.network.data <- data.frame(indegree = igraph::degree(the.graph, mode = "in"),
+                                      outdegree = igraph::degree(the.graph, mode = "out"),
+                                      betweenness = igraph::betweenness(the.graph, directed = FALSE),
+                                      leaderrank = leaderrank(the.graph),
+                                      laplace = laplacian(the.graph, mode = "in"),
+                                      leverage = leverage(the.graph),
+                                      latora = closeness.latora(the.graph))
   analysis.network.data$actor <- rownames(analysis.network.data)
   rownames(analysis.network.data) <- NULL
   analysis.network.data <- analysis.network.data |>
@@ -216,7 +209,7 @@ calculate.salience <- function(the.frame, the.grouping, the.file) {
   the.salience <- CalculateSalience(anthro.frame, GROUPING = "GROUPING")
   }
   code.salience <- SalienceByCode(the.salience, dealWithDoubles = "MAX")
-  #write_csv(code.salience, the.filename, append = FALSE)
+  write_csv(code.salience, the.filename, append = FALSE)
   return(code.salience)
 }
 ```
@@ -233,7 +226,6 @@ calculate.keyactors <- function(the.frame, the.salience, the.file) {
   max_leverage <- max(the.frame$leverage, na.rm = TRUE)
   min_leverage <- min(the.frame$leverage, na.rm = TRUE)
   key.frame <- the.frame %>%
-    #mutate(leverage = ((leverage - min_leverage) / (max_leverage - min_leverage))) |>
     select(actor, leverage, leaderrank)
   key.res <- lm(leaderrank ~ leverage, data = key.frame)$residuals
   key.frame <- transform(key.frame, residuals = abs(key.res))
@@ -332,8 +324,8 @@ calculate.keyactors <- function(the.frame, the.salience, the.file) {
 create.q.cent <- function(the.1, the.2, the.question) {
   the.q.cent <- bind_rows(the.1, the.2) |>
     mutate(question = the.question) |>
-    select(question, actor, betweenness, outdegree, indegree, constraint, leverage,
-           laplace, infocent, leaderrank, latora, SmithsS)
+    select(question, actor, betweenness, outdegree, indegree, leverage,
+           laplace, leaderrank, latora, SmithsS)
 }
 
 calculate.ranks <- function(the.cent) {
@@ -341,17 +333,14 @@ calculate.ranks <- function(the.cent) {
     mutate(outdegree_rank = dense_rank(desc(outdegree))) |>
     mutate(betweenness_rank = dense_rank(desc(betweenness))) |>
     mutate(indegree_rank = dense_rank(desc(indegree))) |>
-    mutate(constraint_rank = dense_rank(desc(constraint))) |>
     mutate(leverage_rank = dense_rank(desc(leverage))) |>
     mutate(laplacian_rank = dense_rank(desc(laplace))) |>
-    mutate(infocent_rank = dense_rank(desc(infocent))) |>
     mutate(leaderrank_rank = dense_rank(desc(leaderrank))) |>
     mutate(smiths_rank = dense_rank(desc(SmithsS))) |>
     mutate(latora_rank = dense_rank(desc(latora))) |>
-    mutate(leverage_rank = dense_rank(desc(leverage))) |>
     select(question, actor, outdegree, outdegree_rank, indegree, indegree_rank,
-           betweenness, betweenness_rank, constraint, constraint_rank,
-           leverage, leverage_rank, laplace, laplacian_rank, infocent, infocent_rank,
+           betweenness, betweenness_rank,
+           leverage, leverage_rank, laplace, laplacian_rank,
            latora, latora_rank, leaderrank, leaderrank_rank, SmithsS, smiths_rank) |>
     arrange(question, actor)
   rownames(the.cent) <- NULL
