@@ -1,0 +1,11 @@
+
+#TOC::before {
+  content: "";
+  display: block;
+  height: 100px;
+  margin: 2.75em 20px 40px 20px;
+  background-image: url("family_as_faculty.png");
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
