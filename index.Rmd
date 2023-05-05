@@ -37,30 +37,43 @@ A social network analysis of a small network that is involved in the Collaborati
 
 We are exploring the following questions through a social network analysis:
 
-* What *intentional* social networks form through an effort between pre-admissions teacher education 
+* What *intentional social networks* form through an effort between pre-admissions teacher education 
 students, Neighborhood Caucus members, and Family Leaders through a Family as Faculty
 initiative focused on educational justice?
 * Considering the social network as a *model*, what dynamics can be uncovered that
 provide insight into the ways in which connections and relationships are built through
 a Family as Faculty initiative focused on educational justice?
-* Understanding the "unruly" nature of educational justice work and the networks that
+* Understanding the *unruly complexity* of educational justice work and the networks that
 emerge, what historical and social impacts can be brought forward to illuminate and
 deepen our understanding of how dynamic social networks operate while focusing on
 educational justice?
 
+The term *intentional social networks* comes from the work of
+Kira Baker-Doyle that demonstrates how educators strategically reach out and construct networks
+around their work [@baker-doyleFirstyearTeachersSupport2012; @baker-doyleSocialSideTeacher2020].
+*Unruly complexity* comes from the work of Peter Taylor through his critique of models
+and his efforts to re-situate model-based research in historical and sociocultural contexts
+[@taylorUnrulyComplexityEcology2010; @taylorComplexityConstructionIntersecting2018].
+
+All components of this work can be found at the project's [OSF repository](https://osf.io/kxhp9/?view_only=eb0fefe6b5bd41b6955c2a4c657e785e).
+
 # Literate Code
 
-Computer scientist Don Knuth first coined the term "literate code" as a phrase to indicate
-that programming should be in the form of a human-readable narrative. It has been taken up
+Computer scientist Don @knuthLiterateProgramming1984 first coined the term "literate programming" to describe a form of programming that is created as a human-readable narrative. It has been taken up
 as a format that is rich in comments and documentation to illustrate and illuminate
 the choices and decisions that were made in the act of programming. Literate code is
-also an essential aspect of research to promote reproducibility of analysis.
-In this case, as a community-engaged study more interested in deomonstrating
-trustworthiness and transparency, literate code provides a clear window for community
-members and participants into the inner processes of data analysis and visualization
-techniques.
+also an essential aspect of research to promote reproducibility of analysis 
+[@dekkerFacilitatingReproducibilityCollaboration2018; @vassilevLanguageagnosticReproducibleData2016].
+In this case, as a community-engaged study, we are more interested in exemplifying
+trust, transparency, and accountability [@chouSupportingEthicalPractice2020; @mullinsAdvancingCommunityengagedResearch2020; @sabatelloDataSharingCommunityengaged2022a],
+literate code provides a clear window for community members and participants into 
+the inner processes of data analysis and visualization methodologies.
 
-I'm a bricoleur, so the code itself is not great.
+I (Jeremy Price) engage in coding as bricolage [@EpistemologicalPluralismRevaluation], so the code itself is neither particularly <abbr title = "Don't Repeat Yourself">DRY</abbr> nor
+<abbr title = "Single Level of Abstraction Principle">SLAP</abbr>. It works, however,
+and gets the job done even if there may be more efficient ways of doing things.
+
+<aside>[Contributors are always welcomed.](https://github.com/jeremyfprice/fafi-sna/blob/main/CODE_OF_CONDUCT.md)</aside>
 
 ## Load Libraries
 
@@ -74,7 +87,7 @@ Network Graph Libraries allow for the construction, analysis, and visualization 
 social network data. The igraph library [@csard2006igraph] is the main social network
 analysis engine, while tidygraph [@thomas2023tidygraph] and ggraph [@pedersen2022ggraph]
 provide functionality for processing and visualizing social network graphs, respectively.
-Centiserve [@jalili2017centiserve] and CINNA [@ashtiani2019cinna] provide extended
+Centiserve&nbsp;[@jalili2017centiserve] and CINNA [@ashtiani2019cinna] provide extended
 centrality algorithms.
 
 ```{r graph-libraries, message = FALSE, warning = FALSE, echo = TRUE}
@@ -722,6 +735,12 @@ corrplot::corrplot(test, method = "square", type = "lower",
 # Initial Reflections
 
 Go here
+
+```{r unruly-timeline, echo = TRUE, layout="l-body-outset", results = TRUE}
+timeline.frame <- read_csv("data/timeline-data.csv", col_names = TRUE, show_col_types = FALSE)
+ggscatter(timeline.frame, x = "year", y = "layer", label = "event", point = FALSE,
+          repel = TRUE)
+```
 
 ## Acknowledgments {.appendix}
 
