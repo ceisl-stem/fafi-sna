@@ -1,7 +1,7 @@
 ---
-title: "FAFSI Social Network Analysis"
+title: "The Analysis Is Not The Social Network"
 description: |
-  Understanding small and unruly networks in efforts to promote educational justice.
+  Illuminating the unruly nature of intentional social networks in educational justice efforts.
 author:
   - name: Jeremy F Price 
     url: https://www.jeremyfprice.info/
@@ -11,10 +11,13 @@ author:
   - name: Cristina Santamaría Graff
     affiliation: IU School of Education-Indianapolis
     affiliation_url: https://education.iupui.edu/
+    orcid_id: 0000-0002-4628-8949
   - name: Akaash Arora
     affiliation: IU School of Education-Indianapolis
+    affiliation_url: https://education.iupui.edu/
   - name: Román Graff
     affiliation: Ivy Tech Community College-Indianapolis
+    affiliation_url: https://www.ivytech.edu/locations/indianapolis/
 slug: price2023fafsisna
 date: "`r Sys.Date()`"
 output:
@@ -28,17 +31,34 @@ bibliography: fafi-sna-references.bib
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-Distill is a publication format for scientific and technical writing, native to the web. 
+# Introduction
 
-Learn more about using Distill for R Markdown at <https://rstudio.github.io/distill>.
+A social network analysis of a small network that is involved in the Collaborative for Equitable and Inclusive STEM Learning (CEISL) Family as Faculty as an Infrastructure project at the Indiana University School of Education-Indianapolis. Funded in part by a [National Association for Family, School, and Community Engagement Mini-Grant](https://nafsce.org/page/MiniGrant).
 
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+We are exploring the following questions through a social network analysis:
 
-Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+* What *intentional* social networks form through an effort between pre-admissions teacher education 
+students, Neighborhood Caucus members, and Family Leaders through a Family as Faculty
+initiative focused on educational justice?
+* Considering the social network as a *model*, what dynamics can be uncovered that
+provide insight into the ways in which connections and relationships are built through
+a Family as Faculty initiative focused on educational justice?
+* Understanding the "unruly" nature of educational justice work and the networks that
+emerge, what historical and social impacts can be brought forward to illuminate and
+deepen our understanding of how dynamic social networks operate while focusing on
+educational justice?
 
 # Literate Code
 
-Don Knuth, reproducibility, but in this case trustworthiness and transparency are more important.
+Computer scientist Don Knuth first coined the term "literate code" as a phrase to indicate
+that programming should be in the form of a human-readable narrative. It has been taken up
+as a format that is rich in comments and documentation to illustrate and illuminate
+the choices and decisions that were made in the act of programming. Literate code is
+also an essential aspect of research to promote reproducibility of analysis.
+In this case, as a community-engaged study more interested in deomonstrating
+trustworthiness and transparency, literate code provides a clear window for community
+members and participants into the inner processes of data analysis and visualization
+techniques.
 
 I'm a bricoleur, so the code itself is not great.
 
