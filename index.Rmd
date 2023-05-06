@@ -27,8 +27,24 @@ creative_commons: CC BY-NC-SA
 bibliography: fafi-sna-references.bib
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include=FALSE, purl = FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r, eval = FALSE}
+######################################################
+##                                                  ##
+##     THE ANALYSIS IS NOT THE SOCIAL NETWORK       ##
+##  Illuminating the unruly nature of intentional   ##
+##  social networks in educational justice efforts  ##
+##                                                  ##
+######################################################
+##                                                  ##
+##   Funded in part by a National Association for   ##
+##     Family, School, and Community Engagement     ##
+##                    Mini-Grant.                   ##
+##                                                  ##
+######################################################
 ```
 
 # Introduction
@@ -69,25 +85,33 @@ trust, transparency, and accountability [@chouSupportingEthicalPractice2020; @mu
 literate code provides a clear window for community members and participants into 
 the inner processes of data analysis and visualization methodologies.
 
-I (Jeremy Price) engage in coding as bricolage [@EpistemologicalPluralismRevaluation], so the code itself is neither particularly <abbr title = "Don't Repeat Yourself">DRY</abbr> nor
-<abbr title = "Single Level of Abstraction Principle">SLAP</abbr>. It works, however,
-and gets the job done even if there may be more efficient ways of doing things.
+I (Jeremy Price) engage in *coding as bricolage* [@EpistemologicalPluralismRevaluation], so the code itself is neither particularly <abbr title = "Don't Repeat Yourself">DRY</abbr> nor
+<abbr title = "Single Level of Abstraction Principle">SLAP</abbr>. But it works and gets
+the job done even if there may be more elegant and efficient ways of doing things.
 
 <aside>[Contributors are always welcomed.](https://github.com/jeremyfprice/fafi-sna/blob/main/CODE_OF_CONDUCT.md)</aside>
 
-## Load Libraries
+# Load Libraries
+
+```{r, eval = FALSE}
+######################################################
+##                                                  ##
+##                 LOAD LIBRARIES                   ##
+##                                                  ##
+######################################################
+```
 
 Libraries are packages that are loaded in to extend the functionality to the base R
 programming language. This project makes use of three different categories of libraries:
 **Network Graph Libraries**, a **Quantitative Anthropology Library**, and **Other R Libraries**.
 
-### Network Graph Libraries
+## Network Graph Libraries
 
 Network Graph Libraries allow for the construction, analysis, and visualization of
-social network data. The igraph library [@csard2006igraph] is the main social network
-analysis engine, while tidygraph [@thomas2023tidygraph] and ggraph [@pedersen2022ggraph]
+social network data. The `igraph` library [@csard2006igraph] is the main social network
+analysis engine, while `tidygraph` [@thomas2023tidygraph] and `ggraph` [@pedersen2022ggraph]
 provide functionality for processing and visualizing social network graphs, respectively.
-Centiserve&nbsp;[@jalili2017centiserve] and CINNA [@ashtiani2019cinna] provide extended
+`Centiserve`&nbsp;[@jalili2017centiserve] and `CINNA` [@ashtiani2019cinna] provide extended
 centrality algorithms.
 
 ```{r graph-libraries, message = FALSE, warning = FALSE, echo = TRUE}
@@ -96,28 +120,30 @@ library(tidygraph)
 library(ggraph)
 library(centiserve)
 library(CINNA)
-library(ggpubr)
 ```
 
-### Quantitative Anthropology Library
+## Quantitative Anthropology Library
 
 Since participants are asked for names and roles, the [data collection process](https://osf.io/5tay8/?view_only=d3b7267695b443d9b6ff773579e77896) is 
 essentially a freelisting protocol [@quinlanFreelistingMethod2018]. Under that
-assumption, Smith's Salience (S) Score can be calculated. AnthroTools [@purzycki2017anthrotools]
+assumption, Smith's Salience (S) Score can be calculated. `AnthroTools` [@purzycki2017anthrotools]
 provides functionality for working with freelist data and calculating Smith's S.
 
 ```{r anthro-libraries, message = FALSE, warning = FALSE, echo = TRUE}
 library(AnthroTools)
 ```
 
-### Other R Libraries
+## Other R Libraries
 
 The other libraries utilized for this analysis provide extensions for base R in 
-working with data. The readr package [@wickham2023readr] allows for efficient and
-straightforward reading and writing of local csv files, while the rio [@chan2021rio]
-package allows for the reading of web-based csv files as the datasets for this project
-are stored in an [OSF repository](https://osf.io/y3xz4/?view_only=b810bc6716624ed0bc843833ee2cf61e). The glue [@hester2022glue], tidyr [@wickham2023tidyr], and dplyr [@wickham2023dplyr]
-packages are used to process data.
+working with data. The `readr` package [@wickham2023readr] allows for efficient and
+straightforward reading and writing of local <abbr title="Comma-Separated Values">CSV</abbr> files,
+while the `rio` [@chan2021rio] package allows for the reading of web-based <abbr title="Comma-Separated Values">CSV</abbr> files as the datasets for this project are stored in an [OSF repository](https://osf.io/y3xz4/?view_only=b810bc6716624ed0bc843833ee2cf61e). The `glue` [@hester2022glue], `tidyr` [@wickham2023tidyr], and `dplyr` [@wickham2023dplyr]
+packages are used to process data. The `ggthemes` package [@arnold2021ggthemes]
+provides extended theme options for graphs, `vistime` [@raabe2022vistime] provides functionality
+for creating timelines, `ggcorrplot` [@kassambara2022ggcorrplot] provides functionality for
+creating correlation plots, and `ggpubr` [@kassambara2023ggpubr] provides functionality for creating
+publication-ready plots and graphs.
 
 ```{r standard-libraries, message = FALSE, warning = FALSE, echo = TRUE}
 library(readr)
@@ -125,11 +151,33 @@ library(rio)
 library(glue)
 library(tidyr)
 library(dplyr)
+library(ggthemes)
+library(ggpubr)
+library(ggcorrplot)
+library(vistime)
 ```
 
-## Define Constants
+# Define Constants
 
-The following constants are utilized across the project. The [IBM Carbon Design System color pallete](https://carbondesignsystem.com/data-visualization/color-palettes/), a large
+```{r, eval = FALSE}
+######################################################
+##                                                  ##
+##               DEFINE CONSTANTS                   ##
+##                                                  ##
+######################################################
+```
+
+The following constants are utilized across the project.
+
+## Common Color Pallete
+
+```{r, eval = FALSE}
+#####################################
+## Define the common color palette ##
+#####################################
+```
+
+The [IBM Carbon Design System color pallete](https://carbondesignsystem.com/data-visualization/color-palettes/), a large
 color-blind friendly data-oriented color palette, is used to represent various types of
 participants. `the.palette` links these participant types with color codes.
 
@@ -139,6 +187,14 @@ the.palette <<- c("FL" = "#6929c4", "NC" = "#1192e8", "PA" = "#005d5d",
                   "OR" = "#198038", "OT" = "#002d9c", "SA" = "#ee538b",
                   "ST" = "#b28600", "UA" = "#009d9a", "UF" = "#012749",
                   "US" = "#8a3800")
+```
+
+## Participant Abbreviation List
+
+```{r, eval = FALSE}
+##############################################
+## Define the participant abbreviation list ##
+##############################################
 ```
 
 Relatedly, `the.abbrev` dataframe provides links between the abbreviations for the
@@ -153,68 +209,222 @@ the.abbrev <<- data.frame(color_code = c("FL", "NC", "FF", "IL", "OR", "OT", "SA
                                    "Staff", "Student", "Child"))
 ```
 
-## Define Functions
+# Define Functions
 
-### Initialize Network Graph
+```{r, eval = FALSE}
+######################################################
+##                                                  ##
+##               DEFINE FUNCTIONS                   ##
+##                                                  ##
+######################################################
+```
+
+Functions provide "shortcodes" for repeating calculations or analyses multiple times
+with different variables, datasets, or networks.
+
+## Helper Functions
+
+Helper functions provide functionality to other functions or ongoing analysis and calculations
+across the code.
+
+### Save Plots Function
+
+```{r, eval = FALSE}
+###############################
+## Save plots as PDF and PNG ##
+###############################
+```
+
+This function saves plots to the `output` folder in two formats, as a `pdf` file and as
+a `png`. These two formats serve different purposes, so both are useful: `pdf` files are
+useful for inclusion in publications and `png` files are useful for distribution via the
+web. Both files are set at a high resolution 300<abbr title="Dots Per Inch">dpi</abbr>.
+
+```{r function-plot-save-plot, echo = TRUE}
+plot.save <- function(the.plot, the.file) {
+  # Set the filename for the PDF.
+  pdf.name <- glue("output/{the.file}.pdf")
+  # Set the filname fro the PNG.
+  png.name <- glue("output/{the.file}.png")
+  # Save as PDF.
+  ggsave(the.plot, filename = pdf.name, width = 11.5, height = 8, units = "in", dpi = 300)
+  #Save as PNG.
+  ggsave(the.plot, filename = png.name, width = 11.5, height = 8, units = "in", dpi = 300)
+}
+```
+
+### Create Correlation Plot Function
+
+```{r, eval = FALSE}
+#############################
+## Create Correlation Plot ##
+#############################
+```
+
+Correlation plots are effective modes of visualizing relationships between variables. This
+function takes in a dataframe and creates and saves a correlation plot while identifying
+(with an X) correlations that are not statistically significant (i.e., the $p$-value for
+non-significant correlations is greater than 0.05).
+
+```{r function-corr-plot, echo = TRUE}
+plot.corr <- function(the.frame, the.file) {
+  # Calculate the correlation of the provided dataframe.
+  corr <- round(cor(the.frame), 1)
+  # Calculate a matrix of significance.
+  p.mat <- cor_pmat(corr)
+  # Initialize plot.
+  corr.plot <- ggcorrplot(corr,
+                          hc.order = TRUE, # Order according to hierarchical clustering.
+                          type = "lower", # Only display the bottom half.
+                          p.mat = p.mat, # Account for statistical significance.
+                          colors = c("#750e13", "#ffffff", "#003a6d")) # Set colors.
+  # Save the plot...
+  plot.save(corr.plot, the.file)
+  # ...and return it.
+  return(corr.plot)
+}
+```
+
+### Calculate Tukey's Fences Function
+
+```{r, eval = FALSE}
+##############################
+## Calculate Tukey's Fences ##
+##############################
+```
+
+Small graphs are prone to extreme outliers, especially when there are power dynamics such 
+as instructor-student relations. While acknowledging this dynamic, it does skew such calculations
+as a Key Actor Analysis. Tukey's fences [@hoaglinPerformanceResistantRules1986; @tukeyExploratoryDataAnalysis1993] is one way to remove the impact of these outliers.
+
+```{r function-calculate-tukey, echo = TRUE}
+calculate.tukey <- function(the.cent) {
+  # Calculate Tukey's fences
+  q <- quantile(the.cent, c(0.25, 0.75))
+  iqr <- q[2] - q[1]
+  the.fence <- data.frame(lower = q[1] - 1.5 * iqr,
+                          upper = q[2] + 1.5 * iqr)
+  return(the.fence)
+}
+```
+
+## Network Graph Functions
+
+### Initialize Network Graph Function
+
+```{r, eval = FALSE}
+######################################################
+## Prepare the data and initialize the graph object ##
+######################################################
+```
+
+The `set.graph` function takes in an edge list that provides a representation of 
+who participants named in the survey and converts it into a network graph object.
+Extra variables are added to the graph:
+
+* `weight`, which is the number of times $i$ (the participant) names $j$ on the survey, 
+which is used to *weight* the relationships between actors.
+* `color_code`, which is just the first two letters of actor id that allows reference to the
+color palette to set the color of the node when the graph is plotted.
+* `size_code`, which is the Smith's Salience Score for $j$ (multiplied by 100) to set the size
+of the node when the graph is plotted.
+* `label`, which is the abbreviation expanded with the ID number for easier reading when the
+graph is plotted.
+
+The graph and these variables are passed on for plotting and calculating centralities. Several
+of the centrality algorithms account for `weight` when calculating the centrality.
 
 ```{r function-set-graph, echo = TRUE}
 set.graph <- function(the.frame, the.salience) {
+  # Reduce the edge list to just i (from) and j (to).
   the.frame <- the.frame |>
     select("from", "to")
-  the.weight <- the.frame %>% 
-    group_by(from, to) %>%
-    summarize(weight = n()) %>%
+  # Calculate the number of times i names j.
+  the.weight <- the.frame |>
+    group_by(from, to) |>
+    summarize(weight = n()) |>
     ungroup()
+  # Combine the dataframes into one, matching the weight to the edge.
   the.frame <- merge(the.frame, the.weight, by = c('from', 'to'))
+  # Create the igraph object, and set it to be a directed graph (i.e., i -> j).
   the.graph <- the.frame |>
     graph_from_data_frame(directed = TRUE)
+    the.salience <- the.salience |> rename("name" = "actor")
+  node.data <- data.frame(name = V(the.graph)$name) |>
+    mutate(id_no = substr(V(the.graph)$name, 3, 4)) |>
+    mutate(color_code = substr(V(the.graph)$name, 1, 2)) |>
+    left_join(the.salience) |>
+    left_join(the.abbrev) |>
+    mutate(label = glue("{full} {id_no}")) |>
+    replace_na(list(SmithsS = 0.01))
+  V(the.graph)$color_code <- node.data$color_code
+  V(the.graph)$size_code <- (node.data$SmithsS) * 100
+  V(the.graph)$label <- node.data$label
+  # Send the graph object back for further processing.
   return(the.graph)
 }
 ```
 
 
+```{r, eval = FALSE}
+###########################
+## Plot the graph object ##
+###########################
+```
+
+The `draw.graph` creates the visualization--the plot--of the social network graph and then
+saves it for further use. The `geom_edge_fan` feature is used to represent the number of times
+a participant named an actor.
+
 ```{r function-draw-graph, echo = TRUE}
-draw.graph <- function(the.graph, the.salience, the.file) {
-  the.filename <- glue("output/sna_{the.file}-plot.pdf")
-  the.salience <- the.salience %>%
-    select(CODE, SmithsS) %>%
-    rename("name" = "CODE")
-  node.data <- data.frame(name = V(the.graph)$name) %>%
-    mutate(id_no = substr(V(the.graph)$name, 3, 4)) %>%
-    mutate(color_code = substr(V(the.graph)$name, 1, 2)) %>%
-    left_join(the.salience) %>%
-    left_join(the.abbrev) %>%
-    mutate(label = glue("{full} {id_no}")) %>%
-    replace_na(list(SmithsS = 0.01))
-  V(the.graph)$color_code <- node.data$color_code
-  V(the.graph)$size_code <- (node.data$SmithsS) * 100
-  V(the.graph)$label <- node.data$label
+draw.graph <- function(the.graph, the.file) {
+  # Set the filename for saving the graph.
+  the.file <- glue("sna_{the.file}-plot")
+  # Set a reproducible seed for randomization, used to ensure that the plot looks more or less
+  # the same each time it is created.
   set.seed(123)
+  # Create the plot.
   the.plot <- the.graph |>
-    ggraph(layout = "fr") +
-    geom_edge_fan(color = "#A7A9AB") +
-    geom_node_point(aes(color = color_code,
-                        size = size_code),
-                        show.legend = FALSE) +
-    scale_size_continuous(range = c(2.5,10)) +
-    scale_color_manual(values = the.palette) +
-    geom_node_text(aes(label = label), repel = TRUE) +
+    ggraph(layout = "fr") + # Display the graph using the Fruchterman and Reingold algorithm.
+    geom_edge_fan(color = "#A7A9AB") + # Plot the edges between nodes.
+    geom_node_point(aes(color = color_code,    # Plot the nodes with the color determined by the
+                        size = size_code),     # participant and the size of the node determined
+                        show.legend = FALSE) + # by the Smith's S Salience Score.
+    scale_size_continuous(range = c(2.5,10)) + # Rescale the node size.
+    scale_color_manual(values = the.palette) + # Bring in the color palette.
+    geom_node_text(aes(label = label), repel = TRUE) + # Place the actor name on the graph.
     labs(edge_width = "Letters") +
-    theme_graph(base_family = "Input Mono")
-  ggsave(the.plot, filename = the.filename, width = 11.5, height = 8, units = "in", dpi = 300)
+    theme_graph() # Set the theme to social network graph which removes all extraneous grids.
+  # Save the plot.
+  plot.save(the.plot, the.file)
+  # Return the plot for further use as necessary.
   return(the.plot)
 }
 ```
 
+### Calculate Centralities
+
+A number of *node-level centralities,* or metrics, are calculated on the graphs and are
+utilized for the analysis. *Nodes* are the graphical representation of *actors* and
+*edges* are the graphical representation of *relationships* between actors.
+
+* **Degree (In) Centrality.** The number of *incoming* edges *from* other actors 
+[@borgattiCentralityConceptsMeasures2019; @everettCentralityGroupsClasses1999].
+* **Degree (Out) Centrality.** The number of *outgoing* edges *to* other actors 
+[@borgattiCentralityConceptsMeasures2019; @everettCentralityGroupsClasses1999].
+* **Laplacian Centrality.** The "what will happen when I'm gone" centrality, an indication of how *indispensible* an actor is based on the structural resilience of the network and how the network can "fill in" if a node is removed [@qiLaplacianCentralityNew2012].
+* **Latora Closeness Centrality.** A measure of *efficiency* of network graphs, particularly small
+and potentially disconnected graphs, indicating how efficiently information moves through the actor
+and across the network [@latoraEfficientBehaviorSmallworld2001].
+* **Leader Rank Centrality.** [@luLeadersSocialNetworks2011].
+* **Leverage Centrality.** A measure of how "in the thick of it" an actor is, based on who they are connected to and who those actors are connected to, while accounting for parallel, not just serial, flows of information [@joyceNewMeasureCentrality2010].
+
 ```{r function-calculate-centrality, echo = TRUE}
 calculate.centrality <- function(the.graph, the.salience, the.file) {
-  the.salience <- the.salience |>
-    select("actor" = "CODE", "SmithsS")
   analysis.network.data <- data.frame(indegree = igraph::degree(the.graph, mode = "in"),
                                       outdegree = igraph::degree(the.graph, mode = "out"),
-                                      betweenness = igraph::betweenness(the.graph, directed = FALSE),
                                       leaderrank = leaderrank(the.graph),
-                                      laplace = laplacian(the.graph, mode = "in"),
+                                      laplace = laplacian(the.graph),
                                       leverage = leverage(the.graph),
                                       latora = closeness.latora(the.graph))
   analysis.network.data$actor <- rownames(analysis.network.data)
@@ -227,6 +437,8 @@ calculate.centrality <- function(the.graph, the.salience, the.file) {
   return(analysis.network.data)
 }
 ```
+
+## Calculate Salience Scores
 
 ### Calculate Named Actors Salience Scores Function
 
@@ -254,113 +466,114 @@ calculate.salience <- function(the.frame, the.grouping, the.file) {
   }
   code.salience <- SalienceByCode(the.salience, dealWithDoubles = "MAX")
   write_csv(code.salience, the.filename, append = FALSE)
+  code.salience <- code.salience |>
+    select("actor" = "CODE", "SmithsS")
   return(code.salience)
 }
 ```
 
+## Key Actor Functions
+
 ### Identify Key Actors Function
 
 ```{r function-calculate-keyactors, echo = TRUE}
-calculate.keyactors <- function(the.frame, the.salience, the.file) {
-  the.salience <- the.salience %>%
-    select("CODE", "SmithsS") %>%
-    rename("actor" = "CODE")
-  the.filename <- glue("output/keyactors_{the.file}.pdf")
-  table.filename <- glue("output/table_{the.file}_keyactors.csv")
+calculate.keyactors <- function(the.frame, the.file) {
   max_leverage <- max(the.frame$leverage, na.rm = TRUE)
   min_leverage <- min(the.frame$leverage, na.rm = TRUE)
   key.frame <- the.frame %>%
-    select(actor, leverage, leaderrank)
-  key.res <- lm(leaderrank ~ leverage, data = key.frame)$residuals
-  key.frame <- transform(key.frame, residuals = abs(key.res))
-  node.data <- data.frame(actor = key.frame$actor) %>%
-    mutate(color_code = substr(key.frame$actor, 1, 2))
-  key.frame <- key.frame %>%
-    left_join(node.data, by = "actor") %>%
-    mutate(id_no = substr(key.frame$actor, 3, 4)) %>%
-    left_join(the.abbrev) %>%
-    mutate(label = glue("{full} {id_no}")) %>%
-    left_join(the.salience) %>%
-    replace_na(list(SmithsS = 0))
-  # Calculate Tukey's fences
-  q <- quantile(key.frame$leaderrank, c(0.25, 0.75))
-  iqr <- q[2] - q[1]
-  lower.fence <- q[1] - 1.5 * iqr
-  upper.fence <- q[2] + 1.5 * iqr
-  
-  # Trim data
-  key.frame.leaderrank.trimmed <- key.frame$leaderrank[key.frame$leaderrank >= lower.fence &
-                                                     key.frame$leaderrank <= upper.fence]
-  # Calculate Tukey's fences
-  q <- quantile(key.frame$leverage, c(0.25, 0.75))
-  iqr <- q[2] - q[1]
-  lower.fence <- q[1] - 1.5 * iqr
-  upper.fence <- q[2] + 1.5 * iqr
-  
-  # Trim data
-  key.frame.leverage.trimmed <- key.frame$leverage[key.frame$leverage >= lower.fence &
-                                                     key.frame$leverage <= upper.fence]
-  
-  key.ymedian <- median(key.frame$leaderrank)
-  key.xmedian <- median(key.frame$leverage)
-  key.ymean <- mean(key.frame.leaderrank.trimmed)
-  key.xmean <- mean(key.frame.leverage.trimmed)
-  key.frame <- key.frame %>%
+    select(actor, leverage, leaderrank, SmithsS)
+  key.res <- lm(leaderrank ~ leverage, data = key.frame)$residuals |>
+    as.data.frame() |>
+    rename(res = 1) |>
+    mutate(res = abs(res))
+  key.res$actor <- row.names(key.res)
+  row.names(key.res) <- NULL
+  key.frame <- key.frame |>
+    left_join(key.res) |>
+    mutate(color_code = substr(key.frame$actor, 1, 2)) |>
+    mutate(id_no = substr(key.frame$actor, 3, 4)) |>
+    left_join(the.abbrev) |>
+    mutate(label = glue("{full} {id_no}")) |>
+    select(-full, -id_no)
+  leaderrank.fence <- calculate.tukey(key.frame$leaderrank)
+  key.frame.leaderrank.trimmed <- key.frame |>
+    filter(leaderrank >= leaderrank.fence$lower & leaderrank <= leaderrank.fence$upper)
+  leverage.fence <- calculate.tukey(key.frame$leverage)
+  key.frame.leverage.trimmed <- key.frame |>
+    filter(leverage >= leverage.fence$lower & leverage.fence$upper)
+  key.ymean <- mean(key.frame.leaderrank.trimmed$leaderrank)
+  key.xmean <- mean(key.frame.leverage.trimmed$leverage)
+  key.frame <- key.frame |>
     mutate(keystatus = case_when((leaderrank > key.ymean & leverage > key.xmean) ~ "Sage",
                                  (leaderrank > key.ymean & leverage < key.xmean) ~ "Steward",
-                                 (leaderrank < key.ymean & leverage > key.xmean) ~ "Weaver")) %>%
-    na.omit() %>%
-    group_by(keystatus) %>%
-    arrange(desc(residuals), desc(SmithsS)) %>%
-    unique() %>% ungroup() %>% na.omit()
+                                 (leaderrank < key.ymean & leverage > key.xmean) ~ "Weaver")) |>
+    na.omit() |>
+    group_by(keystatus) |>
+    arrange(desc(res), desc(SmithsS)) |>
+    unique() |> ungroup()# |> na.omit()
+  plot.keyactors(key.frame, key.xmean, key.ymean, the.file)
+  key.frame <- key.frame %>%
+    select(actor, leverage, leaderrank, res, SmithsS, keystatus) %>%
+    arrange(keystatus, desc(res), desc(SmithsS))
+  return(key.frame)
+}
+```
+
+### Plot Key Actors Function
+
+```{r function-plot-keyactors, echo = TRUE}
+plot.keyactors <- function(key.frame, key.xmean, key.ymean, the.file) {
+  the.filename <- glue("output/keyactors_{the.file}.pdf")
   key.xmin <- min(key.frame$leverage)
   key.xmax <- max(key.frame$leverage)
   key.ymin <- min(key.frame$leaderrank)
   key.ymax <- max(key.frame$leaderrank)
-  key.xmid <- (key.xmin + key.xmax)/2
-  key.ymid <- (key.ymin + key.ymax)/2
-  plot.ymin <- key.ymean - key.ymax
-  plot.xmin <- key.xmean - key.xmax
-  steward.count <- key.frame %>%
-    count(keystatus) %>%
-    filter(keystatus == "Steward") %>%
-    pull(n)
-  steward.count <- ifelse(is.numeric(steward.count), steward.count, 0)
-  steward.count <- steward.count %>% replace_na(0)
-  weaver.count <- key.frame %>%
-    count(keystatus) %>%
-    filter(keystatus == "Weaver") %>%
-    pull(n)
-  weaver.count <- ifelse(is.numeric(weaver.count), weaver.count, 0)
-  weaver.count <- weaver.count %>% replace_na(0)
+  steward.count <- count.keyactors(key.frame, "Steward")
+  sage.count <- count.keyactors(key.frame, "Sage")
+  weaver.count <- count.keyactors(key.frame, "Weaver")
   key.plot <- ggscatter(key.frame, x = "leverage", y = "leaderrank",
-      label = "label", label.rectangle = FALSE, repel = TRUE,
-      theme = theme_minimal(), ylab = "Leader Rank Centrality", xlab = "leverage Centrality",
-      point = TRUE, show.legend = FALSE, color = "color_code", palette = the.palette,
-      conf.int = FALSE, cor.coef = FALSE, legend = "none")
+                        label = "label", label.rectangle = FALSE, repel = TRUE,
+                        theme = theme_minimal(), ylab = "Leader Rank Centrality",
+                        xlab = "Leverage Centrality", point = TRUE, show.legend = FALSE,
+                        color = "color_code", palette = the.palette,
+                        conf.int = FALSE, cor.coef = FALSE, legend = "none")
   if(steward.count != 0) {
     key.plot <- key.plot +
       geom_vline(xintercept = key.xmean, color = "#243142", alpha = 0.2) +
       geom_label(aes(x = key.xmin, y = key.ymax, label = "Stewards", hjust = 0),
-                 color = "#243142", fill = "#EEEEEE")
+                 color = "#243142", fill = "#A7A9AB")
   }
   if(weaver.count != 0) {
     key.plot <- key.plot +
       geom_hline(yintercept = key.ymean, color = "#243142", alpha = 0.2) +
       geom_label(aes(x = key.xmax, y = key.ymin,
-                     label = "Weavers", hjust = 1), color = "#243142", fill = "#EEEEEE")
+                     label = "Weavers", hjust = 1), color = "#243142", fill = "#A7A9AB")
   }
   key.plot <- key.plot +
     geom_label(aes(x = key.xmax, y = key.ymax,
-                   label = "Sages", hjust = 1), color = "#243142", fill = "#EEEEEE")# +
-  key.frame <- key.frame %>%
-    select(actor, leverage, leaderrank, residuals, SmithsS, keystatus) %>%
-    arrange(keystatus, desc(residuals), desc(SmithsS))
+                   label = "Sages", hjust = 1), color = "#243142", fill = "#A7A9AB") +
+    theme_few() +
+    theme(legend.position = "none")
   ggsave(key.plot, filename = the.filename, width = 11.5, height = 8, units = "in", dpi = 300)
-  #write_csv(key.frame, table.filename, append = FALSE)
-  return(key.frame)
+  return(key.plot)
 }
 ```
+
+### Count Key Actors Function
+
+```{r function-count-keyactors, echo = TRUE}
+count.keyactors <- function(key.frame, the.actor) {
+    the.count <- key.frame |>
+      count(keystatus) |>
+      filter(keystatus == the.actor) |>
+      pull(n)
+  the.count <- ifelse(is.numeric(the.count), the.count, 0)
+  the.count <- the.count |> replace_na(0)
+  return(the.count)
+}
+```
+
+## Deeper Analysis Functions
 
 ### Combine Multiplex Graph Layers Functions
 
@@ -368,14 +581,13 @@ calculate.keyactors <- function(the.frame, the.salience, the.file) {
 create.q.cent <- function(the.1, the.2, the.question) {
   the.q.cent <- bind_rows(the.1, the.2) |>
     mutate(question = the.question) |>
-    select(question, actor, betweenness, outdegree, indegree, leverage,
+    select(question, actor, outdegree, indegree, leverage,
            laplace, leaderrank, latora, SmithsS)
 }
 
 calculate.ranks <- function(the.cent) {
   the.cent <- the.cent |>
     mutate(outdegree_rank = dense_rank(desc(outdegree))) |>
-    mutate(betweenness_rank = dense_rank(desc(betweenness))) |>
     mutate(indegree_rank = dense_rank(desc(indegree))) |>
     mutate(leverage_rank = dense_rank(desc(leverage))) |>
     mutate(laplacian_rank = dense_rank(desc(laplace))) |>
@@ -383,7 +595,6 @@ calculate.ranks <- function(the.cent) {
     mutate(smiths_rank = dense_rank(desc(SmithsS))) |>
     mutate(latora_rank = dense_rank(desc(latora))) |>
     select(question, actor, outdegree, outdegree_rank, indegree, indegree_rank,
-           betweenness, betweenness_rank,
            leverage, leverage_rank, laplace, laplacian_rank,
            latora, latora_rank, leaderrank, leaderrank_rank, SmithsS, smiths_rank) |>
     arrange(question, actor)
@@ -441,21 +652,9 @@ create.q.key <- function(the.1, the.2, the.question){
 }
 ```
 
-```{r function-key-overall, message=FALSE, warning=FALSE, echo = TRUE, results = FALSE}
-key.overall <- function(the.frame) {
-  access_mean <- mean(the.frame$access_score)
-  reputation_mean <- mean(the.frame$reputation_score)
-  ggscatter(the.frame, x = "access_score", y = "reputation_score", label = "actor") +
-    geom_hline(yintercept = access_mean, color = "#243142", alpha = 0.2) +
-    geom_vline(xintercept = reputation_mean, color = "#243142", alpha = 0.2)
-}
-```
+## Processing The Data
 
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file). 
-
-The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
-
-## Reading the Data
+### Reading the Data
 
 ```{r read-data, message=FALSE, warning=FALSE, echo = TRUE, results = FALSE}
 pates.frame <- import("https://osf.io/download/62qpa/", format = "csv") |>
@@ -482,19 +681,15 @@ ncfl.frame <- import("https://osf.io/download/ghz3c/", format = "csv") |>
 full.frame <- rbind(pates.frame, ncfl.frame)
 ```
 
-## Process Data
-
 ### Create Overall Graph
 
 ```{r process-full, echo = TRUE, results = FALSE}
 full.salience <- calculate.salience(full.frame, "GROUPING", "full")
 full.graph <- set.graph(full.frame, full.salience)
-full.plot <- draw.graph(full.graph, full.salience, "full")
+full.plot <- draw.graph(full.graph, "full")
 ```
 
-```{r print-full-graph}
-print(full.plot)
-```
+<img src = "output/sna_full-plot.png" alt = "Full Social Network Plot" />
 
 ### Process Question 1
 
@@ -503,17 +698,17 @@ pates.q1.frame <- pates.frame |>
   filter(question == "Q1")
 pates.q1.salience <- calculate.salience(pates.q1.frame, "GROUPING", "Q1")
 pates.q1.graph <- set.graph(pates.q1.frame, pates.q1.salience)
-pates.q1.plot <- draw.graph(pates.q1.graph, pates.q1.salience, "q1_pates")
+pates.q1.plot <- draw.graph(pates.q1.graph, "q1_pates")
 pates.q1.cent <- calculate.centrality(pates.q1.graph, pates.q1.salience, "q1_pates")
-pates.q1.key <- calculate.keyactors(pates.q1.cent, pates.q1.salience, "q1_pates")
+pates.q1.key <- calculate.keyactors(pates.q1.cent, "q1_pates")
 
 ncfl.q1.frame <- ncfl.frame |>
   filter(question == "Q1")
 ncfl.q1.salience <- calculate.salience(ncfl.q1.frame, "GROUPING", "Q1")
 ncfl.q1.graph <- set.graph(ncfl.q1.frame, ncfl.q1.salience)
-ncfl.q1.plot <- draw.graph(ncfl.q1.graph, ncfl.q1.salience, "q1_ncfl")
+ncfl.q1.plot <- draw.graph(ncfl.q1.graph, "q1_ncfl")
 ncfl.q1.cent <- calculate.centrality(ncfl.q1.graph, ncfl.q1.salience, "q1_ncfl")
-ncfl.q1.key <- calculate.keyactors(ncfl.q1.cent, ncfl.q1.salience, "q1_ncfl")
+ncfl.q1.key <- calculate.keyactors(ncfl.q1.cent, "q1_ncfl")
 ```
 
 ### Process Question 3
@@ -523,17 +718,17 @@ pates.q3.frame <- pates.frame |>
   filter(question == "Q3")
 pates.q3.salience <- calculate.salience(pates.q3.frame, "GROUPING", "Q3")
 pates.q3.graph <- set.graph(pates.q3.frame, pates.q3.salience)
-pates.q3.plot <- draw.graph(pates.q3.graph, pates.q3.salience, "q3_pates")
+pates.q3.plot <- draw.graph(pates.q3.graph, "q3_pates")
 pates.q3.cent <- calculate.centrality(pates.q3.graph, pates.q3.salience, "q3_pates")
-pates.q3.key <- calculate.keyactors(pates.q3.cent, pates.q3.salience, "q3_pates")
+pates.q3.key <- calculate.keyactors(pates.q3.cent, "q3_pates")
 
 ncfl.q3.frame <- ncfl.frame |>
   filter(question == "Q3")
 ncfl.q3.salience <- calculate.salience(ncfl.q3.frame, "GROUPING", "Q3")
 ncfl.q3.graph <- set.graph(ncfl.q3.frame, ncfl.q3.salience)
-ncfl.q3.plot <- draw.graph(ncfl.q3.graph, ncfl.q3.salience, "q3_ncfl")
+ncfl.q3.plot <- draw.graph(ncfl.q3.graph, "q3_ncfl")
 ncfl.q3.cent <- calculate.centrality(ncfl.q3.graph, ncfl.q3.salience, "q3_ncfl")
-ncfl.q3.key <- calculate.keyactors(ncfl.q3.cent, ncfl.q3.salience, "q3_ncfl")
+ncfl.q3.key <- calculate.keyactors(ncfl.q3.cent, "q3_ncfl")
 ```
 
 ### Process Question 4
@@ -543,35 +738,37 @@ pates.q4.frame <- pates.frame |>
   filter(question == "Q4")
 pates.q4.salience <- calculate.salience(pates.q4.frame, "GROUPING", "Q4")
 pates.q4.graph <- set.graph(pates.q4.frame, pates.q4.salience)
-pates.q4.plot <- draw.graph(pates.q4.graph, pates.q4.salience, "q4_pates")
+pates.q4.plot <- draw.graph(pates.q4.graph, "q4_pates")
 pates.q4.cent <- calculate.centrality(pates.q4.graph, pates.q4.salience, "q4_pates")
-pates.q4.key <- calculate.keyactors(pates.q4.cent, pates.q4.salience, "q4_pates")
+pates.q4.key <- calculate.keyactors(pates.q4.cent, "q4_pates")
 
 ncfl.q4.frame <- ncfl.frame |>
   filter(question == "Q4")
 ncfl.q4.salience <- calculate.salience(ncfl.q4.frame, "GROUPING", "Q4")
 ncfl.q4.graph <- set.graph(ncfl.q4.frame, ncfl.q4.salience)
-ncfl.q4.plot <- draw.graph(ncfl.q4.graph, ncfl.q4.salience, "q4_ncfl")
+ncfl.q4.plot <- draw.graph(ncfl.q4.graph, "q4_ncfl")
 ncfl.q4.cent <- calculate.centrality(ncfl.q4.graph, ncfl.q4.salience, "q4_ncfl")
-ncfl.q4.key <- calculate.keyactors(ncfl.q4.cent, ncfl.q4.salience, "q4_ncfl")
+ncfl.q4.key <- calculate.keyactors(ncfl.q4.cent, "q4_ncfl")
 ```
 
-### Calculate Actor Flexibility Score
+```{r pates-graphs, purl=FALSE, eval=FALSE, cache=TRUE}
+  ggarrange(pates.q1.plot, pates.q3.plot, pates.q4.plot, ncol = 3, nrow = 1)
+```
 
-$F_i = \frac{\frac{1}{m(m-1)} \sum_{p\neq q} J(set_p^i, set_q^i)}{\max_{p,q} J(set_p, set_q)}$
+```{r ncfl-graphs, layout="l-body-outset", eval=FALSE, purl=FALSE}
+  ggarrange(ncfl.q1.plot, ncfl.q3.plot, ncfl.q4.plot, ncol = 3, nrow = 1)
+```
 
-Where $i$ represents a given actor, $m$ is the total number of sets, $p$ and $q$
-are indices representing the set of sets, and $J$ represents the Jaccard Coefficient.
+# Analyzing the Data
+
+## Calculate Actor Flexibility Score
+
+$F_i = \frac{\frac{1}{m(m-1)} \sum_{p\neq q} J(set_p^i,\ set_q^i)}{\max_{p,q} J(set_p,\ set_q)}$
+
+Where $i$ represents a given actor, $m$ is the total number of sets, $p$ and $q$ are indices representing the set of sets, and $J$ represents the Jaccard Coefficient.
 
 ```{r calculate-actor-flexibility, echo = TRUE}
 # Calculating Actor Flexibility Score
-# Latex: F_i = \frac{\frac{1}{m(m-1)} \sum_{p\neq q} J(set_p^i, set_q^i)}{\max_{p,q} J(set_p, set_q)}
-# Where:
-# * i represents a given actor
-# *	m is the total number of sets
-# * p and q are indices representing the set of sets
-# * J represents the Jaccard Coefficient
-
 flex.frame <<- full.frame |>
   select(question, actor = from, to)
 
@@ -579,7 +776,7 @@ flex.results <- lapply(unique(flex.frame$actor), calculate.node.flexibility)
 flex.score <- do.call(rbind, flex.results)
 ```
 
-### Calculate Key Actor Score
+## Calculate Key Actor Score
 
 ```{r calculate-key-actor-score, echo = TRUE, results = FALSE}
 q1.key <- create.q.key(pates.q1.key, ncfl.q1.key, "q1")
@@ -595,7 +792,7 @@ q.key <<- bind_rows(q1.key, q3.key, q4.key) |>
   mutate(keyscore = keyscore / 9)
 ```
 
-### Create Rankings for Comparing Across Graphs
+## Create Rankings for Comparing Across Graphs
 
 Because this is a multilayered graph that includes information across a range of contexts
 in response to different prompts, *the calculated centralities themselves cannot be
@@ -618,7 +815,7 @@ q.cent <<- bind_rows(q1.cent, q3.cent, q4.cent)
 
 ```{r create-rankings-overall, echo = TRUE, results = TRUE}
 full.avg.cent <- q.cent |>
-  select(actor, betweenness_rank, laplacian_rank, outdegree_rank, indegree_rank,
+  select(actor, leverage_rank, laplacian_rank, outdegree_rank, indegree_rank,
          latora_rank, leaderrank_rank, smiths_rank) |>
   group_by(actor) |>
   summarize(across(everything(), mean), .groups = "drop")  |>
@@ -632,14 +829,23 @@ full.avg.cent <- q.cent |>
 
 Put in a correlation plot here that compares all the ranks.
 
-### Analyze Key Actors
+```{r}
+corr.avg <- full.avg.cent |>
+  select(-flexibility, -keyscore, -actor) |>
+  plot.corr("rank-corr")
+print(corr.avg)
+```
+
+## Analyze Key Actors
 
 We look at the key actors in this project as contributors to the social network through 
 three **perspectives** (really need to come up with a better word than that):
 
-* **Positionality.** Laplacian Centrality and Betweenness Centrality
+* **Positionality.** Laplacian Centrality and Leverage Centrality
 * **Reachability.** Latora Closeness Centrality and In Degree Centrality
 * **Reputation.** Leader Rank Centrality and Smith's S Score
+
+$\frac{1}{{\text{avg}(R_{\text{p}},\ R_{\text{q}})}} \times 10$
 
 ```{r analyze-key-actors, echo = TRUE, results = FALSE}
 keyactors.q.frame <- q.key |>
@@ -652,7 +858,7 @@ keyactors.q.frame <- q.key |>
 
 keyactors.frame <- full.avg.cent |>
   filter(keyscore > 0) |>
-  mutate(positionality_score = ((1 / (laplacian_rank + betweenness_rank) / 2)) * 10) |>
+  mutate(positionality_score = ((1 / (laplacian_rank + leverage_rank) / 2)) * 10) |>
   mutate(reputation_score = ((1 / (smiths_rank + leaderrank_rank) / 2)) * 10) |>
   mutate(reachability_score = ((1 / (latora_rank + indegree_rank) / 2)) * 10) |>
   mutate(overall_score = (positionality_score + reputation_score + reachability_score) / 3) |>
@@ -671,24 +877,19 @@ write_csv(keyactors.frame, file = "output/keyactors_analysis.csv")
 It is important to recognize that it's all OK, and I hope this works.
 
 ```{r keyactor-analysis-corr-plot, echo = TRUE}
-test <- keyactors.frame |>
-  select(actor, overall_score, positionality_score, reachability_score, reputation_score)
-test <- as.data.frame(test)
-rownames(test) <- test$actor
-test$actor <- NULL
-test <- as.data.frame(test)
-test <- cor(test)
-corrplot::corrplot(test, method = "square", type = "lower",
-                   col= colorRampPalette(c("#750e13", "white", "#003a6d"))(50))
+keyactors.corr <- keyactors.frame |>
+  select(positionality_score, reachability_score, reputation_score) |>
+  plot.corr("keyactors-corr")
+print(keyactors.corr)
 ```
 
-### Analyze Participant Actors
+## Analyze Participant Actors
 
 We look at the participants in this project--the Pre-Admissions Teacher Education Students,
 the Neighborhood Caucus members, and the Family Leaders--as contributors to the social
 network through three **perspectives** (really need to come up with a better word than that):
 
-* **Positionality.** Laplacian Centrality and Betweenness Centrality
+* **Positionality.** Laplacian Centrality and Leverage Centrality
 * **Reachability.** Latora Closeness Centrality and Out Degree Centrality
 * **Potentiality.** Flexibility Score and Reputation Score
 
@@ -704,11 +905,11 @@ reputation_rank_na <- (max(participants.frame$reputation_rank)) + 1
 participants.frame <- participants.frame |>
   mutate(reputation_rank = if_else(reputation_rank == 0, reputation_rank_na, reputation_rank)) |>
   mutate(potentiality_score = ((1 / (flexibility_rank + reputation_rank) / 2)) * 10) |>
-  mutate(positionality_score = ((1 / (laplacian_rank + betweenness_rank) / 2)) * 10) |>
+  mutate(positionality_score = ((1 / (laplacian_rank + leverage_rank) / 2)) * 10) |>
   mutate(reachability_score = ((1 / (latora_rank + outdegree_rank) / 2)) * 10) |>
   mutate(overall_score = (potentiality_score + positionality_score + reachability_score) / 3) |>
   select(actor, overall_score, positionality_score, reachability_score, potentiality_score,
-         laplacian_rank, betweenness_rank, latora_rank, outdegree_rank,
+         laplacian_rank, leverage_rank, latora_rank, outdegree_rank,
          flexibility_rank, keyscore_rank, reputation_rank) |>
   arrange(desc(overall_score)) |> as.data.frame()
 ```
@@ -721,15 +922,24 @@ write_csv(participants.frame, file = "output/participants_analysis.csv")
 It is important to recognize that it's all OK, and I hope this works.
 
 ```{r participant-analysis-corr-plot, echo = TRUE}
-test <- participants.frame |>
-  select(actor, overall_score, positionality_score, reachability_score, potentiality_score)
-test <- as.data.frame(test)
-rownames(test) <- test$actor
-test$actor <- NULL
-test <- as.data.frame(test)
-test <- cor(test)
-corrplot::corrplot(test, method = "square", type = "lower",
-                   col= colorRampPalette(c("#750e13", "white", "#003a6d"))(50))
+participants.corr <- participants.frame |>
+  select(positionality_score, reachability_score, potentiality_score) |>
+  plot.corr("participants-corr")
+print(participants.corr)
+```
+
+```{r plot-overall-scores}
+overall.frame <- participants.frame |>
+  select(actor, overall_score) |>
+  mutate(color_code = substr(actor, 1, 2))
+overall.plot <- ggstripchart(overall.frame, x = "color_code", y = "overall_score", label = "actor",
+                             repel = TRUE, color = "color_code", palette = "the.palette",
+                             fill = "color_code", label.rectangle = FALSE, show.legend = FALSE,
+                             label.color = "color_code", xlab = "Network", ylab = "Overall Score") +
+  theme_few() +
+  theme(legend.position = "none")
+plot.save(overall.plot, "overall-corr")
+print(overall.plot)
 ```
 
 # Initial Reflections
@@ -738,9 +948,13 @@ Go here
 
 ```{r unruly-timeline, echo = TRUE, layout="l-body-outset", results = TRUE}
 timeline.frame <- read_csv("data/timeline-data.csv", col_names = TRUE, show_col_types = FALSE)
-ggscatter(timeline.frame, x = "year", y = "layer", label = "event", point = FALSE,
-          repel = TRUE)
+timeline.plot <- gg_vistime(timeline.frame, col.event = "event", col.group = "layer",
+                            col.start = "start", col.end = "end", optimize_y = TRUE) +
+  theme_few()
+plot.save(timeline.plot, "timeline")
 ```
+
+<img src="output/timeline.png" alt="Timeline" />
 
 ## Acknowledgments {.appendix}
 
@@ -779,4 +993,15 @@ Author contributions here using the [CRediT Taxonomy](https://credit.niso.org/).
 | | Validation | Supporting |
 | | Writing - Original Draft | Supporting |
 | | Writing - Review & Editing | Supporting |
-
+| **Akaash Arora** | Conceptualization | Supporting |
+| | Data Curation | Supporting |
+| | Formal Analysis | Supporting |
+| | Validation | Supporting |
+| | Writing - Original Draft | Supporting |
+| | Writing - Review & Editing | Supporting |
+| **Román Graff** | Conceptualization | Supporting |
+| | Data Curation | Supporting |
+| | Formal Analysis | Supporting |
+| | Validation | Supporting |
+| | Writing - Original Draft | Supporting |
+| | Writing - Review & Editing | Supporting |
