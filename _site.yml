@@ -1,0 +1,8 @@
+---
+name: "fafi-sna"
+title: "The Analysis is Not the Social Network"
+exclude: ["README.md", "_site.yml", "_output.yml", "*.log", "data", "output", "R", "LICENSE"]
+output_dir: "docs"
+navbar:
+  source_url: https://github.com/jeremyfprice/fafi-sna/
+---

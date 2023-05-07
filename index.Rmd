@@ -3,6 +3,7 @@ title: "The Analysis Is Not The Social Network"
 description: |
   Illuminating the unruly nature of intentional social networks in educational justice efforts.
 repository_url: https://github.com/jeremyfprice/fafi-sna/
+preview: aux/fafi-sna-logo.png
 author:
   - name: Jeremy F Price 
     url: https://www.jeremyfprice.info/
@@ -19,13 +20,14 @@ author:
   - name: Román Graff
     affiliation: Ivy Tech Community College-Indianapolis
     affiliation_url: https://www.ivytech.edu/locations/indianapolis/
-slug: price2023fafsisna
+slug: price2023fafisna
 date: "`r Sys.Date()`"
 output:
   distill::distill_article:
     self_contained: false
+    theme: theme.css
 creative_commons: CC BY-NC-SA
-bibliography: fafi-sna-references.bib
+bibliography: aux/fafi-sna-references.bib
 ---
 
 ```{r setup, include=FALSE, purl = FALSE}
@@ -48,9 +50,9 @@ knitr::opts_chunk$set(echo = FALSE)
 ######################################################
 ```
 
-![Family as Faculty as an Infrastructure](family_as_faculty.png)
+![Family as Faculty as an Infrastructure Social Network Analysis Project](aux/fafi-sna-logo.png)
 
-## Introduction
+# Introduction
 
 A social network analysis of a small network that is involved in the Collaborative for Equitable and Inclusive STEM Learning (CEISL) Family as Faculty as an Infrastructure project at the Indiana University School of Education-Indianapolis. Funded in part by a [National Association for Family, School, and Community Engagement Mini-Grant](https://nafsce.org/page/MiniGrant).
 
@@ -76,7 +78,7 @@ and his efforts to re-situate model-based research in historical and sociocultur
 
 All components of this work can be found at the project's [OSF repository](https://osf.io/kxhp9/?view_only=eb0fefe6b5bd41b6955c2a4c657e785e).
 
-## Literate Code
+# Literate Code
 
 Computer scientist Don @knuthLiterateProgramming1984 first coined the term "literate programming" to describe a form of programming that is created as a human-readable narrative. It has been taken up
 as a format that is rich in comments and documentation to illustrate and illuminate
@@ -88,13 +90,13 @@ trust, transparency, and accountability [@chouSupportingEthicalPractice2020; @mu
 literate code provides a clear window for community members and participants into 
 the inner processes of data analysis and visualization methodologies.
 
-I (Jeremy Price) engage in *coding as bricolage* [@EpistemologicalPluralismRevaluation], so the code itself is neither particularly <abbr title = "Don't Repeat Yourself">DRY</abbr> nor
+This is primarily an exercise in *coding as bricolage* [@EpistemologicalPluralismRevaluation], so the code itself is neither particularly <abbr title = "Don't Repeat Yourself">DRY</abbr> nor
 <abbr title = "Single Level of Abstraction Principle">SLAP</abbr>. But it works and gets
 the job done even if there may be more elegant and efficient ways of doing things.
 
 <aside>[Contributors are always welcomed.](https://github.com/jeremyfprice/fafi-sna/blob/main/CODE_OF_CONDUCT.md)</aside>
 
-# Load Libraries
+## Load Libraries
 
 ```{r, eval = FALSE}
 ######################################################
@@ -160,7 +162,7 @@ library(ggcorrplot)
 library(vistime)
 ```
 
-# Define Constants
+## Define Constants
 
 ```{r, eval = FALSE}
 ######################################################
@@ -220,7 +222,7 @@ the.abbrev <<- data.frame(
 )
 ```
 
-# Define Functions
+## Define Functions
 
 ```{r, eval = FALSE}
 ######################################################
@@ -325,7 +327,9 @@ calculate.tukey <- function(the.cent) {
 ######################################################
 ```
 
-***Initialize Network Graph Function.*** The `set.graph` function takes in an edge list that
+#### Initialize Network Graph Function
+
+The `set.graph` function takes in an edge list that
 provides a representation of who participants named in the survey and converts it into a
 network graph object. Extra variables are added to the graph:
 

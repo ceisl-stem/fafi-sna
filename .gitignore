@@ -2,3 +2,5 @@
 .Rhistory
 *.log
 data/
+index_files/
+index_cache/
