@@ -1,4 +1,4 @@
-![FAFI](fafi-sna-logo.png)
+![FAFI](aux/fafi-sna-logo.png)
 
 # Family as Faculty as Infrastructure Social Network Analysis
 

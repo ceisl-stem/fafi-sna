@@ -246,7 +246,9 @@ across the code.
 ###############################
 ```
 
-***Save Plots Function.*** This function saves plots to the `output` folder in two formats,
+#### Save Plots Function
+
+This function saves plots to the `output` folder in two formats,
 as a `pdf` file and as a `png`. These two formats serve different purposes, so both are useful:
 `pdf` files are useful for inclusion in publications and `png` files are useful for distribution
 via the web. Both files are set at a high resolution 300<abbr title="Dots Per Inch">dpi</abbr>.

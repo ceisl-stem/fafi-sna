@@ -90,3 +90,9 @@ d-article h2 {
   padding-bottom: 9px;
   border-bottom: solid 1px rgba(25, 25, 25, 0.1);
 }
+
+d-article h4 {
+  font-weight: 700;
+  font-style: italic;
+  font-size: 24px;
+}
