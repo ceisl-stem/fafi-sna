@@ -50,7 +50,7 @@ To give feedback, report a bug, or request a feature, please open an issue.
 To contribute a change, note that the distill project is released with a [Contributor Code of Conduct](code_of_conduct.md). By contributing to this project, you agree to abide by its terms.
 
 ## License
-All code for this project is licensed under the CC0 1.0 Universal License - see the [LICENSE](LICENSE) file for details. All outputs, plots, analyses, and figures are licensed under the [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.
+All code for this project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. All outputs, plots, analyses, and figures are licensed under the [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.
 
 ## Acknowledgements
 
