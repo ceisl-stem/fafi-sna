@@ -7,5 +7,6 @@ exclude: ["LICENSE", "R", "output", "data", "README.md"]
 navbar:
   logo:
     image: aux/ceisl-logo.png
+    url: https://ceisl.iupui.edu/
   source_url: https://github.com/jeremyfprice/fafi-sna/
 ---
