@@ -18,23 +18,25 @@ In addition, we look at a variety of centralities as a way to understanding the 
 
 ```
 fafi-sna/
-┣ .github/                <- Directory used by Github to generate webpage
+┣ .github/                  <- Directory used by Github to serve webpage
 ┃ ┗ workflows/
-┣ index_cache/            <- Directory used by Distill to store temporary files
-┣ index_files/            <- Directory used by Distill to store helper files
-┣ output/                 <- Target directory for collecting R output files
-┃ ┗ plots/                <- Directory for storing plots in PDF and PNG formats
-┃ ┗ csv/                  <- Directory for storing CSV files
-┣ .gitignore              <- Files and directories to be ignored by Git
-┣ .nojekyll               <- File to tell Github to not use Jekyll
-┣ CODE_OF_CONDUCT.md      <- Code of Conduct for project contributors
-┣ LICENSE                 <- License for project
-┣ README.md               <- This file, a general overview of this project
-┣ fafi-sna-references.bib <- Bibliography for this project in BibTeX format
-┣ fafi-sna.R              <- R script distilled from the literate programming file
-┣ family_as_faculty.png   <- Project logo
-┣ index.Rmd               <- Literate programming file for the project analysis
-┗ index.html              <- Rendered version of the literate programming file
+┣ aux/                      <- Directory for storing auxiliary files
+┃ ┗ fafi-sna-references.bib <- Bibliography for this project in BibTeX format
+┃ ┗ theme.css               <- Cascading style sheet for the project
+┃ ┗ fafi-sna-logo.png       <- Project logo
+┣ docs/                     <- Directory for the rendered literate programming file
+┃ ┗ index.html              <- Rendered version of the literate programming file
+┣ output/                   <- Target directory for collecting R output files
+┃ ┗ plots/                  <- Directory for storing plots in PDF and PNG formats
+┃ ┗ csv/                    <- Directory for storing CSV files
+┣ R                         <- Directory for storing R scripts
+┃ ┗ fafi-sna.R              <- R script distilled from the literate programming file
+┣ .gitignore                <- Files and directories to be ignored by Git
+┣ .nojekyll                 <- File to tell Github to not use Jekyll
+┣ CODE_OF_CONDUCT.md        <- Code of Conduct for project contributors
+┣ LICENSE                   <- License (MIT) for project
+┣ README.md                 <- This file, a general overview of this project
+┗ index.Rmd                 <- Literate programming file for the project analysis
 ```
 
 ## Project Team
