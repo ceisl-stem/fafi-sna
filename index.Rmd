@@ -252,9 +252,9 @@ via the web. Both files are set at a high resolution 300<abbr title="Dots Per In
 ```{r function-plot-save-plot, echo = TRUE}
 plot.save <- function(the.plot, the.file) {
   # Set the filename for the PDF.
-  pdf.name <- glue("output/{the.file}.pdf")
+  pdf.name <- glue("output/plots/{the.file}.pdf")
   # Set the filname fro the PNG.
-  png.name <- glue("output/{the.file}.png")
+  png.name <- glue("output/plots/{the.file}.png")
   # Save as PDF.
   ggsave(the.plot, filename = pdf.name, width = 11.5, height = 8, units = "in", dpi = 300)
   # Save as PNG.
@@ -454,7 +454,7 @@ calculate.centrality <- function(the.graph, the.salience, the.file) {
 
 ```{r function-calculate-salience, echo = TRUE}
 calculate.salience <- function(the.frame, the.grouping, the.file) {
-  the.filename <- glue("output/salience_{the.file}.csv")
+  the.filename <- glue("output/csv/salience_{the.file}.csv")
   anthro.frame <- the.frame |>
     select("Subj" = "from", "Order" = "order", "CODE" = "to", "GROUPING" = "question") |>
     add_count(Subj, GROUPING) |>
@@ -721,7 +721,7 @@ full.graph <- set.graph(full.frame, full.salience)
 full.plot <- draw.graph(full.graph, "full")
 ```
 
-<img src = "output/sna_full-plot.png" alt = "Full Social Network Plot" />
+![Full Social Network Plot](output/plots/sna_full-plot.png)
 
 ### Process Question 1
 
@@ -912,7 +912,7 @@ keyactors.frame <- full.avg.cent |>
 
 ```{r write-keyactors, layout="l-body-outset", results = TRUE}
 rmarkdown::paged_table(keyactors.frame)
-write_csv(keyactors.frame, file = "output/keyactors_analysis.csv")
+write_csv(keyactors.frame, file = "output/csv/keyactors_analysis.csv")
 ```
 
 It is important to recognize that it's all OK, and I hope this works.
@@ -960,7 +960,7 @@ participants.frame <- participants.frame |>
 
 ```{r write-participant-actors, layout="l-body-outset", results = TRUE}
 rmarkdown::paged_table(participants.frame)
-write_csv(participants.frame, file = "output/participants_analysis.csv")
+write_csv(participants.frame, file = "output/csv/participants_analysis.csv")
 ```
 
 It is important to recognize that it's all OK, and I hope this works.

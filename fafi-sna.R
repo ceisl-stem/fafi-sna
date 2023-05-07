@@ -83,9 +83,9 @@ the.abbrev <<- data.frame(
 
 plot.save <- function(the.plot, the.file) {
   # Set the filename for the PDF.
-  pdf.name <- glue("output/{the.file}.pdf")
+  pdf.name <- glue("output/plots/{the.file}.pdf")
   # Set the filname fro the PNG.
-  png.name <- glue("output/{the.file}.png")
+  png.name <- glue("output/plots/{the.file}.png")
   # Save as PDF.
   ggsave(the.plot, filename = pdf.name, width = 11.5, height = 8, units = "in", dpi = 300)
   # Save as PNG.
@@ -214,7 +214,7 @@ calculate.centrality <- function(the.graph, the.salience, the.file) {
 }
 
 calculate.salience <- function(the.frame, the.grouping, the.file) {
-  the.filename <- glue("output/salience_{the.file}.csv")
+  the.filename <- glue("output/csv/salience_{the.file}.csv")
   anthro.frame <- the.frame |>
     select("Subj" = "from", "Order" = "order", "CODE" = "to", "GROUPING" = "question") |>
     add_count(Subj, GROUPING) |>
@@ -562,7 +562,7 @@ keyactors.frame <- full.avg.cent |>
   arrange(desc(overall_score))
 
 rmarkdown::paged_table(keyactors.frame)
-write_csv(keyactors.frame, file = "output/keyactors_analysis.csv")
+write_csv(keyactors.frame, file = "output/csv/keyactors_analysis.csv")
 
 keyactors.corr <- keyactors.frame |>
   select(positionality_score, reachability_score, reputation_score) |>
@@ -592,7 +592,7 @@ participants.frame <- participants.frame |>
   as.data.frame()
 
 rmarkdown::paged_table(participants.frame)
-write_csv(participants.frame, file = "output/participants_analysis.csv")
+write_csv(participants.frame, file = "output/csv/participants_analysis.csv")
 
 participants.corr <- participants.frame |>
   select(positionality_score, reachability_score, potentiality_score) |>
