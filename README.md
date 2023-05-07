@@ -45,11 +45,13 @@ fafi-sna/
 * Román Graff (Ivy Tech Community College, Indianapolis, IN)
 
 ## Contributing
+
 To give feedback, report a bug, or request a feature, please open an issue.
 
 To contribute a change, note that the distill project is released with a [Contributor Code of Conduct](code_of_conduct.md). By contributing to this project, you agree to abide by its terms.
 
 ## License
+
 All code for this project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. All outputs, plots, analyses, and figures are licensed under the [CC-BY-NC-SA 4.0](http://creativecommons.org/licenses/by-nc-sa/4.0/) license.
 
 ## Acknowledgements
@@ -58,4 +60,4 @@ The literate coding framework for this project utilizes the [Distill for R Markd
 
 This project is funded in part by a [National Association of Family, School, and Community Engagement Minigrant](https://nafsce.org/page/MiniGrant).
 
-[![Open Data](https://img.shields.io/badge/DATA-open-informational)](https://osf.io/y3xz4/) [![Open Analysis](https://img.shields.io/badge/ANALYSIS-open-informational)](https://osf.io/epsvt/) [![Open Materials](https://img.shields.io/badge/MATERIALS-open-informational)](https://osf.io/5tay8/) [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md)
+[![Open Source](https://img.shields.io/badge/SOURCE-open-informational)](LICENSE)[![Open Data](https://img.shields.io/badge/DATA-open-informational)](https://osf.io/y3xz4/) [![Open Analysis](https://img.shields.io/badge/ANALYSIS-open-informational)](https://osf.io/epsvt/) [![Open Materials](https://img.shields.io/badge/MATERIALS-open-informational)](https://osf.io/5tay8/) [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md)
