@@ -2,6 +2,7 @@
 title: "The Analysis Is Not The Social Network"
 description: |
   Illuminating the unruly nature of intentional social networks in educational justice efforts.
+repository_url: https://github.com/jeremyfprice/fafi-sna/
 author:
   - name: Jeremy F Price 
     url: https://www.jeremyfprice.info/
