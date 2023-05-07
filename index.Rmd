@@ -25,7 +25,9 @@ date: "`r Sys.Date()`"
 output:
   distill::distill_article:
     self_contained: false
-    theme: theme.css
+    theme: aux/theme.css
+navbar:
+  source_url: https://github.com/jeremyfprice/fafi-sna/
 creative_commons: CC BY-NC-SA
 bibliography: aux/fafi-sna-references.bib
 ---
@@ -76,7 +78,34 @@ around their work [@baker-doyleFirstyearTeachersSupport2012; @baker-doyleSocialS
 and his efforts to re-situate model-based research in historical and sociocultural contexts
 [@taylorUnrulyComplexityEcology2010; @taylorComplexityConstructionIntersecting2018].
 
+## Components
+
 All components of this work can be found at the project's [OSF repository](https://osf.io/kxhp9/?view_only=eb0fefe6b5bd41b6955c2a4c657e785e).
+
+### Directory Structure
+
+```
+fafi-sna/
+┣ .github/                  <- Directory used by Github to serve webpage
+┃ ┗ workflows/
+┣ aux/                      <- Directory for storing auxiliary files
+┃ ┗ fafi-sna-references.bib <- Bibliography for this project in BibTeX format
+┃ ┗ theme.css               <- Cascading style sheet for the project
+┃ ┗ fafi-sna-logo.png       <- Project logo
+┣ docs/                     <- Directory for the rendered literate programming file
+┃ ┗ index.html              <- Rendered version of the literate programming file
+┣ output/                   <- Target directory for collecting R output files
+┃ ┗ plots/                  <- Directory for storing plots in PDF and PNG formats
+┃ ┗ csv/                    <- Directory for storing CSV files
+┣ R                         <- Directory for storing R scripts
+┃ ┗ fafi-sna.R              <- R script distilled from the literate programming file
+┣ .gitignore                <- Files and directories to be ignored by Git
+┣ .nojekyll                 <- File to tell Github to not use Jekyll
+┣ CODE_OF_CONDUCT.md        <- Code of Conduct for project contributors
+┣ LICENSE                   <- License (MIT) for project
+┣ README.md                 <- This file, a general overview of this project
+┗ index.Rmd                 <- Literate programming file for the project analysis
+```
 
 # Literate Code
 
@@ -1007,7 +1036,7 @@ print(overall.plot)
 
 Context is important!
 
-```{r unruly-timeline, echo = TRUE, layout="l-body-outset", results = TRUE}
+```{r unruly-timeline, echo = TRUE, layout="l-body-outset", results = TRUE, eval = FALSE}
 timeline.frame <- read_csv("data/timeline-data.csv", col_names = TRUE, show_col_types = FALSE)
 timeline.plot <- gg_vistime(timeline.frame,
   col.event = "event", col.group = "layer",
@@ -1017,12 +1046,10 @@ timeline.plot <- gg_vistime(timeline.frame,
 plot.save(timeline.plot, "timeline")
 ```
 
-```{r save-timeline, echo = FALSE, purl = FALSE, dpi=300}
+```{r save-timeline, echo = FALSE, purl = FALSE, dpi=300, eval = FALSE}
 # Save a copy of the network to be displayed below
-ggsave(timeline.plot, filename = "aux/timeline-plot.png", width = 11.5, height = 8, units = "in", dpi = 300)
+ggsave(timeline.plot, filename = "aux/timeline-plot.png", width = 18, height = 6, units = "in", dpi = 300)
 ```
-
-![Timeline](aux/timeline-plot.png)
 
 ## Acknowledgments {.appendix}
 
