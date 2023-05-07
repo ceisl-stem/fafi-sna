@@ -30,6 +30,7 @@ navbar:
   source_url: https://github.com/jeremyfprice/fafi-sna/
 creative_commons: CC BY-NC-SA
 bibliography: aux/fafi-sna-references.bib
+citation_url: https://jeremyfprice.github.io/fafi-sna/
 ---
 
 ```{r setup, include=FALSE, purl = FALSE}
