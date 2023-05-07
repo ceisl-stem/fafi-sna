@@ -120,7 +120,7 @@ trust, transparency, and accountability [@chouSupportingEthicalPractice2020; @mu
 literate code provides a clear window for community members and participants into 
 the inner processes of data analysis and visualization methodologies.
 
-This is primarily an exercise in *coding as bricolage* [@EpistemologicalPluralismRevaluation], so the code itself is neither particularly <abbr title = "Don't Repeat Yourself">DRY</abbr> nor
+This is primarily an exercise in *coding as bricolage* [@levi-straussSavageMind1968; @EpistemologicalPluralismRevaluation], so the code itself is neither particularly <abbr title = "Don't Repeat Yourself">DRY</abbr> nor
 <abbr title = "Single Level of Abstraction Principle">SLAP</abbr>. But it works and gets
 the job done even if there may be more elegant and efficient ways of doing things.
 

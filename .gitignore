@@ -2,7 +2,6 @@
 .Rhistory
 *.log
 data/
-index_files/
-index_cache/
 .Rproj.user
 *Rproj
+*.pdf
