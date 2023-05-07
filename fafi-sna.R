@@ -46,22 +46,30 @@ library(vistime)
 ## ## Define the common color palette ##
 ## #####################################
 
-the.palette <<- c("FL" = "#6929c4", "NC" = "#1192e8", "PA" = "#005d5d",
-                  "CF" = "#9f1853", "FF" = "#fa4d56", "IL" = "#570408",
-                  "OR" = "#198038", "OT" = "#002d9c", "SA" = "#ee538b",
-                  "ST" = "#b28600", "UA" = "#009d9a", "UF" = "#012749",
-                  "US" = "#8a3800")
+the.palette <<- c(
+  "FL" = "#6929c4", "NC" = "#1192e8", "PA" = "#005d5d",
+  "CF" = "#9f1853", "FF" = "#fa4d56", "IL" = "#570408",
+  "OR" = "#198038", "OT" = "#002d9c", "SA" = "#ee538b",
+  "ST" = "#b28600", "UA" = "#009d9a", "UF" = "#012749",
+  "US" = "#8a3800"
+)
 
 ## ##############################################
 ## ## Define the participant abbreviation list ##
 ## ##############################################
 
-the.abbrev <<- data.frame(color_code = c("FL", "NC", "FF", "IL", "OR", "OT", "SA",
-                                     "ST", "UA", "UF", "US", "PA", "CF"),
-                          full = c("Family Leader", "NC Member", "Friend/Family",
-                                   "Institutional Leader", "Other Resource", "Therapist",
-                                   "Administrator", "Teacher", "Advisor", "Faculty",
-                                   "Staff", "Student", "Child"))
+the.abbrev <<- data.frame(
+  color_code = c(
+    "FL", "NC", "FF", "IL", "OR", "OT", "SA",
+    "ST", "UA", "UF", "US", "PA", "CF"
+  ),
+  full = c(
+    "Family Leader", "NC Member", "Friend/Family",
+    "Institutional Leader", "Other Resource", "Therapist",
+    "Administrator", "Teacher", "Advisor", "Faculty",
+    "Staff", "Student", "Child"
+  )
+)
 
 ## ######################################################
 ## ##                                                  ##
@@ -80,7 +88,7 @@ plot.save <- function(the.plot, the.file) {
   png.name <- glue("output/{the.file}.png")
   # Save as PDF.
   ggsave(the.plot, filename = pdf.name, width = 11.5, height = 8, units = "in", dpi = 300)
-  #Save as PNG.
+  # Save as PNG.
   ggsave(the.plot, filename = png.name, width = 11.5, height = 8, units = "in", dpi = 300)
 }
 
@@ -95,10 +103,11 @@ plot.corr <- function(the.frame, the.file) {
   p.mat <- cor_pmat(corr)
   # Initialize plot.
   corr.plot <- ggcorrplot(corr,
-                          hc.order = TRUE, # Order according to hierarchical clustering.
-                          type = "lower", # Only display the bottom half.
-                          p.mat = p.mat, # Account for statistical significance.
-                          colors = c("#750e13", "#ffffff", "#003a6d")) # Set colors.
+    hc.order = TRUE, # Order according to hierarchical clustering.
+    type = "lower", # Only display the bottom half.
+    p.mat = p.mat, # Account for statistical significance.
+    colors = c("#750e13", "#ffffff", "#003a6d")
+  ) # Set colors.
   # Save the plot...
   plot.save(corr.plot, the.file)
   # ...and return it.
@@ -113,8 +122,10 @@ calculate.tukey <- function(the.cent) {
   # Calculate Tukey's fences
   q <- quantile(the.cent, c(0.25, 0.75))
   iqr <- q[2] - q[1]
-  the.fence <- data.frame(lower = q[1] - 1.5 * iqr,
-                          upper = q[2] + 1.5 * iqr)
+  the.fence <- data.frame(
+    lower = q[1] - 1.5 * iqr,
+    upper = q[2] + 1.5 * iqr
+  )
   return(the.fence)
 }
 
@@ -132,11 +143,11 @@ set.graph <- function(the.frame, the.salience) {
     summarize(weight = n()) |>
     ungroup()
   # Combine the dataframes into one, matching the weight to the edge.
-  the.frame <- merge(the.frame, the.weight, by = c('from', 'to'))
+  the.frame <- merge(the.frame, the.weight, by = c("from", "to"))
   # Create the igraph object, and set it to be a directed graph (i.e., i -> j).
   the.graph <- the.frame |>
     graph_from_data_frame(directed = TRUE)
-    the.salience <- the.salience |> rename("name" = "actor")
+  the.salience <- the.salience |> rename("name" = "actor")
   node.data <- data.frame(name = V(the.graph)$name) |>
     mutate(id_no = substr(V(the.graph)$name, 3, 4)) |>
     mutate(color_code = substr(V(the.graph)$name, 1, 2)) |>
@@ -165,10 +176,14 @@ draw.graph <- function(the.graph, the.file) {
   the.plot <- the.graph |>
     ggraph(layout = "fr") + # Display the graph using the Fruchterman and Reingold algorithm.
     geom_edge_fan(color = "#A7A9AB") + # Plot the edges between nodes.
-    geom_node_point(aes(color = color_code,    # Plot the nodes with the color determined by the
-                        size = size_code),     # participant and the size of the node determined
-                        show.legend = FALSE) + # by the Smith's S Salience Score.
-    scale_size_continuous(range = c(2.5,10)) + # Rescale the node size.
+    geom_node_point(
+      aes(
+        color = color_code, # Plot the nodes with the color determined by the
+        size = size_code
+      ), # participant and the size of the node determined
+      show.legend = FALSE
+    ) + # by the Smith's S Salience Score.
+    scale_size_continuous(range = c(2.5, 10)) + # Rescale the node size.
     scale_color_manual(values = the.palette) + # Bring in the color palette.
     geom_node_text(aes(label = label), repel = TRUE) + # Place the actor name on the graph.
     labs(edge_width = "Letters") +
@@ -180,12 +195,14 @@ draw.graph <- function(the.graph, the.file) {
 }
 
 calculate.centrality <- function(the.graph, the.salience, the.file) {
-  analysis.network.data <- data.frame(indegree = igraph::degree(the.graph, mode = "in"),
-                                      outdegree = igraph::degree(the.graph, mode = "out"),
-                                      leaderrank = leaderrank(the.graph),
-                                      laplace = laplacian(the.graph),
-                                      leverage = leverage(the.graph),
-                                      latora = closeness.latora(the.graph))
+  analysis.network.data <- data.frame(
+    indegree = igraph::degree(the.graph, mode = "in"),
+    outdegree = igraph::degree(the.graph, mode = "out"),
+    leaderrank = leaderrank(the.graph),
+    laplace = laplacian(the.graph),
+    leverage = leverage(the.graph),
+    latora = closeness.latora(the.graph)
+  )
   analysis.network.data$actor <- rownames(analysis.network.data)
   rownames(analysis.network.data) <- NULL
   analysis.network.data <- analysis.network.data |>
@@ -202,7 +219,7 @@ calculate.salience <- function(the.frame, the.grouping, the.file) {
     select("Subj" = "from", "Order" = "order", "CODE" = "to", "GROUPING" = "question") |>
     add_count(Subj, GROUPING) |>
     filter(n > 1)
-  if(the.grouping == "none") {
+  if (the.grouping == "none") {
     anthro.frame <- anthro.frame |>
       select("Subj", "Order", "CODE") |>
       distinct() |>
@@ -210,12 +227,12 @@ calculate.salience <- function(the.frame, the.grouping, the.file) {
     anthro.frame$Order <- as.numeric(anthro.frame$Order)
     the.salience <- CalculateSalience(anthro.frame)
   } else {
-  anthro.frame <- anthro.frame |>
-    select("Subj", "Order", "CODE", "GROUPING") |>
-    distinct() |>
-    as.data.frame()
-  anthro.frame$Order <- as.numeric(anthro.frame$Order)
-  the.salience <- CalculateSalience(anthro.frame, GROUPING = "GROUPING")
+    anthro.frame <- anthro.frame |>
+      select("Subj", "Order", "CODE", "GROUPING") |>
+      distinct() |>
+      as.data.frame()
+    anthro.frame$Order <- as.numeric(anthro.frame$Order)
+    the.salience <- CalculateSalience(anthro.frame, GROUPING = "GROUPING")
   }
   code.salience <- SalienceByCode(the.salience, dealWithDoubles = "MAX")
   write_csv(code.salience, the.filename, append = FALSE)
@@ -251,13 +268,16 @@ calculate.keyactors <- function(the.frame, the.file) {
   key.ymean <- mean(key.frame.leaderrank.trimmed$leaderrank)
   key.xmean <- mean(key.frame.leverage.trimmed$leverage)
   key.frame <- key.frame |>
-    mutate(keystatus = case_when((leaderrank > key.ymean & leverage > key.xmean) ~ "Sage",
-                                 (leaderrank > key.ymean & leverage < key.xmean) ~ "Steward",
-                                 (leaderrank < key.ymean & leverage > key.xmean) ~ "Weaver")) |>
+    mutate(keystatus = case_when(
+      (leaderrank > key.ymean & leverage > key.xmean) ~ "Sage",
+      (leaderrank > key.ymean & leverage < key.xmean) ~ "Steward",
+      (leaderrank < key.ymean & leverage > key.xmean) ~ "Weaver"
+    )) |>
     na.omit() |>
     group_by(keystatus) |>
     arrange(desc(res), desc(SmithsS)) |>
-    unique() |> ungroup()# |> na.omit()
+    unique() |>
+    ungroup()
   plot.keyactors(key.frame, key.xmean, key.ymean, the.file)
   key.frame <- key.frame %>%
     select(actor, leverage, leaderrank, res, SmithsS, keystatus) %>%
@@ -274,27 +294,34 @@ plot.keyactors <- function(key.frame, key.xmean, key.ymean, the.file) {
   steward.count <- count.keyactors(key.frame, "Steward")
   sage.count <- count.keyactors(key.frame, "Sage")
   weaver.count <- count.keyactors(key.frame, "Weaver")
-  key.plot <- ggscatter(key.frame, x = "leverage", y = "leaderrank",
-                        label = "label", label.rectangle = FALSE, repel = TRUE,
-                        theme = theme_minimal(), ylab = "Leader Rank Centrality",
-                        xlab = "Leverage Centrality", point = TRUE, show.legend = FALSE,
-                        color = "color_code", palette = the.palette,
-                        conf.int = FALSE, cor.coef = FALSE, legend = "none")
-  if(steward.count != 0) {
+  key.plot <- ggscatter(key.frame,
+    x = "leverage", y = "leaderrank",
+    label = "label", label.rectangle = FALSE, repel = TRUE,
+    theme = theme_minimal(), ylab = "Leader Rank Centrality",
+    xlab = "Leverage Centrality", point = TRUE, show.legend = FALSE,
+    color = "color_code", palette = the.palette,
+    conf.int = FALSE, cor.coef = FALSE, legend = "none"
+  )
+  if (steward.count != 0) {
     key.plot <- key.plot +
       geom_vline(xintercept = key.xmean, color = "#243142", alpha = 0.2) +
       geom_label(aes(x = key.xmin, y = key.ymax, label = "Stewards", hjust = 0),
-                 color = "#243142", fill = "#A7A9AB")
+        color = "#243142", fill = "#A7A9AB"
+      )
   }
-  if(weaver.count != 0) {
+  if (weaver.count != 0) {
     key.plot <- key.plot +
       geom_hline(yintercept = key.ymean, color = "#243142", alpha = 0.2) +
-      geom_label(aes(x = key.xmax, y = key.ymin,
-                     label = "Weavers", hjust = 1), color = "#243142", fill = "#A7A9AB")
+      geom_label(aes(
+        x = key.xmax, y = key.ymin,
+        label = "Weavers", hjust = 1
+      ), color = "#243142", fill = "#A7A9AB")
   }
   key.plot <- key.plot +
-    geom_label(aes(x = key.xmax, y = key.ymax,
-                   label = "Sages", hjust = 1), color = "#243142", fill = "#A7A9AB") +
+    geom_label(aes(
+      x = key.xmax, y = key.ymax,
+      label = "Sages", hjust = 1
+    ), color = "#243142", fill = "#A7A9AB") +
     theme_few() +
     theme(legend.position = "none")
   ggsave(key.plot, filename = the.filename, width = 11.5, height = 8, units = "in", dpi = 300)
@@ -302,20 +329,29 @@ plot.keyactors <- function(key.frame, key.xmean, key.ymean, the.file) {
 }
 
 count.keyactors <- function(key.frame, the.actor) {
-    the.count <- key.frame |>
-      count(keystatus) |>
-      filter(keystatus == the.actor) |>
-      pull(n)
+  the.count <- key.frame |>
+    count(keystatus) |>
+    filter(keystatus == the.actor) |>
+    pull(n)
   the.count <- ifelse(is.numeric(the.count), the.count, 0)
   the.count <- the.count |> replace_na(0)
   return(the.count)
 }
 
+create.q.key <- function(the.1, the.2, the.question) {
+  the.q.key <- bind_rows(the.1, the.2) |>
+    mutate(question = the.question) |>
+    select(question, actor, keystatus)
+  return(the.q.key)
+}
+
 create.q.cent <- function(the.1, the.2, the.question) {
   the.q.cent <- bind_rows(the.1, the.2) |>
     mutate(question = the.question) |>
-    select(question, actor, outdegree, indegree, leverage,
-           laplace, leaderrank, latora, SmithsS)
+    select(
+      question, actor, outdegree, indegree, leverage,
+      laplace, leaderrank, latora, SmithsS
+    )
 }
 
 calculate.ranks <- function(the.cent) {
@@ -327,9 +363,11 @@ calculate.ranks <- function(the.cent) {
     mutate(leaderrank_rank = dense_rank(desc(leaderrank))) |>
     mutate(smiths_rank = dense_rank(desc(SmithsS))) |>
     mutate(latora_rank = dense_rank(desc(latora))) |>
-    select(question, actor, outdegree, outdegree_rank, indegree, indegree_rank,
-           leverage, leverage_rank, laplace, laplacian_rank,
-           latora, latora_rank, leaderrank, leaderrank_rank, SmithsS, smiths_rank) |>
+    select(
+      question, actor, outdegree, outdegree_rank, indegree, indegree_rank,
+      leverage, leverage_rank, laplace, laplacian_rank,
+      latora, latora_rank, leaderrank, leaderrank_rank, SmithsS, smiths_rank
+    ) |>
     arrange(question, actor)
   rownames(the.cent) <- NULL
   return(the.cent)
@@ -362,24 +400,19 @@ calculate.node.flexibility <- function(the.actor) {
   jaccard.1 <- calculate.jaccard(set1, set2)
   jaccard.2 <- calculate.jaccard(set2, set3)
   jaccard.3 <- calculate.jaccard(set1, set3)
-  the.flexibility <- 1 - ((1/(3*(3-1)) * (jaccard.1 + jaccard.2 + jaccard.3)) / 3)
+  the.flexibility <- 1 - ((1 / (3 * (3 - 1)) * (jaccard.1 + jaccard.2 + jaccard.3)) / 3)
   response.frame <- data.frame(actor = the.actor, flexibility = the.flexibility)
   return(response.frame)
-}
-
-create.q.key <- function(the.1, the.2, the.question){
-  the.q.key <- bind_rows(the.1, the.2) |>
-    mutate(question = the.question) |>
-    select(question, actor, keystatus)
-  return(the.q.key)
 }
 
 pates.frame <- import("https://osf.io/download/62qpa/", format = "csv") |>
   mutate_all(toupper) |>
   filter(id != "PA09") |>
-  pivot_longer(cols = starts_with("Q"),
-               names_to = "question",
-               values_to = "to") |>
+  pivot_longer(
+    cols = starts_with("Q"),
+    names_to = "question",
+    values_to = "to"
+  ) |>
   drop_na() |>
   select("question", "from" = "id", "to") |>
   separate(col = question, into = c("question", "order"), sep = "_") |>
@@ -387,9 +420,11 @@ pates.frame <- import("https://osf.io/download/62qpa/", format = "csv") |>
 
 ncfl.frame <- import("https://osf.io/download/ghz3c/", format = "csv") |>
   mutate_all(toupper) |>
-  pivot_longer(cols = starts_with("Q"),
-               names_to = "question",
-               values_to = "to") |>
+  pivot_longer(
+    cols = starts_with("Q"),
+    names_to = "question",
+    values_to = "to"
+  ) |>
   drop_na() |>
   select("question", "from" = "ID", "to") |>
   separate(col = question, into = c("question", "order"), sep = "_") |>
@@ -465,9 +500,11 @@ q3.key <- create.q.key(pates.q3.key, ncfl.q3.key, "q3")
 q4.key <- create.q.key(pates.q4.key, ncfl.q4.key, "q4")
 q.key <<- bind_rows(q1.key, q3.key, q4.key) |>
   select(actor, keystatus) |>
-  mutate(keyscore = case_when(keystatus == "Sage" ~ 3,
-                              keystatus == "Steward" ~ 2,
-                              keystatus == "Weaver" ~ 1)) |>
+  mutate(keyscore = case_when(
+    keystatus == "Sage" ~ 3,
+    keystatus == "Steward" ~ 2,
+    keystatus == "Weaver" ~ 1
+  )) |>
   group_by(actor) |>
   summarize(keyscore = sum(keyscore)) |>
   mutate(keyscore = keyscore / 9)
@@ -481,16 +518,19 @@ q4.cent <- create.q.cent(pates.q4.cent, ncfl.q4.cent, "q4") |>
 q.cent <<- bind_rows(q1.cent, q3.cent, q4.cent)
 
 full.avg.cent <- q.cent |>
-  select(actor, leverage_rank, laplacian_rank, outdegree_rank, indegree_rank,
-         latora_rank, leaderrank_rank, smiths_rank) |>
+  select(
+    actor, leverage_rank, laplacian_rank, outdegree_rank, indegree_rank,
+    latora_rank, leaderrank_rank, smiths_rank
+  ) |>
   group_by(actor) |>
-  summarize(across(everything(), mean), .groups = "drop")  |>
+  summarize(across(everything(), mean), .groups = "drop") |>
   left_join(flex.score) |>
   left_join(q.key) |>
   replace_na(list(flexibility = 0, keyscore = 0)) |>
   mutate(flexibility_rank = dense_rank(desc(flexibility))) |>
   mutate(keyscore_rank = dense_rank(desc(keyscore))) |>
-  ungroup() |> as.data.frame()
+  ungroup() |>
+  as.data.frame()
 
 corr.avg <- full.avg.cent |>
   select(-flexibility, -keyscore, -actor) |>
@@ -501,8 +541,10 @@ keyactors.q.frame <- q.key |>
   left_join(q1.key) |>
   left_join(q3.key, by = "actor") |>
   left_join(q4.key, by = "actor") |>
-  select(actor, q1_status = keystatus.x, q3_status = keystatus.y,
-                q4_status = keystatus) |>
+  select(actor,
+    q1_status = keystatus.x, q3_status = keystatus.y,
+    q4_status = keystatus
+  ) |>
   arrange(actor)
 
 keyactors.frame <- full.avg.cent |>
@@ -511,8 +553,10 @@ keyactors.frame <- full.avg.cent |>
   mutate(reputation_score = ((1 / (smiths_rank + leaderrank_rank) / 2)) * 10) |>
   mutate(reachability_score = ((1 / (latora_rank + indegree_rank) / 2)) * 10) |>
   mutate(overall_score = (positionality_score + reputation_score + reachability_score) / 3) |>
-  select(actor, overall_score, positionality_score, reachability_score, reputation_score,
-         keyscore, keyscore_rank) |>
+  select(
+    actor, overall_score, positionality_score, reachability_score, reputation_score,
+    keyscore, keyscore_rank
+  ) |>
   left_join(keyactors.q.frame) |>
   unique() |>
   arrange(desc(overall_score))
@@ -539,10 +583,13 @@ participants.frame <- participants.frame |>
   mutate(positionality_score = ((1 / (laplacian_rank + leverage_rank) / 2)) * 10) |>
   mutate(reachability_score = ((1 / (latora_rank + outdegree_rank) / 2)) * 10) |>
   mutate(overall_score = (potentiality_score + positionality_score + reachability_score) / 3) |>
-  select(actor, overall_score, positionality_score, reachability_score, potentiality_score,
-         laplacian_rank, leverage_rank, latora_rank, outdegree_rank,
-         flexibility_rank, keyscore_rank, reputation_rank) |>
-  arrange(desc(overall_score)) |> as.data.frame()
+  select(
+    actor, overall_score, positionality_score, reachability_score, potentiality_score,
+    laplacian_rank, leverage_rank, latora_rank, outdegree_rank,
+    flexibility_rank, keyscore_rank, reputation_rank
+  ) |>
+  arrange(desc(overall_score)) |>
+  as.data.frame()
 
 rmarkdown::paged_table(participants.frame)
 write_csv(participants.frame, file = "output/participants_analysis.csv")
@@ -555,17 +602,21 @@ print(participants.corr)
 overall.frame <- participants.frame |>
   select(actor, overall_score) |>
   mutate(color_code = substr(actor, 1, 2))
-overall.plot <- ggstripchart(overall.frame, x = "color_code", y = "overall_score", label = "actor",
-                             repel = TRUE, color = "color_code", palette = "the.palette",
-                             fill = "color_code", label.rectangle = FALSE, show.legend = FALSE,
-                             label.color = "color_code", xlab = "Network", ylab = "Overall Score") +
+overall.plot <- ggstripchart(overall.frame,
+  x = "color_code", y = "overall_score", label = "actor",
+  repel = TRUE, color = "color_code", palette = "the.palette",
+  fill = "color_code", label.rectangle = FALSE, show.legend = FALSE,
+  label.color = "color_code", xlab = "Network", ylab = "Overall Score"
+) +
   theme_few() +
   theme(legend.position = "none")
 plot.save(overall.plot, "overall-corr")
 print(overall.plot)
 
 timeline.frame <- read_csv("data/timeline-data.csv", col_names = TRUE, show_col_types = FALSE)
-timeline.plot <- gg_vistime(timeline.frame, col.event = "event", col.group = "layer",
-                            col.start = "start", col.end = "end", optimize_y = TRUE) +
+timeline.plot <- gg_vistime(timeline.frame,
+  col.event = "event", col.group = "layer",
+  col.start = "start", col.end = "end", optimize_y = TRUE
+) +
   theme_few()
 plot.save(timeline.plot, "timeline")
