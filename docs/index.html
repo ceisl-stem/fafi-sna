@@ -2229,7 +2229,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   /* Optional: embed custom fonts here with `@import`          */
   /* This must remain at the top of this file.                 */
 
-  @import url('https://fonts.googleapis.com/css2?family=Inter&family=Atkinson+Hyperlegible&family=JetBrains+Mono&family=Noto+Sans');
+  @import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible&family=JetBrains+Mono&family=Rubik');
 
 
   html {
@@ -2246,10 +2246,10 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     --aside-color:     rgba(25, 25, 25, 0.6);
     --fig-cap-color:   rgba(25, 25, 25, 0.6);
     /*-- Specify custom fonts ~~~ must be imported above   --*/
-    --heading-font:    "Noto Sans", sans-serif;
+    --heading-font:    "Rubik", sans-serif;
     --mono-font:       "JetBrains Mono", monospace;
     --body-font:       "Atkinson Hyperlegible", sans-serif;
-    --navbar-font:     "Noto Sans", sans-serif;  /* websites + blogs only */
+    --navbar-font:     "Rubik", sans-serif;  /* websites + blogs only */
   }
 
   /*-- ARTICLE METADATA --*/
@@ -2282,14 +2282,14 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     --text-color:       #EDEBEB;
     --text-size:        15px;
     --hover-color:      white;
-    --bkgd-color:       #990000;
+    --bkgd-color:       #01426A;
   }
 
   .distill-site-footer {
     --text-color:       #EDEBEB;
     --text-size:        15px;
     --hover-color:      white;
-    --bkgd-color:       #990000;
+    --bkgd-color:       #01426A;
   }
 
   /*-- Additional custom styles --*/
@@ -2307,6 +2307,13 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     font-size: 24px;
     padding-bottom: 9px;
     border-bottom: solid 1px rgba(25, 25, 25, 0.1);
+  }
+
+  d-article h4 {
+    font-weight: 700;
+    text-transform: none;
+    font-size: 1.06rem;
+    color:   rgba(25, 25, 25, 0.25);
   }</style>
   <style type="text/css">
   /* base style */
@@ -2556,6 +2563,7 @@ around their work <span class="citation" data-cites="baker-doyleFirstyearTeacher
 and his efforts to re-situate model-based research in historical and sociocultural contexts
 <span class="citation" data-cites="taylorUnrulyComplexityEcology2010 taylorComplexityConstructionIntersecting2018">(<a href="#ref-taylorUnrulyComplexityEcology2010" role="doc-biblioref">Taylor 2010</a>, <a href="#ref-taylorComplexityConstructionIntersecting2018" role="doc-biblioref">2018</a>)</span>.</p>
 <p>All components of this work can be found at the project’s <a href="https://osf.io/kxhp9/?view_only=eb0fefe6b5bd41b6955c2a4c657e785e">OSF repository</a>.</p>
+<h1 id="literate-code">Literate Code</h1>
 <p>Computer scientist Don <span class="citation" data-cites="knuthLiterateProgramming1984">Knuth (<a href="#ref-knuthLiterateProgramming1984" role="doc-biblioref">1984</a>)</span> first coined the term “literate programming” to describe a form of programming that is created as a human-readable narrative. It has been taken up
 as a format that is rich in comments and documentation to illustrate and illuminate
 the choices and decisions that were made in the act of programming. Literate code is
@@ -2565,8 +2573,7 @@ In this case, as a community-engaged study, we are more interested in exemplifyi
 trust, transparency, and accountability <span class="citation" data-cites="chouSupportingEthicalPractice2020 mullinsAdvancingCommunityengagedResearch2020 sabatelloDataSharingCommunityengaged2022a">(<a href="#ref-chouSupportingEthicalPractice2020" role="doc-biblioref">Chou and Frazier 2020</a>; <a href="#ref-mullinsAdvancingCommunityengagedResearch2020" role="doc-biblioref">Mullins et al. 2020</a>; <a href="#ref-sabatelloDataSharingCommunityengaged2022a" role="doc-biblioref">Sabatello et al. 2022</a>)</span>,
 literate code provides a clear window for community members and participants into
 the inner processes of data analysis and visualization methodologies.</p>
-<h1 id="literate-code">Literate Code</h1>
-<p>The lead author engage in <em>coding as bricolage</em> <span class="citation" data-cites="EpistemologicalPluralismRevaluation">(<a href="#ref-EpistemologicalPluralismRevaluation" role="doc-biblioref">Turkle and Papert 1992</a>)</span>, so the code itself is neither particularly <abbr title = "Don't Repeat Yourself">DRY</abbr> nor
+<p>This is primarily an exercise in <em>coding as bricolage</em> <span class="citation" data-cites="EpistemologicalPluralismRevaluation">(<a href="#ref-EpistemologicalPluralismRevaluation" role="doc-biblioref">Turkle and Papert 1992</a>)</span>, so the code itself is neither particularly <abbr title = "Don't Repeat Yourself">DRY</abbr> nor
 <abbr title = "Single Level of Abstraction Principle">SLAP</abbr>. But it works and gets
 the job done even if there may be more elegant and efficient ways of doing things.</p>
 <aside>
@@ -2685,7 +2692,8 @@ across the code.</p>
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
-<p><strong><em>Save Plots Function.</em></strong> This function saves plots to the <code>output</code> folder in two formats,
+<h4 id="save-plots-function">Save Plots Function</h4>
+<p>This function saves plots to the <code>output</code> folder in two formats,
 as a <code>pdf</code> file and as a <code>png</code>. These two formats serve different purposes, so both are useful:
 <code>pdf</code> files are useful for inclusion in publications and <code>png</code> files are useful for distribution
 via the web. Both files are set at a high resolution 300<abbr title="Dots Per Inch">dpi</abbr>.</p>
@@ -2694,7 +2702,7 @@ via the web. Both files are set at a high resolution 300<abbr title="Dots Per In
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>plot.save</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>the.plot</span>, <span class='va'>the.file</span><span class='op'>)</span> <span class='op'>{</span></span>
 <span>  <span class='co'># Set the filename for the PDF.</span></span>
 <span>  <span class='va'>pdf.name</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://glue.tidyverse.org/reference/glue.html'>glue</a></span><span class='op'>(</span><span class='st'>"output/plots/{the.file}.pdf"</span><span class='op'>)</span></span>
-<span>  <span class='co'># Set the filname fro the PNG.</span></span>
+<span>  <span class='co'># Set the filname for the PNG.</span></span>
 <span>  <span class='va'>png.name</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://glue.tidyverse.org/reference/glue.html'>glue</a></span><span class='op'>(</span><span class='st'>"output/plots/{the.file}.png"</span><span class='op'>)</span></span>
 <span>  <span class='co'># Save as PDF.</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggsave.html'>ggsave</a></span><span class='op'>(</span><span class='va'>the.plot</span>, filename <span class='op'>=</span> <span class='va'>pdf.name</span>, width <span class='op'>=</span> <span class='fl'>11.5</span>, height <span class='op'>=</span> <span class='fl'>8</span>, units <span class='op'>=</span> <span class='st'>"in"</span>, dpi <span class='op'>=</span> <span class='fl'>300</span><span class='op'>)</span></span>
@@ -2706,7 +2714,8 @@ via the web. Both files are set at a high resolution 300<abbr title="Dots Per In
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
-<p><strong><em>Create Correlation Plot Function.</em></strong> Correlation plots are effective modes of visualizing
+<h4 id="create-correlation-plot-function">Create Correlation Plot Function</h4>
+<p>Correlation plots are effective modes of visualizing
 relationships between variables. This function takes in a dataframe and creates and saves a
 correlation plot while identifying (with an X) correlations that are not statistically significant
 (i.e., the <span class="math inline">\(p\)</span>-value for non-significant correlations is greater than 0.05).</p>
@@ -2734,7 +2743,8 @@ correlation plot while identifying (with an X) correlations that are not statist
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
-<p><strong><em>Calculate Tukey’s Fences Function.</em></strong> Small graphs are prone to extreme outliers, especially
+<h4 id="calculate-tukeys-fences-function">Calculate Tukey’s Fences Function</h4>
+<p>Small graphs are prone to extreme outliers, especially
 when there are power dynamics such
 as instructor-student relations. While acknowledging this dynamic, it does skew such calculations
 as a Key Actor Analysis. Tukey’s fences <span class="citation" data-cites="hoaglinPerformanceResistantRules1986 tukeyExploratoryDataAnalysis1993">(<a href="#ref-hoaglinPerformanceResistantRules1986" role="doc-biblioref">Hoaglin, Iglewicz, and Tukey 1986</a>; <a href="#ref-tukeyExploratoryDataAnalysis1993" role="doc-biblioref">Tukey 1993</a>)</span> is one way to remove the impact of these outliers.</p>
@@ -2807,7 +2817,8 @@ of the centrality algorithms account for <code>weight</code> when calculating th
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
-<p><strong><em>Plot the Graph Function.</em></strong> The <code>draw.graph</code> creates the visualization–the plot–of the
+<h4 id="plot-the-graph-function">Plot the Graph Function</h4>
+<p>The <code>draw.graph</code> creates the visualization–the plot–of the
 social network graph and then saves it for further use. The <code>geom_edge_fan</code> feature is used
 to represent the number of times a participant named an actor.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -2841,7 +2852,8 @@ to represent the number of times a participant named an actor.</p>
 <span><span class='op'>}</span></span></code></pre>
 </div>
 </div>
-<p><strong><em>Calculate Centralities Function.</em></strong> A number of <em>node-level centralities,</em> or metrics,
+<h4 id="calculate-network-centralities-function">Calculate Network Centralities Function</h4>
+<p>A number of <em>node-level centralities,</em> or metrics,
 are calculated on the graphs and are utilized for the analysis. <em>Nodes</em> are the graphical
 representation of <em>actors</em> and <em>edges</em> are the graphical representation of <em>relationships</em>
 between actors.</p>
@@ -2879,7 +2891,7 @@ and across the network <span class="citation" data-cites="latoraEfficientBehavio
 <span><span class='op'>}</span></span></code></pre>
 </div>
 </div>
-<p><strong><em>Calculate Named Actors Salience Scores Function.</em></strong></p>
+<h4 id="calculate-named-actors-salience-scores-function">Calculate Named Actors Salience Scores Function</h4>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>calculate.salience</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>the.frame</span>, <span class='va'>the.grouping</span>, <span class='va'>the.file</span><span class='op'>)</span> <span class='op'>{</span></span>
@@ -2912,7 +2924,7 @@ and across the network <span class="citation" data-cites="latoraEfficientBehavio
 </div>
 </div>
 <h3 id="key-actor-functions">Key Actor Functions</h3>
-<p><strong><em>Identify Key Actors Function.</em></strong></p>
+<h4 id="identify-key-actors-function">Identify Key Actors Function</h4>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>calculate.keyactors</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>the.frame</span>, <span class='va'>the.file</span><span class='op'>)</span> <span class='op'>{</span></span>
@@ -2960,7 +2972,7 @@ and across the network <span class="citation" data-cites="latoraEfficientBehavio
 <span><span class='op'>}</span></span></code></pre>
 </div>
 </div>
-<p><strong><em>Plot Key Actors Function.</em></strong></p>
+<h4 id="plot-key-actors-function">Plot Key Actors Function</h4>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>plot.keyactors</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>key.frame</span>, <span class='va'>key.xmean</span>, <span class='va'>key.ymean</span>, <span class='va'>the.file</span><span class='op'>)</span> <span class='op'>{</span></span>
@@ -3007,7 +3019,7 @@ and across the network <span class="citation" data-cites="latoraEfficientBehavio
 <span><span class='op'>}</span></span></code></pre>
 </div>
 </div>
-<p><strong><em>Count Key Actors Function.</em></strong></p>
+<h4 id="count-key-actors-function">Count Key Actors Function</h4>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>count.keyactors</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>key.frame</span>, <span class='va'>the.actor</span><span class='op'>)</span> <span class='op'>{</span></span>
@@ -3021,7 +3033,7 @@ and across the network <span class="citation" data-cites="latoraEfficientBehavio
 <span><span class='op'>}</span></span></code></pre>
 </div>
 </div>
-<p><strong><em>Process Key Actor Data Functions.</em></strong></p>
+<h4 id="process-key-actor-data-functions">Process Key Actor Data Functions</h4>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>create.q.key</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>the.1</span>, <span class='va'>the.2</span>, <span class='va'>the.question</span><span class='op'>)</span> <span class='op'>{</span></span>
@@ -3033,7 +3045,7 @@ and across the network <span class="citation" data-cites="latoraEfficientBehavio
 </div>
 </div>
 <h3 id="deeper-analysis-functions">Deeper Analysis Functions</h3>
-<p><strong><em>Combine Multiplex Graph Layers Functions.</em></strong></p>
+<h4 id="combine-multiplex-graph-layers-functions">Combine Multiplex Graph Layers Functions</h4>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>create.q.cent</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>the.1</span>, <span class='va'>the.2</span>, <span class='va'>the.question</span><span class='op'>)</span> <span class='op'>{</span></span>
@@ -3066,7 +3078,7 @@ and across the network <span class="citation" data-cites="latoraEfficientBehavio
 </div>
 </div>
 <h3 id="calculate-node-flexibility-functions">Calculate Node Flexibility Functions</h3>
-<p><strong><em>Calculate Jaccard Coefficient Function.</em></strong></p>
+<h4 id="calculate-jaccard-coefficient-function">Calculate Jaccard Coefficient Function</h4>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>calculate.jaccard</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>the.set1</span>, <span class='va'>the.set2</span><span class='op'>)</span> <span class='op'>{</span></span>
@@ -3075,7 +3087,7 @@ and across the network <span class="citation" data-cites="latoraEfficientBehavio
 <span><span class='op'>}</span></span></code></pre>
 </div>
 </div>
-<p><strong><em>Calculate Node Flexibility Function.</em></strong></p>
+<h4 id="calculate-node-flexibility-function">Calculate Node Flexibility Function</h4>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>calculate.node.flexibility</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>the.actor</span><span class='op'>)</span> <span class='op'>{</span></span>
@@ -3146,11 +3158,14 @@ and across the network <span class="citation" data-cites="latoraEfficientBehavio
 <span><span class='va'>full.plot</span> <span class='op'>&lt;-</span> <span class='fu'>draw.graph</span><span class='op'>(</span><span class='va'>full.graph</span>, <span class='st'>"full"</span><span class='op'>)</span></span></code></pre>
 </div>
 </div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
 <figure>
-<img src="output/plots/sna_full-plot.png" alt="Full Social Network Plot" />
+<img src="aux/sna_full-plot.png" alt="Full Social Network Plot" />
 <figcaption aria-hidden="true">Full Social Network Plot</figcaption>
 </figure>
-<h3 id="process-question-1">Process Question 1</h3>
+<h3 id="process-questions">Process Questions</h3>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>pates.q1.frame</span> <span class='op'>&lt;-</span> <span class='va'>pates.frame</span> <span class='op'>|&gt;</span></span>
@@ -3167,13 +3182,9 @@ and across the network <span class="citation" data-cites="latoraEfficientBehavio
 <span><span class='va'>ncfl.q1.graph</span> <span class='op'>&lt;-</span> <span class='fu'>set.graph</span><span class='op'>(</span><span class='va'>ncfl.q1.frame</span>, <span class='va'>ncfl.q1.salience</span><span class='op'>)</span></span>
 <span><span class='va'>ncfl.q1.plot</span> <span class='op'>&lt;-</span> <span class='fu'>draw.graph</span><span class='op'>(</span><span class='va'>ncfl.q1.graph</span>, <span class='st'>"q1_ncfl"</span><span class='op'>)</span></span>
 <span><span class='va'>ncfl.q1.cent</span> <span class='op'>&lt;-</span> <span class='fu'>calculate.centrality</span><span class='op'>(</span><span class='va'>ncfl.q1.graph</span>, <span class='va'>ncfl.q1.salience</span>, <span class='st'>"q1_ncfl"</span><span class='op'>)</span></span>
-<span><span class='va'>ncfl.q1.key</span> <span class='op'>&lt;-</span> <span class='fu'>calculate.keyactors</span><span class='op'>(</span><span class='va'>ncfl.q1.cent</span>, <span class='st'>"q1_ncfl"</span><span class='op'>)</span></span></code></pre>
-</div>
-</div>
-<h3 id="process-question-3">Process Question 3</h3>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>pates.q3.frame</span> <span class='op'>&lt;-</span> <span class='va'>pates.frame</span> <span class='op'>|&gt;</span></span>
+<span><span class='va'>ncfl.q1.key</span> <span class='op'>&lt;-</span> <span class='fu'>calculate.keyactors</span><span class='op'>(</span><span class='va'>ncfl.q1.cent</span>, <span class='st'>"q1_ncfl"</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>pates.q3.frame</span> <span class='op'>&lt;-</span> <span class='va'>pates.frame</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>question</span> <span class='op'>==</span> <span class='st'>"Q3"</span><span class='op'>)</span></span>
 <span><span class='va'>pates.q3.salience</span> <span class='op'>&lt;-</span> <span class='fu'>calculate.salience</span><span class='op'>(</span><span class='va'>pates.q3.frame</span>, <span class='st'>"GROUPING"</span>, <span class='st'>"Q3"</span><span class='op'>)</span></span>
 <span><span class='va'>pates.q3.graph</span> <span class='op'>&lt;-</span> <span class='fu'>set.graph</span><span class='op'>(</span><span class='va'>pates.q3.frame</span>, <span class='va'>pates.q3.salience</span><span class='op'>)</span></span>
@@ -3187,13 +3198,9 @@ and across the network <span class="citation" data-cites="latoraEfficientBehavio
 <span><span class='va'>ncfl.q3.graph</span> <span class='op'>&lt;-</span> <span class='fu'>set.graph</span><span class='op'>(</span><span class='va'>ncfl.q3.frame</span>, <span class='va'>ncfl.q3.salience</span><span class='op'>)</span></span>
 <span><span class='va'>ncfl.q3.plot</span> <span class='op'>&lt;-</span> <span class='fu'>draw.graph</span><span class='op'>(</span><span class='va'>ncfl.q3.graph</span>, <span class='st'>"q3_ncfl"</span><span class='op'>)</span></span>
 <span><span class='va'>ncfl.q3.cent</span> <span class='op'>&lt;-</span> <span class='fu'>calculate.centrality</span><span class='op'>(</span><span class='va'>ncfl.q3.graph</span>, <span class='va'>ncfl.q3.salience</span>, <span class='st'>"q3_ncfl"</span><span class='op'>)</span></span>
-<span><span class='va'>ncfl.q3.key</span> <span class='op'>&lt;-</span> <span class='fu'>calculate.keyactors</span><span class='op'>(</span><span class='va'>ncfl.q3.cent</span>, <span class='st'>"q3_ncfl"</span><span class='op'>)</span></span></code></pre>
-</div>
-</div>
-<h3 id="process-question-4">Process Question 4</h3>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>pates.q4.frame</span> <span class='op'>&lt;-</span> <span class='va'>pates.frame</span> <span class='op'>|&gt;</span></span>
+<span><span class='va'>ncfl.q3.key</span> <span class='op'>&lt;-</span> <span class='fu'>calculate.keyactors</span><span class='op'>(</span><span class='va'>ncfl.q3.cent</span>, <span class='st'>"q3_ncfl"</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>pates.q4.frame</span> <span class='op'>&lt;-</span> <span class='va'>pates.frame</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>question</span> <span class='op'>==</span> <span class='st'>"Q4"</span><span class='op'>)</span></span>
 <span><span class='va'>pates.q4.salience</span> <span class='op'>&lt;-</span> <span class='fu'>calculate.salience</span><span class='op'>(</span><span class='va'>pates.q4.frame</span>, <span class='st'>"GROUPING"</span>, <span class='st'>"Q4"</span><span class='op'>)</span></span>
 <span><span class='va'>pates.q4.graph</span> <span class='op'>&lt;-</span> <span class='fu'>set.graph</span><span class='op'>(</span><span class='va'>pates.q4.frame</span>, <span class='va'>pates.q4.salience</span><span class='op'>)</span></span>
@@ -3218,7 +3225,7 @@ and across the network <span class="citation" data-cites="latoraEfficientBehavio
 </div>
 <h1 id="analyzing-the-data">Analyzing the Data</h1>
 <h3 id="preparing-the-scores">Preparing the Scores</h3>
-<p><strong><em>Calculate Actor Flexibility Score.</em></strong></p>
+<h4 id="calculate-actor-flexibility-score">Calculate Actor Flexibility Score</h4>
 <p><span class="math inline">\(F_i = \frac{\frac{1}{m(m-1)} \sum_{p\neq q} J(set_p^i,\ set_q^i)}{\max_{p,q} J(set_p,\ set_q)}\)</span></p>
 <p>Where <span class="math inline">\(i\)</span> represents a given actor, <span class="math inline">\(m\)</span> is the total number of sets, <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> are indices representing the set of sets, and <span class="math inline">\(J\)</span> represents the Jaccard Coefficient.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -3231,7 +3238,7 @@ and across the network <span class="citation" data-cites="latoraEfficientBehavio
 <span><span class='va'>flex.score</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/do.call.html'>do.call</a></span><span class='op'>(</span><span class='va'>rbind</span>, <span class='va'>flex.results</span><span class='op'>)</span></span></code></pre>
 </div>
 </div>
-<p><strong><em>Calculate Key Actor Score.</em></strong></p>
+<h4 id="calculate-key-actor-score">Calculate Key Actor Score</h4>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>q1.key</span> <span class='op'>&lt;-</span> <span class='fu'>create.q.key</span><span class='op'>(</span><span class='va'>pates.q1.key</span>, <span class='va'>ncfl.q1.key</span>, <span class='st'>"q1"</span><span class='op'>)</span></span>
@@ -3249,7 +3256,8 @@ and across the network <span class="citation" data-cites="latoraEfficientBehavio
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>keyscore <span class='op'>=</span> <span class='va'>keyscore</span> <span class='op'>/</span> <span class='fl'>9</span><span class='op'>)</span></span></code></pre>
 </div>
 </div>
-<p><strong><em>Create Rankings for Comparing Across Graphs.</em></strong> Because this is a multilayered graph
+<h4 id="create-rankings-for-comparing-across-graphs">Create Rankings for Comparing Across Graphs</h4>
+<p>Because this is a multilayered graph
 that includes information across a range of contexts in response to different prompts,
 <em>the calculated centralities themselves cannot be compared</em> because this is like comparing
 a golden delicious to a honey crisp apple. Instead, relative ranks can be compared across
@@ -3393,7 +3401,7 @@ network through three <strong>perspectives</strong> (really need to come up with
 </div>
 <p><img src="index_files/figure-html5/participant-analysis-corr-plot-1.png" width="624" /></p>
 </div>
-<h2 id="initial-reflections">Initial Reflections</h2>
+<h1 id="initial-reflections">Initial Reflections</h1>
 <p>Go here</p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="index_files/figure-html5/plot-overall-scores-1.png" width="624" /></p>
@@ -3410,7 +3418,13 @@ network through three <strong>perspectives</strong> (really need to come up with
 <span><span class='fu'>plot.save</span><span class='op'>(</span><span class='va'>timeline.plot</span>, <span class='st'>"timeline"</span><span class='op'>)</span></span></code></pre>
 </div>
 </div>
-<p><img src="output/timeline.png" alt="Timeline" /></p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<figure>
+<img src="aux/timeline-plot.png" alt="Timeline" />
+<figcaption aria-hidden="true">Timeline</figcaption>
+</figure>
 <h2 class="appendix" id="acknowledgments">Acknowledgments</h2>
 <p>This is work is funded in part by a <a href="https://nafsce.org/page/MiniGrant">National Association for Family, School, and
 Community Engagement (NAFSCE) Mini-Grant</a>.</p>

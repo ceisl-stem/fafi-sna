@@ -84,7 +84,7 @@ the.abbrev <<- data.frame(
 plot.save <- function(the.plot, the.file) {
   # Set the filename for the PDF.
   pdf.name <- glue("output/plots/{the.file}.pdf")
-  # Set the filname fro the PNG.
+  # Set the filname for the PNG.
   png.name <- glue("output/plots/{the.file}.png")
   # Save as PDF.
   ggsave(the.plot, filename = pdf.name, width = 11.5, height = 8, units = "in", dpi = 300)
@@ -435,6 +435,8 @@ full.frame <- rbind(pates.frame, ncfl.frame)
 full.salience <- calculate.salience(full.frame, "GROUPING", "full")
 full.graph <- set.graph(full.frame, full.salience)
 full.plot <- draw.graph(full.graph, "full")
+
+
 
 pates.q1.frame <- pates.frame |>
   filter(question == "Q1")

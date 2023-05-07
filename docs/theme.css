@@ -11,7 +11,7 @@
 /* Optional: embed custom fonts here with `@import`          */
 /* This must remain at the top of this file.                 */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter&family=Atkinson+Hyperlegible&family=JetBrains+Mono&family=Noto+Sans');
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible&family=JetBrains+Mono&family=Rubik');
 
 
 html {
@@ -28,10 +28,10 @@ html {
   --aside-color:     rgba(25, 25, 25, 0.6);
   --fig-cap-color:   rgba(25, 25, 25, 0.6);
   /*-- Specify custom fonts ~~~ must be imported above   --*/
-  --heading-font:    "Noto Sans", sans-serif;
+  --heading-font:    "Rubik", sans-serif;
   --mono-font:       "JetBrains Mono", monospace;
   --body-font:       "Atkinson Hyperlegible", sans-serif;
-  --navbar-font:     "Noto Sans", sans-serif;  /* websites + blogs only */
+  --navbar-font:     "Rubik", sans-serif;  /* websites + blogs only */
 }
 
 /*-- ARTICLE METADATA --*/
@@ -64,14 +64,14 @@ d-appendix {
   --text-color:       #EDEBEB;
   --text-size:        15px;
   --hover-color:      white;
-  --bkgd-color:       #990000;
+  --bkgd-color:       #01426A;
 }
 
 .distill-site-footer {
   --text-color:       #EDEBEB;
   --text-size:        15px;
   --hover-color:      white;
-  --bkgd-color:       #990000;
+  --bkgd-color:       #01426A;
 }
 
 /*-- Additional custom styles --*/
@@ -89,4 +89,11 @@ d-article h2 {
   font-size: 24px;
   padding-bottom: 9px;
   border-bottom: solid 1px rgba(25, 25, 25, 0.1);
+}
+
+d-article h4 {
+  font-weight: 700;
+  text-transform: none;
+  font-size: 1.06rem;
+  color:   rgba(25, 25, 25, 0.25);
 }

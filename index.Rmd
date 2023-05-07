@@ -257,7 +257,7 @@ via the web. Both files are set at a high resolution 300<abbr title="Dots Per In
 plot.save <- function(the.plot, the.file) {
   # Set the filename for the PDF.
   pdf.name <- glue("output/plots/{the.file}.pdf")
-  # Set the filname fro the PNG.
+  # Set the filname for the PNG.
   png.name <- glue("output/plots/{the.file}.png")
   # Save as PDF.
   ggsave(the.plot, filename = pdf.name, width = 11.5, height = 8, units = "in", dpi = 300)
@@ -272,7 +272,9 @@ plot.save <- function(the.plot, the.file) {
 #############################
 ```
 
-***Create Correlation Plot Function.*** Correlation plots are effective modes of visualizing
+#### Create Correlation Plot Function
+
+Correlation plots are effective modes of visualizing
 relationships between variables. This function takes in a dataframe and creates and saves a
 correlation plot while identifying (with an X) correlations that are not statistically significant
 (i.e., the $p$-value for non-significant correlations is greater than 0.05).
@@ -303,7 +305,9 @@ plot.corr <- function(the.frame, the.file) {
 ##############################
 ```
 
-***Calculate Tukey's Fences Function.*** Small graphs are prone to extreme outliers, especially
+#### Calculate Tukey's Fences Function
+
+Small graphs are prone to extreme outliers, especially
 when there are power dynamics such 
 as instructor-student relations. While acknowledging this dynamic, it does skew such calculations
 as a Key Actor Analysis. Tukey's fences [@hoaglinPerformanceResistantRules1986; @tukeyExploratoryDataAnalysis1993] is one way to remove the impact of these outliers.
@@ -385,7 +389,9 @@ set.graph <- function(the.frame, the.salience) {
 ###########################
 ```
 
-***Plot the Graph Function.*** The `draw.graph` creates the visualization--the plot--of the
+#### Plot the Graph Function
+
+The `draw.graph` creates the visualization--the plot--of the
 social network graph and then saves it for further use. The `geom_edge_fan` feature is used
 to represent the number of times a participant named an actor.
 
@@ -419,7 +425,9 @@ draw.graph <- function(the.graph, the.file) {
 }
 ```
 
-***Calculate Centralities Function.*** A number of *node-level centralities,* or metrics,
+#### Calculate Network Centralities Function
+
+A number of *node-level centralities,* or metrics,
 are calculated on the graphs and are utilized for the analysis. *Nodes* are the graphical
 representation of *actors* and *edges* are the graphical representation of *relationships*
 between actors.
@@ -456,7 +464,7 @@ calculate.centrality <- function(the.graph, the.salience, the.file) {
 }
 ```
 
-***Calculate Named Actors Salience Scores Function.*** 
+#### Calculate Named Actors Salience Scores Function
 
 ```{r function-calculate-salience, echo = TRUE}
 calculate.salience <- function(the.frame, the.grouping, the.file) {
@@ -490,7 +498,7 @@ calculate.salience <- function(the.frame, the.grouping, the.file) {
 
 ### Key Actor Functions
 
-***Identify Key Actors Function.***
+#### Identify Key Actors Function
 
 ```{r function-calculate-keyactors, echo = TRUE}
 calculate.keyactors <- function(the.frame, the.file) {
@@ -538,7 +546,7 @@ calculate.keyactors <- function(the.frame, the.file) {
 }
 ```
 
-***Plot Key Actors Function.***
+#### Plot Key Actors Function
 
 ```{r function-plot-keyactors, echo = TRUE}
 plot.keyactors <- function(key.frame, key.xmean, key.ymean, the.file) {
@@ -585,7 +593,7 @@ plot.keyactors <- function(key.frame, key.xmean, key.ymean, the.file) {
 }
 ```
 
-***Count Key Actors Function.***
+#### Count Key Actors Function
 
 ```{r function-count-keyactors, echo = TRUE}
 count.keyactors <- function(key.frame, the.actor) {
@@ -599,7 +607,7 @@ count.keyactors <- function(key.frame, the.actor) {
 }
 ```
 
-***Process Key Actor Data Functions.***
+#### Process Key Actor Data Functions
 
 ```{r function-create-q-key, message=FALSE, warning=FALSE, echo = TRUE, results = FALSE}
 create.q.key <- function(the.1, the.2, the.question) {
@@ -612,7 +620,7 @@ create.q.key <- function(the.1, the.2, the.question) {
 
 ### Deeper Analysis Functions
 
-***Combine Multiplex Graph Layers Functions.***
+#### Combine Multiplex Graph Layers Functions
 
 ```{r function-create-q-cent, echo = TRUE}
 create.q.cent <- function(the.1, the.2, the.question) {
@@ -646,7 +654,7 @@ calculate.ranks <- function(the.cent) {
 
 ### Calculate Node Flexibility Functions
 
-***Calculate Jaccard Coefficient Function.***
+#### Calculate Jaccard Coefficient Function
 
 ```{r function calculate-jaccard, message=FALSE, warning=FALSE, echo = TRUE, results = FALSE}
 calculate.jaccard <- function(the.set1, the.set2) {
@@ -655,7 +663,7 @@ calculate.jaccard <- function(the.set1, the.set2) {
 }
 ```
 
-***Calculate Node Flexibility Function.***
+#### Calculate Node Flexibility Function
 
 ```{r function-calculate-node-flexibility, message=FALSE, warning=FALSE, echo = TRUE, results = FALSE}
 calculate.node.flexibility <- function(the.actor) {
@@ -727,11 +735,16 @@ full.graph <- set.graph(full.frame, full.salience)
 full.plot <- draw.graph(full.graph, "full")
 ```
 
-![Full Social Network Plot](output/plots/sna_full-plot.png)
+```{r save-full-sna, echo = FALSE, purl = FALSE, dpi=300}
+# Save a copy of the network to be displayed below
+ggsave(full.plot, filename = "aux/sna_full-plot.png", width = 11.5, height = 8, units = "in", dpi = 300)
+```
 
-### Process Question 1
+![Full Social Network Plot](aux/sna_full-plot.png)
 
-```{r process-q1, echo = TRUE, results = FALSE}
+### Process Questions
+
+```{r process-questions, echo = TRUE, results = FALSE}
 pates.q1.frame <- pates.frame |>
   filter(question == "Q1")
 pates.q1.salience <- calculate.salience(pates.q1.frame, "GROUPING", "Q1")
@@ -747,11 +760,7 @@ ncfl.q1.graph <- set.graph(ncfl.q1.frame, ncfl.q1.salience)
 ncfl.q1.plot <- draw.graph(ncfl.q1.graph, "q1_ncfl")
 ncfl.q1.cent <- calculate.centrality(ncfl.q1.graph, ncfl.q1.salience, "q1_ncfl")
 ncfl.q1.key <- calculate.keyactors(ncfl.q1.cent, "q1_ncfl")
-```
 
-### Process Question 3
-
-```{r process-q3, echo = TRUE, results = FALSE}
 pates.q3.frame <- pates.frame |>
   filter(question == "Q3")
 pates.q3.salience <- calculate.salience(pates.q3.frame, "GROUPING", "Q3")
@@ -767,11 +776,7 @@ ncfl.q3.graph <- set.graph(ncfl.q3.frame, ncfl.q3.salience)
 ncfl.q3.plot <- draw.graph(ncfl.q3.graph, "q3_ncfl")
 ncfl.q3.cent <- calculate.centrality(ncfl.q3.graph, ncfl.q3.salience, "q3_ncfl")
 ncfl.q3.key <- calculate.keyactors(ncfl.q3.cent, "q3_ncfl")
-```
 
-### Process Question 4
-
-```{r process-q4, echo = TRUE, results = FALSE}
 pates.q4.frame <- pates.frame |>
   filter(question == "Q4")
 pates.q4.salience <- calculate.salience(pates.q4.frame, "GROUPING", "Q4")
@@ -801,7 +806,7 @@ ggarrange(ncfl.q1.plot, ncfl.q3.plot, ncfl.q4.plot, ncol = 3, nrow = 1)
 
 ### Preparing the Scores
 
-***Calculate Actor Flexibility Score.***
+#### Calculate Actor Flexibility Score
 
 $F_i = \frac{\frac{1}{m(m-1)} \sum_{p\neq q} J(set_p^i,\ set_q^i)}{\max_{p,q} J(set_p,\ set_q)}$
 
@@ -816,7 +821,7 @@ flex.results <- lapply(unique(flex.frame$actor), calculate.node.flexibility)
 flex.score <- do.call(rbind, flex.results)
 ```
 
-***Calculate Key Actor Score.***
+#### Calculate Key Actor Score
 
 ```{r calculate-key-actor-score, echo = TRUE, results = FALSE}
 q1.key <- create.q.key(pates.q1.key, ncfl.q1.key, "q1")
@@ -834,7 +839,9 @@ q.key <<- bind_rows(q1.key, q3.key, q4.key) |>
   mutate(keyscore = keyscore / 9)
 ```
 
-***Create Rankings for Comparing Across Graphs.*** Because this is a multilayered graph
+#### Create Rankings for Comparing Across Graphs
+
+Because this is a multilayered graph
 that includes information across a range of contexts in response to different prompts,
 *the calculated centralities themselves cannot be compared* because this is like comparing
 a golden delicious to a honey crisp apple. Instead, relative ranks can be compared across
@@ -978,7 +985,7 @@ participants.corr <- participants.frame |>
 print(participants.corr)
 ```
 
-## Initial Reflections
+# Initial Reflections
 
 Go here
 
@@ -1010,7 +1017,12 @@ timeline.plot <- gg_vistime(timeline.frame,
 plot.save(timeline.plot, "timeline")
 ```
 
-<img src="output/timeline.png" alt="Timeline" />
+```{r save-timeline, echo = FALSE, purl = FALSE, dpi=300}
+# Save a copy of the network to be displayed below
+ggsave(timeline.plot, filename = "aux/timeline-plot.png", width = 11.5, height = 8, units = "in", dpi = 300)
+```
+
+![Timeline](aux/timeline-plot.png)
 
 ## Acknowledgments {.appendix}
 
