@@ -17,6 +17,9 @@ author:
   - name: Akaash Arora
     affiliation: IU School of Education-Indianapolis
     affiliation_url: https://education.iupui.edu/
+  - name: Amy Waechter-Versaw
+    affiliation: IU School of Education-Indianapolis
+    affiliation_url: https://education.iupui.edu/
   - name: Román Graff
     affiliation: Ivy Tech Community College-Indianapolis
     affiliation_url: https://www.ivytech.edu/locations/indianapolis/
@@ -1130,6 +1133,12 @@ Author contributions here using the [CRediT Taxonomy](https://credit.niso.org/).
 | | Writing - Original Draft | Supporting |
 | | Writing - Review & Editing | Supporting |
 | **Akaash Arora** | Conceptualization | Supporting |
+| | Data Curation | Supporting |
+| | Formal Analysis | Supporting |
+| | Validation | Supporting |
+| | Writing - Original Draft | Supporting |
+| | Writing - Review & Editing | Supporting |
+| **Amy Waechter-Versaw** | Conceptualization | Supporting |
 | | Data Curation | Supporting |
 | | Formal Analysis | Supporting |
 | | Validation | Supporting |

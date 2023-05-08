@@ -44,6 +44,7 @@ fafi-sna/
 * [Jeremy F Price](https://www.jeremyfprice.info/) (Co-Principal Investigator and SNA Lead, IU School of Education-Indianapolis)
 * [Cristina Santamaría Graff](https://education.iupui.edu/faculty-research/faculty-directory/santamaria-graff-cristina.html) (Principal Investigator, IU School of Education-Indianapolis)
 * Akaash Arora (Graduate Research Assistant, IU School of Education-Indianapolis)
+* Amy Waechter-Versaw (Associate Director for Teacher Learning and School Partnerships, CEISL, IU School of Education-Indianapolis)
 * Román Graff (Ivy Tech Community College, Indianapolis, IN)
 
 ## Contributing
