@@ -864,7 +864,7 @@ grid_sna <- ggarrange(pates.q1.key.plot, pates.q3.key.plot, pates.q4.key.plot,
 ggsave(grid_sna, filename = "aux/grid-key.png", width = 11, height = 8.5, units = "in", dpi = 300)
 ```
 
-![Grid of Social Network Plots](aux/grid-key.png)
+![Grid of Key Actor Plots](aux/grid-key.png)
 
 # Analyzing the Data
 
@@ -1071,20 +1071,26 @@ print(overall.plot)
 
 Context is important!
 
-```{r unruly-timeline, echo = TRUE, layout="l-body-outset", results = TRUE, eval = FALSE}
+```{r unruly-timeline, echo = TRUE, results = TRUE, eval = TRUE}
 timeline.frame <- read_csv("data/timeline-data.csv", col_names = TRUE, show_col_types = FALSE)
+timeline.frame$layer <- factor(timeline.frame$layer, levels = c("local", "policy", "epoch"))
 timeline.plot <- gg_vistime(timeline.frame,
   col.event = "event", col.group = "layer",
-  col.start = "start", col.end = "end", optimize_y = TRUE
+  col.start = "start", col.end = "end", optimize_y = FALSE,
+  title = "Multilayered Timeline",
+  background_lines = NULL
 ) +
-  theme_few()
+  theme_few()# +
+  #theme(panel.grid.minor.x = element_line(color = "#eeeeee"))
 plot.save(timeline.plot, "timeline")
 ```
 
-```{r save-timeline, echo = FALSE, purl = FALSE, dpi=300, eval = FALSE}
+```{r save-timeline, echo = FALSE, purl = FALSE, dpi=300}
 # Save a copy of the network to be displayed below
 ggsave(timeline.plot, filename = "aux/timeline-plot.png", width = 18, height = 6, units = "in", dpi = 300)
 ```
+
+!["Unruly" Timeline](aux/timeline-plot.png)
 
 ## Acknowledgments {.appendix}
 

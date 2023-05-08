@@ -622,10 +622,14 @@ overall.plot <- ggstripchart(overall.frame,
 plot.save(overall.plot, "overall-corr")
 print(overall.plot)
 
-## timeline.frame <- read_csv("data/timeline-data.csv", col_names = TRUE, show_col_types = FALSE)
-## timeline.plot <- gg_vistime(timeline.frame,
-##   col.event = "event", col.group = "layer",
-##   col.start = "start", col.end = "end", optimize_y = TRUE
-## ) +
-##   theme_few()
-## plot.save(timeline.plot, "timeline")
+timeline.frame <- read_csv("data/timeline-data.csv", col_names = TRUE, show_col_types = FALSE)
+timeline.frame$layer <- factor(timeline.frame$layer, levels = c("local", "policy", "epoch"))
+timeline.plot <- gg_vistime(timeline.frame,
+  col.event = "event", col.group = "layer",
+  col.start = "start", col.end = "end", optimize_y = FALSE,
+  title = "Multilayered Timeline",
+  background_lines = NULL
+) +
+  theme_few()# +
+  #theme(panel.grid.minor.x = element_line(color = "#eeeeee"))
+plot.save(timeline.plot, "timeline")
