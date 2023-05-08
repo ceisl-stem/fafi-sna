@@ -3,7 +3,7 @@ title: "The Analysis Is Not The Social Network"
 description: |
   Illuminating the unruly nature of intentional social networks in educational justice efforts.
 repository_url: https://github.com/jeremyfprice/fafi-sna/
-preview: aux/fafi-sna-logo.png
+preview: aux/fafi-sna-git-logo.png
 author:
   - name: Jeremy F Price 
     url: https://www.jeremyfprice.info/
@@ -56,7 +56,7 @@ knitr::opts_chunk$set(echo = FALSE)
 ######################################################
 ```
 
-![Family as Faculty as an Infrastructure Social Network Analysis Project](aux/fafi-sna-logo.png)
+![Family as Faculty as an Infrastructure Social Network Analysis Project](aux/fafi-sna-git-logo.png)
 
 # Introduction
 
@@ -90,14 +90,14 @@ All components of this work can be found at the project's [OSF repository](https
 
 ```
 fafi-sna/
-┣ .github/                  <- Directory used by Github to serve webpage
-┃ ┗ workflows/
 ┣ aux/                      <- Directory for storing auxiliary files
 ┃ ┗ fafi-sna-references.bib <- Bibliography for this project in BibTeX format
 ┃ ┗ theme.css               <- Cascading style sheet for the project
 ┃ ┗ fafi-sna-logo.png       <- Project logo
 ┣ docs/                     <- Directory for the rendered literate programming file
 ┃ ┗ index.html              <- Rendered version of the literate programming file
+┣ index_cache/              <- Directory used to serve the rendered literate programming file
+┣ index_files/              <- Directory used to serve the rendered literate programming file
 ┣ output/                   <- Target directory for collecting R output files
 ┃ ┗ plots/                  <- Directory for storing plots in PDF and PNG formats
 ┃ ┗ csv/                    <- Directory for storing CSV files
@@ -105,6 +105,8 @@ fafi-sna/
 ┃ ┗ fafi-sna.R              <- R script distilled from the literate programming file
 ┣ .gitignore                <- Files and directories to be ignored by Git
 ┣ .nojekyll                 <- File to tell Github to not use Jekyll
+┣ _footer.html              <- The footer for the rendered literate programming file
+┣ _site.yml                 <- Configuration file for the rendered literate programming file
 ┣ CODE_OF_CONDUCT.md        <- Code of Conduct for project contributors
 ┣ LICENSE                   <- License (MIT) for project
 ┣ README.md                 <- This file, a general overview of this project

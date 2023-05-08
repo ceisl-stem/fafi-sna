@@ -1,4 +1,4 @@
-![FAFI](aux/fafi-sna-logo.png)
+![FAFI](aux/fafi-sna-git-logo.png)
 
 # Family as Faculty as Infrastructure Social Network Analysis
 
@@ -18,14 +18,14 @@ In addition, we look at a variety of centralities as a way to understanding the 
 
 ```
 fafi-sna/
-┣ .github/                  <- Directory used by Github to serve webpage
-┃ ┗ workflows/
 ┣ aux/                      <- Directory for storing auxiliary files
 ┃ ┗ fafi-sna-references.bib <- Bibliography for this project in BibTeX format
 ┃ ┗ theme.css               <- Cascading style sheet for the project
 ┃ ┗ fafi-sna-logo.png       <- Project logo
 ┣ docs/                     <- Directory for the rendered literate programming file
 ┃ ┗ index.html              <- Rendered version of the literate programming file
+┣ index_cache/              <- Directory used to serve the rendered literate programming file
+┣ index_files/              <- Directory used to serve the rendered literate programming file
 ┣ output/                   <- Target directory for collecting R output files
 ┃ ┗ plots/                  <- Directory for storing plots in PDF and PNG formats
 ┃ ┗ csv/                    <- Directory for storing CSV files
@@ -33,6 +33,8 @@ fafi-sna/
 ┃ ┗ fafi-sna.R              <- R script distilled from the literate programming file
 ┣ .gitignore                <- Files and directories to be ignored by Git
 ┣ .nojekyll                 <- File to tell Github to not use Jekyll
+┣ _footer.html              <- The footer for the rendered literate programming file
+┣ _site.yml                 <- Configuration file for the rendered literate programming file
 ┣ CODE_OF_CONDUCT.md        <- Code of Conduct for project contributors
 ┣ LICENSE                   <- License (MIT) for project
 ┣ README.md                 <- This file, a general overview of this project
