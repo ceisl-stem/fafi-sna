@@ -253,20 +253,15 @@ calculate.keyactors <- function(the.frame, the.file) {
   key.res$actor <- row.names(key.res)
   row.names(key.res) <- NULL
   key.frame <- key.frame |>
-    left_join(key.res) |>
-    mutate(color_code = substr(key.frame$actor, 1, 2)) |>
-    mutate(id_no = substr(key.frame$actor, 3, 4)) |>
-    left_join(the.abbrev) |>
-    mutate(label = glue("{full} {id_no}")) |>
-    select(-full, -id_no)
+    left_join(key.res)
   leaderrank.fence <- calculate.tukey(key.frame$leaderrank)
   key.frame.leaderrank.trimmed <- key.frame |>
     filter(leaderrank >= leaderrank.fence$lower & leaderrank <= leaderrank.fence$upper)
   leverage.fence <- calculate.tukey(key.frame$leverage)
   key.frame.leverage.trimmed <- key.frame |>
     filter(leverage >= leverage.fence$lower & leverage.fence$upper)
-  key.ymean <- mean(key.frame.leaderrank.trimmed$leaderrank)
-  key.xmean <- mean(key.frame.leverage.trimmed$leverage)
+  key.ymean <<- mean(key.frame.leaderrank.trimmed$leaderrank)
+  key.xmean <<- mean(key.frame.leverage.trimmed$leverage)
   key.frame <- key.frame |>
     mutate(keystatus = case_when(
       (leaderrank > key.ymean & leverage > key.xmean) ~ "Sage",
@@ -278,15 +273,14 @@ calculate.keyactors <- function(the.frame, the.file) {
     arrange(desc(res), desc(SmithsS)) |>
     unique() |>
     ungroup()
-  plot.keyactors(key.frame, key.xmean, key.ymean, the.file)
-  key.frame <- key.frame %>%
-    select(actor, leverage, leaderrank, res, SmithsS, keystatus) %>%
+  key.frame <- key.frame |>
+    select(actor, leverage, leaderrank, res, SmithsS, keystatus) |>
     arrange(keystatus, desc(res), desc(SmithsS))
   return(key.frame)
 }
 
-plot.keyactors <- function(key.frame, key.xmean, key.ymean, the.file) {
-  the.filename <- glue("output/keyactors_{the.file}.pdf")
+plot.keyactors <- function(key.frame, the.file) {
+  the.filename <- glue("keyactors_{the.file}-plot")
   key.xmin <- min(key.frame$leverage)
   key.xmax <- max(key.frame$leverage)
   key.ymin <- min(key.frame$leaderrank)
@@ -294,6 +288,12 @@ plot.keyactors <- function(key.frame, key.xmean, key.ymean, the.file) {
   steward.count <- count.keyactors(key.frame, "Steward")
   sage.count <- count.keyactors(key.frame, "Sage")
   weaver.count <- count.keyactors(key.frame, "Weaver")
+  key.frame <- key.frame  |>
+    mutate(color_code = substr(key.frame$actor, 1, 2)) |>
+    mutate(id_no = substr(key.frame$actor, 3, 4)) |>
+    left_join(the.abbrev) |>
+    mutate(label = glue("{full} {id_no}")) |>
+    select(-full, -id_no)
   key.plot <- ggscatter(key.frame,
     x = "leverage", y = "leaderrank",
     label = "label", label.rectangle = FALSE, repel = TRUE,
@@ -324,7 +324,7 @@ plot.keyactors <- function(key.frame, key.xmean, key.ymean, the.file) {
     ), color = "#243142", fill = "#A7A9AB") +
     theme_few() +
     theme(legend.position = "none")
-  ggsave(key.plot, filename = the.filename, width = 11.5, height = 8, units = "in", dpi = 300)
+  plot.save(key.plot, the.filename)
   return(key.plot)
 }
 
@@ -400,7 +400,8 @@ calculate.node.flexibility <- function(the.actor) {
   jaccard.1 <- calculate.jaccard(set1, set2)
   jaccard.2 <- calculate.jaccard(set2, set3)
   jaccard.3 <- calculate.jaccard(set1, set3)
-  the.flexibility <- 1 - ((1 / (3 * (3 - 1)) * (jaccard.1 + jaccard.2 + jaccard.3)) / 3)
+  #the.flexibility <- 1 - ((1 / (3 * (3 - 1)) * (jaccard.1 + jaccard.2 + jaccard.3)) / 3)
+  the.flexibility <- 1 - ((jaccard.1 + jaccard.2 + jaccard.3) / 3)
   response.frame <- data.frame(actor = the.actor, flexibility = the.flexibility)
   return(response.frame)
 }
@@ -445,6 +446,7 @@ pates.q1.graph <- set.graph(pates.q1.frame, pates.q1.salience)
 pates.q1.plot <- draw.graph(pates.q1.graph, "q1_pates")
 pates.q1.cent <- calculate.centrality(pates.q1.graph, pates.q1.salience, "q1_pates")
 pates.q1.key <- calculate.keyactors(pates.q1.cent, "q1_pates")
+pates.q1.key.plot <- plot.keyactors(pates.q1.key, "q1_pates")
 
 ncfl.q1.frame <- ncfl.frame |>
   filter(question == "Q1")
@@ -453,6 +455,7 @@ ncfl.q1.graph <- set.graph(ncfl.q1.frame, ncfl.q1.salience)
 ncfl.q1.plot <- draw.graph(ncfl.q1.graph, "q1_ncfl")
 ncfl.q1.cent <- calculate.centrality(ncfl.q1.graph, ncfl.q1.salience, "q1_ncfl")
 ncfl.q1.key <- calculate.keyactors(ncfl.q1.cent, "q1_ncfl")
+ncfl.q1.key.plot <- plot.keyactors(ncfl.q1.key, "q1_ncfl")
 
 pates.q3.frame <- pates.frame |>
   filter(question == "Q3")
@@ -461,6 +464,7 @@ pates.q3.graph <- set.graph(pates.q3.frame, pates.q3.salience)
 pates.q3.plot <- draw.graph(pates.q3.graph, "q3_pates")
 pates.q3.cent <- calculate.centrality(pates.q3.graph, pates.q3.salience, "q3_pates")
 pates.q3.key <- calculate.keyactors(pates.q3.cent, "q3_pates")
+pates.q3.key.plot <- plot.keyactors(pates.q3.key, "q3_pates")
 
 ncfl.q3.frame <- ncfl.frame |>
   filter(question == "Q3")
@@ -469,6 +473,7 @@ ncfl.q3.graph <- set.graph(ncfl.q3.frame, ncfl.q3.salience)
 ncfl.q3.plot <- draw.graph(ncfl.q3.graph, "q3_ncfl")
 ncfl.q3.cent <- calculate.centrality(ncfl.q3.graph, ncfl.q3.salience, "q3_ncfl")
 ncfl.q3.key <- calculate.keyactors(ncfl.q3.cent, "q3_ncfl")
+ncfl.q3.key.plot <- plot.keyactors(ncfl.q3.key, "q3_ncfl")
 
 pates.q4.frame <- pates.frame |>
   filter(question == "Q4")
@@ -477,6 +482,7 @@ pates.q4.graph <- set.graph(pates.q4.frame, pates.q4.salience)
 pates.q4.plot <- draw.graph(pates.q4.graph, "q4_pates")
 pates.q4.cent <- calculate.centrality(pates.q4.graph, pates.q4.salience, "q4_pates")
 pates.q4.key <- calculate.keyactors(pates.q4.cent, "q4_pates")
+pates.q4.key.plot <- plot.keyactors(pates.q4.key, "q4_pates")
 
 ncfl.q4.frame <- ncfl.frame |>
   filter(question == "Q4")
@@ -485,6 +491,7 @@ ncfl.q4.graph <- set.graph(ncfl.q4.frame, ncfl.q4.salience)
 ncfl.q4.plot <- draw.graph(ncfl.q4.graph, "q4_ncfl")
 ncfl.q4.cent <- calculate.centrality(ncfl.q4.graph, ncfl.q4.salience, "q4_ncfl")
 ncfl.q4.key <- calculate.keyactors(ncfl.q4.cent, "q4_ncfl")
+ncfl.q4.key.plot <- plot.keyactors(ncfl.q4.key, "q4_ncfl")
 
 
 
