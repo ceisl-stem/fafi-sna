@@ -31,6 +31,7 @@ library(rio)
 library(glue)
 library(tidyr)
 library(dplyr)
+library(gt)
 library(ggthemes)
 library(ggpubr)
 library(ggcorrplot)
@@ -288,7 +289,7 @@ plot.keyactors <- function(key.frame, the.file) {
   steward.count <- count.keyactors(key.frame, "Steward")
   sage.count <- count.keyactors(key.frame, "Sage")
   weaver.count <- count.keyactors(key.frame, "Weaver")
-  key.frame <- key.frame  |>
+  key.frame <- key.frame |>
     mutate(color_code = substr(key.frame$actor, 1, 2)) |>
     mutate(id_no = substr(key.frame$actor, 3, 4)) |>
     left_join(the.abbrev) |>
@@ -400,7 +401,7 @@ calculate.node.flexibility <- function(the.actor) {
   jaccard.1 <- calculate.jaccard(set1, set2)
   jaccard.2 <- calculate.jaccard(set2, set3)
   jaccard.3 <- calculate.jaccard(set1, set3)
-  #the.flexibility <- 1 - ((1 / (3 * (3 - 1)) * (jaccard.1 + jaccard.2 + jaccard.3)) / 3)
+  # the.flexibility <- 1 - ((1 / (3 * (3 - 1)) * (jaccard.1 + jaccard.2 + jaccard.3)) / 3)
   the.flexibility <- 1 - ((jaccard.1 + jaccard.2 + jaccard.3) / 3)
   response.frame <- data.frame(actor = the.actor, flexibility = the.flexibility)
   return(response.frame)
@@ -569,9 +570,9 @@ keyactors.frame <- full.avg.cent |>
   left_join(keyactors.q.frame) |>
   unique() |>
   arrange(desc(overall_score))
-
-rmarkdown::paged_table(keyactors.frame)
 write_csv(keyactors.frame, file = "output/csv/keyactors_analysis.csv")
+
+
 
 keyactors.corr <- keyactors.frame |>
   select(positionality_score, reachability_score, reputation_score) |>
@@ -599,9 +600,9 @@ participants.frame <- participants.frame |>
   ) |>
   arrange(desc(overall_score)) |>
   as.data.frame()
-
-rmarkdown::paged_table(participants.frame)
 write_csv(participants.frame, file = "output/csv/participants_analysis.csv")
+
+
 
 participants.corr <- participants.frame |>
   select(positionality_score, reachability_score, potentiality_score) |>
@@ -623,13 +624,35 @@ plot.save(overall.plot, "overall-corr")
 print(overall.plot)
 
 timeline.frame <- read_csv("data/timeline-data.csv", col_names = TRUE, show_col_types = FALSE)
-timeline.frame$layer <- factor(timeline.frame$layer, levels = c("local", "policy", "epoch"))
+timeline.frame$layer <- factor(timeline.frame$layer,
+  levels = c("act", "local", "sped", "policy", "epoch")
+)
 timeline.plot <- gg_vistime(timeline.frame,
   col.event = "event", col.group = "layer",
   col.start = "start", col.end = "end", optimize_y = FALSE,
   title = "Multilayered Timeline",
   background_lines = NULL
 ) +
-  theme_few()# +
-  #theme(panel.grid.minor.x = element_line(color = "#eeeeee"))
+  theme_few() +
+  geom_segment(
+    aes(
+      x = as.POSIXct("1954-01-30"), y = 9,
+      xend = as.POSIXct("1956-01-30"), yend = 31.5
+    ),
+    color = "#A7A9AB", linetype = 2, size = 0.65
+  ) +
+  geom_segment(
+    aes(
+      x = as.POSIXct("1959-01-30"), y = 31.75,
+      xend = as.POSIXct("1968-01-30"), yend = 31
+    ),
+    color = "#A7A9AB", linetype = 2, size = 0.65
+  ) +
+  geom_segment(
+    aes(
+      x = as.POSIXct("1970-01-30"), y = 22,
+      xend = as.POSIXct("1970-01-30"), yend = 30.5
+    ),
+    color = "#A7A9AB", linetype = 2, size = 0.65
+  )
 plot.save(timeline.plot, "timeline")
