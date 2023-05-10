@@ -86,7 +86,7 @@ and his efforts to re-situate model-based research in historical and sociocultur
 
 All components of this work can be found at the project's [OSF repository](https://osf.io/kxhp9/?view_only=eb0fefe6b5bd41b6955c2a4c657e785e).
 
-### Directory Structure
+### File Structure
 
 ```
 fafi-sna/
@@ -1146,6 +1146,12 @@ ggsave(timeline.plot, filename = "aux/timeline-plot.png", width = 18, height = 6
 ```
 
 !["Unruly" Timeline](aux/timeline-plot.png)
+
+## Session Information {.appendix}
+
+```{r, echo = FALSE}
+sessioninfo::session_info(pkgs = "attached", info = c("platform", "packages"))
+```
 
 ## Acknowledgments {.appendix}
 

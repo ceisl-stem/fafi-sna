@@ -22,23 +22,23 @@ fafi-sna/
 ┃ ┗ fafi-sna-references.bib <- Bibliography for this project in BibTeX format
 ┃ ┗ theme.css               <- Cascading style sheet for the project
 ┃ ┗ fafi-sna-logo.png       <- Project logo
-┣ docs/                     <- Directory for the rendered literate programming file
-┃ ┗ index.html              <- Rendered version of the literate programming file
-┣ index_cache/              <- Directory used to serve the rendered literate programming file
-┣ index_files/              <- Directory used to serve the rendered literate programming file
+┣ docs/                     <- Directory for the rendered literate code
+┃ ┗ index.html              <- Rendered version of the literate code
+┣ index_cache/              <- Directory used to serve the rendered literate code
+┣ index_files/              <- Directory used to serve the rendered literate code
 ┣ output/                   <- Target directory for collecting R output files
 ┃ ┗ plots/                  <- Directory for storing plots in PDF and PNG formats
 ┃ ┗ csv/                    <- Directory for storing CSV files
 ┣ R                         <- Directory for storing R scripts
-┃ ┗ fafi-sna.R              <- R script distilled from the literate programming file
+┃ ┗ fafi-sna.R              <- R script distilled from the literate code
 ┣ .gitignore                <- Files and directories to be ignored by Git
 ┣ .nojekyll                 <- File to tell Github to not use Jekyll
-┣ _footer.html              <- The footer for the rendered literate programming file
-┣ _site.yml                 <- Configuration file for the rendered literate programming file
+┣ _footer.html              <- The footer for the rendered literate code
+┣ _site.yml                 <- Configuration file for the rendered literate code
 ┣ CODE_OF_CONDUCT.md        <- Code of Conduct for project contributors
 ┣ LICENSE                   <- License (MIT) for project
 ┣ README.md                 <- This file, a general overview of this project
-┗ index.Rmd                 <- Literate programming file for the project analysis
+┗ index.Rmd                 <- Literate code for the project analysis
 ```
 
 ## Project Team
