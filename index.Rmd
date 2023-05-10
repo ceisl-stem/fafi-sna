@@ -1008,7 +1008,8 @@ keyactors.frame |>
     row.striping.background_color = "#00000011"
   ) |>
   sub_missing(missing_text = " ") |>
-  tab_spanner(label = "Key Actor Roles", columns = 6:8)
+  tab_spanner(label = "Key Actor Roles", columns = 6:8) |>
+  tab_spanner(label = "Network Scores", columns = 3:5)
 ```
 
 It is important to recognize that it's all OK, and I hope this works.
