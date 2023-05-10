@@ -159,7 +159,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <meta name="citation_reference" content="citation_title=Literate Programming;citation_volume=27;citation_doi=10.1093/comjnl/27.2.97;citation_issn=0010-4620;citation_author=D. E. Knuth"/>
   <meta name="citation_reference" content="citation_title=Tidygraph: A tidy API for graph manipulation;citation_author=Thomas Lin Pedersen"/>
   <meta name="citation_reference" content="citation_title=Ggraph: An implementation of grammar of graphics for graphs and networks;citation_author=Thomas Lin Pedersen"/>
-  <meta name="citation_reference" content="citation_title=CINNA: An r/CRAN package to decipher central informative nodes in network analysis;citation_volume=35;citation_author=Minoo Ashtiani;citation_author=Mehdi Mirzaie;citation_author=Mohieddin Jafari"/>
   <meta name="citation_reference" content="citation_title=Centiserve: Find graph centrality indices;citation_author=Mahdi Jalili"/>
   <meta name="citation_reference" content="citation_title=The Freelisting Method;citation_publisher=Springer Singapore;citation_doi=10.1007/978-981-10-2779-6_12-2;citation_author=Marsha B. Quinlan"/>
   <meta name="citation_reference" content="citation_title=Readr: Read rectangular text data;citation_author=Hadley Wickham;citation_author=Jim Hester;citation_author=Jennifer Bryan"/>
@@ -2156,337 +2155,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   </script>
 
-  <style type="text/css">
-  /* base variables */
-
-  /* Edit the CSS properties in this file to create a custom
-     Distill theme. Only edit values in the right column
-     for each row; values shown are the CSS defaults.
-     To return any property to the default,
-     you may set its value to: unset
-     All rows must end with a semi-colon.                      */
-
-  /* Optional: embed custom fonts here with `@import`          */
-  /* This must remain at the top of this file.                 */
-
-
-
-  html {
-    /*-- Main font sizes --*/
-    --title-size:      50px;
-    --body-size:       1.06rem;
-    --code-size:       14px;
-    --aside-size:      12px;
-    --fig-cap-size:    13px;
-    /*-- Main font colors --*/
-    --title-color:     #000000;
-    --header-color:    rgba(0, 0, 0, 0.8);
-    --body-color:      rgba(0, 0, 0, 0.8);
-    --aside-color:     rgba(0, 0, 0, 0.6);
-    --fig-cap-color:   rgba(0, 0, 0, 0.6);
-    /*-- Specify custom fonts ~~~ must be imported above   --*/
-    --heading-font:    sans-serif;
-    --mono-font:       monospace;
-    --body-font:       sans-serif;
-    --navbar-font:     sans-serif;  /* websites + blogs only */
-  }
-
-  /*-- ARTICLE METADATA --*/
-  d-byline {
-    --heading-size:    0.6rem;
-    --heading-color:   rgba(0, 0, 0, 0.5);
-    --body-size:       0.8rem;
-    --body-color:      rgba(0, 0, 0, 0.8);
-  }
-
-  /*-- ARTICLE TABLE OF CONTENTS --*/
-  .d-contents {
-    --heading-size:    18px;
-    --contents-size:   13px;
-  }
-
-  /*-- ARTICLE APPENDIX --*/
-  d-appendix {
-    --heading-size:    15px;
-    --heading-color:   rgba(0, 0, 0, 0.65);
-    --text-size:       0.8em;
-    --text-color:      rgba(0, 0, 0, 0.5);
-  }
-
-  /*-- WEBSITE HEADER + FOOTER --*/
-  /* These properties only apply to Distill sites and blogs  */
-
-  .distill-site-header {
-    --title-size:       18px;
-    --text-color:       rgba(255, 255, 255, 0.8);
-    --text-size:        15px;
-    --hover-color:      white;
-    --bkgd-color:       #0F2E3D;
-  }
-
-  .distill-site-footer {
-    --text-color:       rgba(255, 255, 255, 0.8);
-    --text-size:        15px;
-    --hover-color:      white;
-    --bkgd-color:       #0F2E3D;
-  }
-
-  /*-- Additional custom styles --*/
-  /* Add any additional CSS rules below                      */
-  </style>
-  <style type="text/css">
-  /* base variables */
-
-  /* Edit the CSS properties in this file to create a custom
-     Distill theme. Only edit values in the right column
-     for each row; values shown are the CSS defaults.
-     To return any property to the default,
-     you may set its value to: unset
-     All rows must end with a semi-colon.                      */
-
-  /* Optional: embed custom fonts here with `@import`          */
-  /* This must remain at the top of this file.                 */
-
-  @import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible&family=JetBrains+Mono&family=Lato');
-
-
-  html {
-    /*-- Main font sizes --*/
-    --title-size:      36px;
-    --body-size:       1.06rem;
-    --code-size:       14px;
-    --aside-size:      12px;
-    --fig-cap-size:    13px;
-    /*-- Main font colors --*/
-    --title-color:     #191919;
-    --header-color:    rgba(25, 25, 25, 0.8);
-    --body-color:      rgba(25, 25, 25, 0.8);
-    --aside-color:     rgba(25, 25, 25, 0.6);
-    --fig-cap-color:   rgba(25, 25, 25, 0.6);
-    /*-- Specify custom fonts ~~~ must be imported above   --*/
-    --heading-font:    "Lato", sans-serif;
-    --mono-font:       "JetBrains Mono", monospace;
-    --body-font:       "Atkinson Hyperlegible", sans-serif;
-    --navbar-font:     "Lato", sans-serif;  /* websites + blogs only */
-  }
-
-  /*-- ARTICLE METADATA --*/
-  d-byline {
-    --heading-size:    0.6rem;
-    --heading-color:   rgba(25, 25, 25, 0.5);
-    --body-size:       0.8rem;
-    --body-color:      rgba(25, 25, 25, 0.8);
-  }
-
-  /*-- ARTICLE TABLE OF CONTENTS --*/
-  .d-contents {
-    --heading-size:    18px;
-    --contents-size:   13px;
-  }
-
-  /*-- ARTICLE APPENDIX --*/
-  d-appendix {
-    --heading-size:    15px;
-    --heading-color:   rgba(25, 25, 25, 0.65);
-    --text-size:       0.8em;
-    --text-color:      rgba(25, 25, 25, 0.5);
-  }
-
-  /*-- WEBSITE HEADER + FOOTER --*/
-  /* These properties only apply to Distill sites and blogs  */
-
-  .distill-site-header {
-    --title-size:       18px;
-    --text-color:       #EDEBEB;
-    --text-size:        15px;
-    --hover-color:      #ffffff;
-    --bkgd-color:       #01426A;
-  }
-
-  .distill-site-footer {
-    --text-color:       #EDEBEB;
-    --text-size:        15px;
-    --hover-color:      #ffffff;
-    --bkgd-color:       #01426A;
-  }
-
-  /*-- Additional custom styles --*/
-  /* Add any additional CSS rules below                      */
-
-  d-article h1 {
-    font-weight: 700;
-    font-size: 36px;
-    padding-bottom: 18px;
-    border-bottom: solid 1px rgba(25, 25, 25, 0.25);
-  }
-
-  d-article h2 {
-    font-weight: 700;
-    font-size: 24px;
-    padding-bottom: 9px;
-    border-bottom: solid 1px rgba(25, 25, 25, 0.1);
-  }
-
-  d-article h4 {
-    font-weight: 700;
-    text-transform: none;
-    font-size: 1.06rem;
-    color:   rgba(25, 25, 25, 0.25);
-  }</style>
-  <style type="text/css">
-  /* base style */
-
-  /* FONT FAMILIES */
-
-  :root {
-    --heading-default: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
-    --mono-default: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-    --body-default: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
-  }
-
-  body,
-  .posts-list .post-preview p,
-  .posts-list .description p {
-    font-family: var(--body-font), var(--body-default);
-  }
-
-  h1, h2, h3, h4, h5, h6,
-  .posts-list .post-preview h2,
-  .posts-list .description h2 {
-    font-family: var(--heading-font), var(--heading-default);
-  }
-
-  d-article div.sourceCode code,
-  d-article pre code {
-    font-family: var(--mono-font), var(--mono-default);
-  }
-
-
-  /*-- TITLE --*/
-  d-title h1,
-  .posts-list > h1 {
-    color: var(--title-color, black);
-  }
-
-  d-title h1 {
-    font-size: var(--title-size, 50px);
-  }
-
-  /*-- HEADERS --*/
-  d-article h1,
-  d-article h2,
-  d-article h3,
-  d-article h4,
-  d-article h5,
-  d-article h6 {
-    color: var(--header-color, rgba(0, 0, 0, 0.8));
-  }
-
-  /*-- BODY --*/
-  d-article > p,  /* only text inside of <p> tags */
-  d-article > ul, /* lists */
-  d-article > ol {
-    color: var(--body-color, rgba(0, 0, 0, 0.8));
-    font-size: var(--body-size, 1.06rem);
-  }
-
-
-  /*-- CODE --*/
-  d-article div.sourceCode code,
-  d-article pre code {
-    font-size: var(--code-size, 14px);
-  }
-
-  /*-- ASIDE --*/
-  d-article aside {
-    font-size: var(--aside-size, 12px);
-    color: var(--aside-color, rgba(0, 0, 0, 0.6));
-  }
-
-  /*-- FIGURE CAPTIONS --*/
-  figure .caption,
-  figure figcaption,
-  .figure .caption {
-    font-size: var(--fig-cap-size, 13px);
-    color: var(--fig-cap-color, rgba(0, 0, 0, 0.6));
-  }
-
-  /*-- METADATA --*/
-  d-byline h3 {
-    font-size: var(--heading-size, 0.6rem);
-    color: var(--heading-color, rgba(0, 0, 0, 0.5));
-  }
-
-  d-byline {
-    font-size: var(--body-size, 0.8rem);
-    color: var(--body-color, rgba(0, 0, 0, 0.8));
-  }
-
-  d-byline a,
-  d-article d-byline a {
-    color: var(--body-color, rgba(0, 0, 0, 0.8));
-  }
-
-  /*-- TABLE OF CONTENTS --*/
-  .d-contents nav h3 {
-    font-size: var(--heading-size, 18px);
-  }
-
-  .d-contents nav a {
-    font-size: var(--contents-size, 13px);
-  }
-
-  /*-- APPENDIX --*/
-  d-appendix h3 {
-    font-size: var(--heading-size, 15px);
-    color: var(--heading-color, rgba(0, 0, 0, 0.65));
-  }
-
-  d-appendix {
-    font-size: var(--text-size, 0.8em);
-    color: var(--text-color, rgba(0, 0, 0, 0.5));
-  }
-
-  d-appendix d-footnote-list a.footnote-backlink {
-    color: var(--text-color, rgba(0, 0, 0, 0.5));
-  }
-
-  /*-- WEBSITE HEADER + FOOTER --*/
-  .distill-site-header .title {
-    font-size: var(--title-size, 18px);
-    font-family: var(--navbar-font), var(--heading-default);
-  }
-
-  .distill-site-header a,
-  .nav-dropdown .nav-dropbtn {
-    font-family: var(--navbar-font), var(--heading-default);
-  }
-
-  .nav-dropdown .nav-dropbtn {
-    color: var(--text-color, rgba(255, 255, 255, 0.8));
-    font-size: var(--text-size, 15px);
-  }
-
-  .distill-site-header a:hover,
-  .nav-dropdown:hover .nav-dropbtn {
-    color: var(--hover-color, white);
-  }
-
-  .distill-site-header {
-    font-size: var(--text-size, 15px);
-    color: var(--text-color, rgba(255, 255, 255, 0.8));
-    background-color: var(--bkgd-color, #0F2E3D);
-  }
-
-  .distill-site-footer {
-    font-size: var(--text-size, 15px);
-    color: var(--text-color, rgba(255, 255, 255, 0.8));
-    background-color: var(--bkgd-color, #0F2E3D);
-  }
-
-  .distill-site-footer a:hover {
-    color: var(--hover-color, white);
-  }</style>
   <!--/radix_placeholder_distill-->
   <script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
@@ -2636,15 +2304,14 @@ programming language. This project makes use of three different categories of li
 social network data. The <code>igraph</code> library <span class="citation" data-cites="csard2006igraph">(<a href="#ref-csard2006igraph" role="doc-biblioref">Csardi and Nepusz 2006</a>)</span> is the main social network
 analysis engine, while <code>tidygraph</code> <span class="citation" data-cites="thomas2023tidygraph">(<a href="#ref-thomas2023tidygraph" role="doc-biblioref">Pedersen 2023</a>)</span> and <code>ggraph</code> <span class="citation" data-cites="pedersen2022ggraph">(<a href="#ref-pedersen2022ggraph" role="doc-biblioref">Pedersen 2022</a>)</span>
 provide functionality for processing and visualizing social network graphs, respectively.
-<code>Centiserve</code> <span class="citation" data-cites="jalili2017centiserve">(<a href="#ref-jalili2017centiserve" role="doc-biblioref">Jalili 2017</a>)</span> and <code>CINNA</code> <span class="citation" data-cites="ashtiani2019cinna">(<a href="#ref-ashtiani2019cinna" role="doc-biblioref">Ashtiani, Mirzaie, and Jafari 2019</a>)</span> provide extended
-centrality algorithms.</p>
+<code>Centiserve</code> <span class="citation" data-cites="jalili2017centiserve">(<a href="#ref-jalili2017centiserve" role="doc-biblioref">Jalili 2017</a>)</span> provides extended centrality algorithms.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://r.igraph.org/'>igraph</a></span><span class='op'>)</span></span>
 <span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidygraph.data-imaginist.com'>tidygraph</a></span><span class='op'>)</span></span>
 <span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggraph.data-imaginist.com'>ggraph</a></span><span class='op'>)</span></span>
 <span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://www.centiserver.org/'>centiserve</a></span><span class='op'>)</span></span>
-<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>CINNA</span><span class='op'>)</span></span></code></pre>
+<span><span class='co'>#library(CINNA)</span></span></code></pre>
 </div>
 </div>
 <h3 id="quantitative-anthropology-library">Quantitative Anthropology Library</h3>
@@ -2882,7 +2549,7 @@ to represent the number of times a participant named an actor.</p>
 <span>    <span class='fu'><a href='https://ggraph.data-imaginist.com/reference/geom_node_point.html'>geom_node_point</a></span><span class='op'>(</span></span>
 <span>      <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span></span>
 <span>        color <span class='op'>=</span> <span class='va'>color_code</span>, <span class='co'># Plot the nodes with the color determined by the</span></span>
-<span>        size <span class='op'>=</span> <span class='va'>size_code</span></span>
+<span>        linewidth <span class='op'>=</span> <span class='va'>size_code</span></span>
 <span>      <span class='op'>)</span>, <span class='co'># participant and the size of the node determined</span></span>
 <span>      show.legend <span class='op'>=</span> <span class='cn'>FALSE</span></span>
 <span>    <span class='op'>)</span> <span class='op'>+</span> <span class='co'># by the Smith's S Salience Score.</span></span>
@@ -3401,8 +3068,10 @@ three <strong>perspectives</strong> (really need to come up with a better word t
 <div class="layout-chunk" data-layout="l-body">
 <div id="cdoqwakkjc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-html {
-  font-family: 'JetBrains Mono', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+#cdoqwakkjc table {
+  font-family: 'JetBrains Mono', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 #cdoqwakkjc thead, #cdoqwakkjc tbody, #cdoqwakkjc tfoot, #cdoqwakkjc tr, #cdoqwakkjc td, #cdoqwakkjc th {
@@ -3417,6 +3086,7 @@ html {
 #cdoqwakkjc .gt_table {
   display: table;
   border-collapse: collapse;
+  line-height: normal;
   margin-left: auto;
   margin-right: auto;
   color: #333333;
@@ -3807,8 +3477,6 @@ html {
 }
 
 #cdoqwakkjc .gt_footnote_marks {
-  font-style: italic;
-  font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
@@ -4031,24 +3699,27 @@ network through three <strong>perspectives</strong> (really need to come up with
 </div>
 </div>
 <div class="layout-chunk" data-layout="l-body">
-<div id="cdoqwakkjc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="oqqybkdgtz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-html {
-  font-family: 'JetBrains Mono', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+#oqqybkdgtz table {
+  font-family: 'JetBrains Mono', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-#cdoqwakkjc thead, #cdoqwakkjc tbody, #cdoqwakkjc tfoot, #cdoqwakkjc tr, #cdoqwakkjc td, #cdoqwakkjc th {
+#oqqybkdgtz thead, #oqqybkdgtz tbody, #oqqybkdgtz tfoot, #oqqybkdgtz tr, #oqqybkdgtz td, #oqqybkdgtz th {
   border-style: none;
 }
 
-#cdoqwakkjc p {
+#oqqybkdgtz p {
   margin: 0;
   padding: 0;
 }
 
-#cdoqwakkjc .gt_table {
+#oqqybkdgtz .gt_table {
   display: table;
   border-collapse: collapse;
+  line-height: normal;
   margin-left: auto;
   margin-right: auto;
   color: #333333;
@@ -4071,12 +3742,12 @@ html {
   border-left-color: #D3D3D3;
 }
 
-#cdoqwakkjc .gt_caption {
+#oqqybkdgtz .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#cdoqwakkjc .gt_title {
+#oqqybkdgtz .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4088,7 +3759,7 @@ html {
   border-bottom-width: 0;
 }
 
-#cdoqwakkjc .gt_subtitle {
+#oqqybkdgtz .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4100,7 +3771,7 @@ html {
   border-top-width: 0;
 }
 
-#cdoqwakkjc .gt_heading {
+#oqqybkdgtz .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4112,13 +3783,13 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#cdoqwakkjc .gt_bottom_border {
+#oqqybkdgtz .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#cdoqwakkjc .gt_col_headings {
+#oqqybkdgtz .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4133,7 +3804,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#cdoqwakkjc .gt_col_heading {
+#oqqybkdgtz .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4153,7 +3824,7 @@ html {
   overflow-x: hidden;
 }
 
-#cdoqwakkjc .gt_column_spanner_outer {
+#oqqybkdgtz .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4165,15 +3836,15 @@ html {
   padding-right: 4px;
 }
 
-#cdoqwakkjc .gt_column_spanner_outer:first-child {
+#oqqybkdgtz .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#cdoqwakkjc .gt_column_spanner_outer:last-child {
+#oqqybkdgtz .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#cdoqwakkjc .gt_column_spanner {
+#oqqybkdgtz .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -4185,11 +3856,11 @@ html {
   width: 100%;
 }
 
-#cdoqwakkjc .gt_spanner_row {
+#oqqybkdgtz .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#cdoqwakkjc .gt_group_heading {
+#oqqybkdgtz .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4215,7 +3886,7 @@ html {
   text-align: left;
 }
 
-#cdoqwakkjc .gt_empty_group_heading {
+#oqqybkdgtz .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4230,15 +3901,15 @@ html {
   vertical-align: middle;
 }
 
-#cdoqwakkjc .gt_from_md > :first-child {
+#oqqybkdgtz .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#cdoqwakkjc .gt_from_md > :last-child {
+#oqqybkdgtz .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#cdoqwakkjc .gt_row {
+#oqqybkdgtz .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -4257,7 +3928,7 @@ html {
   overflow-x: hidden;
 }
 
-#cdoqwakkjc .gt_stub {
+#oqqybkdgtz .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4270,7 +3941,7 @@ html {
   padding-right: 5px;
 }
 
-#cdoqwakkjc .gt_stub_row_group {
+#oqqybkdgtz .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4284,15 +3955,15 @@ html {
   vertical-align: top;
 }
 
-#cdoqwakkjc .gt_row_group_first td {
+#oqqybkdgtz .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#cdoqwakkjc .gt_row_group_first th {
+#oqqybkdgtz .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#cdoqwakkjc .gt_summary_row {
+#oqqybkdgtz .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4302,16 +3973,16 @@ html {
   padding-right: 5px;
 }
 
-#cdoqwakkjc .gt_first_summary_row {
+#oqqybkdgtz .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#cdoqwakkjc .gt_first_summary_row.thick {
+#oqqybkdgtz .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#cdoqwakkjc .gt_last_summary_row {
+#oqqybkdgtz .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4321,7 +3992,7 @@ html {
   border-bottom-color: #D3D3D3;
 }
 
-#cdoqwakkjc .gt_grand_summary_row {
+#oqqybkdgtz .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4331,7 +4002,7 @@ html {
   padding-right: 5px;
 }
 
-#cdoqwakkjc .gt_first_grand_summary_row {
+#oqqybkdgtz .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4341,7 +4012,7 @@ html {
   border-top-color: #D3D3D3;
 }
 
-#cdoqwakkjc .gt_last_grand_summary_row_top {
+#oqqybkdgtz .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4351,11 +4022,11 @@ html {
   border-bottom-color: #D3D3D3;
 }
 
-#cdoqwakkjc .gt_striped {
+#oqqybkdgtz .gt_striped {
   background-color: rgba(0, 0, 0, 0.07);
 }
 
-#cdoqwakkjc .gt_table_body {
+#oqqybkdgtz .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4364,7 +4035,7 @@ html {
   border-bottom-color: #D3D3D3;
 }
 
-#cdoqwakkjc .gt_footnotes {
+#oqqybkdgtz .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4378,7 +4049,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#cdoqwakkjc .gt_footnote {
+#oqqybkdgtz .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4387,7 +4058,7 @@ html {
   padding-right: 5px;
 }
 
-#cdoqwakkjc .gt_sourcenotes {
+#oqqybkdgtz .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4401,7 +4072,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#cdoqwakkjc .gt_sourcenote {
+#oqqybkdgtz .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4409,65 +4080,63 @@ html {
   padding-right: 5px;
 }
 
-#cdoqwakkjc .gt_left {
+#oqqybkdgtz .gt_left {
   text-align: left;
 }
 
-#cdoqwakkjc .gt_center {
+#oqqybkdgtz .gt_center {
   text-align: center;
 }
 
-#cdoqwakkjc .gt_right {
+#oqqybkdgtz .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#cdoqwakkjc .gt_font_normal {
+#oqqybkdgtz .gt_font_normal {
   font-weight: normal;
 }
 
-#cdoqwakkjc .gt_font_bold {
+#oqqybkdgtz .gt_font_bold {
   font-weight: bold;
 }
 
-#cdoqwakkjc .gt_font_italic {
+#oqqybkdgtz .gt_font_italic {
   font-style: italic;
 }
 
-#cdoqwakkjc .gt_super {
+#oqqybkdgtz .gt_super {
   font-size: 65%;
 }
 
-#cdoqwakkjc .gt_footnote_marks {
-  font-style: italic;
-  font-weight: normal;
+#oqqybkdgtz .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#cdoqwakkjc .gt_asterisk {
+#oqqybkdgtz .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#cdoqwakkjc .gt_indent_1 {
+#oqqybkdgtz .gt_indent_1 {
   text-indent: 5px;
 }
 
-#cdoqwakkjc .gt_indent_2 {
+#oqqybkdgtz .gt_indent_2 {
   text-indent: 10px;
 }
 
-#cdoqwakkjc .gt_indent_3 {
+#oqqybkdgtz .gt_indent_3 {
   text-indent: 15px;
 }
 
-#cdoqwakkjc .gt_indent_4 {
+#oqqybkdgtz .gt_indent_4 {
   text-indent: 20px;
 }
 
-#cdoqwakkjc .gt_indent_5 {
+#oqqybkdgtz .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -4600,21 +4269,21 @@ and his efforts to re-situate model-based research in historical and sociocultur
 <span>      x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/as.POSIXlt.html'>as.POSIXct</a></span><span class='op'>(</span><span class='st'>"1954-01-30"</span><span class='op'>)</span>, y <span class='op'>=</span> <span class='fl'>9</span>,</span>
 <span>      xend <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/as.POSIXlt.html'>as.POSIXct</a></span><span class='op'>(</span><span class='st'>"1956-01-30"</span><span class='op'>)</span>, yend <span class='op'>=</span> <span class='fl'>31.5</span></span>
 <span>    <span class='op'>)</span>,</span>
-<span>    color <span class='op'>=</span> <span class='st'>"#A7A9AB"</span>, linetype <span class='op'>=</span> <span class='fl'>2</span>, size <span class='op'>=</span> <span class='fl'>0.65</span></span>
+<span>    color <span class='op'>=</span> <span class='st'>"#A7A9AB"</span>, linetype <span class='op'>=</span> <span class='fl'>2</span>, linewidth <span class='op'>=</span> <span class='fl'>0.65</span></span>
 <span>  <span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_segment.html'>geom_segment</a></span><span class='op'>(</span></span>
 <span>    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span></span>
 <span>      x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/as.POSIXlt.html'>as.POSIXct</a></span><span class='op'>(</span><span class='st'>"1959-01-30"</span><span class='op'>)</span>, y <span class='op'>=</span> <span class='fl'>31.75</span>,</span>
 <span>      xend <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/as.POSIXlt.html'>as.POSIXct</a></span><span class='op'>(</span><span class='st'>"1968-01-30"</span><span class='op'>)</span>, yend <span class='op'>=</span> <span class='fl'>31</span></span>
 <span>    <span class='op'>)</span>,</span>
-<span>    color <span class='op'>=</span> <span class='st'>"#A7A9AB"</span>, linetype <span class='op'>=</span> <span class='fl'>2</span>, size <span class='op'>=</span> <span class='fl'>0.65</span></span>
+<span>    color <span class='op'>=</span> <span class='st'>"#A7A9AB"</span>, linetype <span class='op'>=</span> <span class='fl'>2</span>, linewidth <span class='op'>=</span> <span class='fl'>0.65</span></span>
 <span>  <span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_segment.html'>geom_segment</a></span><span class='op'>(</span></span>
 <span>    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span></span>
 <span>      x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/as.POSIXlt.html'>as.POSIXct</a></span><span class='op'>(</span><span class='st'>"1970-01-30"</span><span class='op'>)</span>, y <span class='op'>=</span> <span class='fl'>22</span>,</span>
 <span>      xend <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/as.POSIXlt.html'>as.POSIXct</a></span><span class='op'>(</span><span class='st'>"1970-01-30"</span><span class='op'>)</span>, yend <span class='op'>=</span> <span class='fl'>30.5</span></span>
 <span>    <span class='op'>)</span>,</span>
-<span>    color <span class='op'>=</span> <span class='st'>"#A7A9AB"</span>, linetype <span class='op'>=</span> <span class='fl'>2</span>, size <span class='op'>=</span> <span class='fl'>0.65</span></span>
+<span>    color <span class='op'>=</span> <span class='st'>"#A7A9AB"</span>, linetype <span class='op'>=</span> <span class='fl'>2</span>, linewidth <span class='op'>=</span> <span class='fl'>0.65</span></span>
 <span>  <span class='op'>)</span></span>
 <span><span class='fu'>plot.save</span><span class='op'>(</span><span class='va'>timeline.plot</span>, <span class='st'>"timeline"</span><span class='op'>)</span></span></code></pre>
 </div>
@@ -4626,339 +4295,22 @@ and his efforts to re-situate model-based research in historical and sociocultur
 <img src="aux/timeline-plot.png" alt="“Unruly” Timeline" />
 <figcaption aria-hidden="true">“Unruly” Timeline</figcaption>
 </figure>
-<h2 class="appendix" id="session-information">Session Information</h2>
-<div class="layout-chunk" data-layout="l-body">
-<pre><code>R version 4.2.2 (2022-10-31)
-Platform: aarch64-apple-darwin20 (64-bit)
-Running under: macOS Ventura 13.3.1
-
-Matrix products: default
-BLAS:   /Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib/libRblas.0.dylib
-LAPACK: /Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib/libRlapack.dylib
-
-locale:
-[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
-
-attached base packages:
-[1] stats     graphics  grDevices utils     datasets  methods  
-[7] base     
-
-other attached packages:
- [1] vistime_1.2.3    ggcorrplot_0.1.4 ggpubr_0.6.0    
- [4] ggthemes_4.2.4   gt_0.8.0.9000    dplyr_1.1.2     
- [7] tidyr_1.3.0      glue_1.6.2       rio_0.5.29      
-[10] readr_2.1.4      AnthroTools_0.8  CINNA_1.2.0     
-[13] centiserve_1.0.0 Matrix_1.5-3     ggraph_2.1.0    
-[16] ggplot2_3.4.2    tidygraph_1.2.3  igraph_1.4.2    
-
-loaded via a namespace (and not attached):
-  [1] readxl_1.4.2               backports_1.4.1           
-  [3] corrplot_0.92              qdapTools_1.3.5           
-  [5] systemfonts_1.0.4          plyr_1.8.8                
-  [7] lazyeval_0.2.2             splines_4.2.2             
-  [9] TH.data_1.1-1              digest_0.6.31             
- [11] htmltools_0.5.5            viridis_0.6.2             
- [13] fansi_1.0.4                magrittr_2.0.3            
- [15] memoise_2.0.1              cluster_2.1.4             
- [17] tzdb_0.3.0                 openxlsx_4.2.5.2          
- [19] sna_2.7-1                  graphlayouts_0.8.4        
- [21] vroom_1.6.1                sandwich_3.0-2            
- [23] colorspace_2.1-0           ggrepel_0.9.3             
- [25] textshaping_0.3.6          haven_2.5.2               
- [27] xfun_0.39                  crayon_1.5.2              
- [29] RCurl_1.98-1.12            jsonlite_1.8.4            
- [31] survival_3.5-5             zoo_1.8-11                
- [33] polyclip_1.10-4            gtable_0.3.3              
- [35] emmeans_1.8.5              car_3.1-1                 
- [37] abind_1.4-5                scales_1.2.1              
- [39] pheatmap_1.0.12            mvtnorm_1.1-3             
- [41] GGally_2.1.2               rstatix_0.7.2             
- [43] Rcpp_1.0.10                viridisLite_0.4.1         
- [45] xtable_1.8-4               flashClust_1.01-2         
- [47] foreign_0.8-84             bit_4.0.5                 
- [49] DT_0.27                    htmlwidgets_1.6.2         
- [51] httr_1.4.5                 RColorBrewer_1.1-3        
- [53] ellipsis_0.3.2             factoextra_1.0.7          
- [55] pkgconfig_2.0.3            reshape_0.8.9             
- [57] farver_2.1.1               multcompView_0.1-9        
- [59] sass_0.4.5                 utf8_1.2.3                
- [61] labeling_0.4.2             tidyselect_1.2.0          
- [63] rlang_1.1.1                munsell_0.5.0             
- [65] cellranger_1.1.0           tools_4.2.2               
- [67] cachem_1.0.7               cli_3.6.1                 
- [69] generics_0.1.3             statnet.common_4.8.0      
- [71] broom_1.0.4                evaluate_0.20             
- [73] stringr_1.5.0              fastmap_1.1.1             
- [75] ragg_1.2.5                 yaml_2.3.7                
- [77] knitr_1.42                 bit64_4.0.5               
- [79] zip_2.3.0                  purrr_1.0.1               
- [81] dendextend_1.17.1          leaps_3.1                 
- [83] compiler_4.2.2             rstudioapi_0.14           
- [85] plotly_4.10.1              curl_5.0.0                
- [87] ggsignif_0.6.4             tibble_3.2.1              
- [89] tweenr_2.0.2               bslib_0.4.2               
- [91] stringi_1.7.12             forcats_1.0.0             
- [93] lattice_0.20-45            assertive.base_0.0-9      
- [95] markdown_1.5               vctrs_0.6.2               
- [97] pillar_1.9.0               lifecycle_1.0.3           
- [99] jquerylib_0.1.4            estimability_1.4.1        
-[101] cowplot_1.1.1              data.table_1.14.8         
-[103] bitops_1.0-7               assertive.types_0.0-3     
-[105] R6_2.5.1                   assertive.properties_0.0-5
-[107] network_1.18.1             gridExtra_2.3             
-[109] codetools_0.2-19           distill_1.5               
-[111] MASS_7.3-58.3              chron_2.3-60              
-[113] withr_2.5.0                multcomp_1.4-23           
-[115] intergraph_2.0-2           parallel_4.2.2            
-[117] hms_1.1.2                  grid_4.2.2                
-[119] coda_0.19-4                rmarkdown_2.21            
-[121] carData_3.0-5              downlit_0.4.2             
-[123] Rtsne_0.16                 ggforce_0.4.1             
-[125] scatterplot3d_0.3-43       FactoMineR_2.8            </code></pre>
-</div>
 <h2 class="appendix" id="acknowledgments">Acknowledgments</h2>
 <p>This is work is funded in part by a <a href="https://nafsce.org/page/MiniGrant">National Association for Family, School, and
 Community Engagement (NAFSCE) Mini-Grant</a>.</p>
 <h2 class="appendix" id="author-contributions">Author Contributions</h2>
-<p>Author contributions here using the <a href="https://credit.niso.org/">CRediT Taxonomy</a>.</p>
-<table>
-<thead>
-<tr class="header">
-<th>Author</th>
-<th>Role</th>
-<th>Contribution</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Jeremy F. Price</strong></td>
-<td>Conceptualization</td>
-<td>Equal</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Data Curation</td>
-<td>Lead</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>Formal Analysis</td>
-<td>Lead</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Funding Acquisition</td>
-<td>Supporting</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>Investigation</td>
-<td>Equal</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Methodology</td>
-<td>Lead</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>Project Administration</td>
-<td>Equal</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Resources</td>
-<td>Lead</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>Software</td>
-<td>Lead</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Supervision</td>
-<td>Lead</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>Validation</td>
-<td>Lead</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Visualization</td>
-<td>Lead</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>Writing - Original Draft</td>
-<td>Lead</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Writing - Review &amp; Editing</td>
-<td>Lead</td>
-</tr>
-<tr class="odd">
-<td><strong>Cristina Santamaría Graff</strong></td>
-<td>Conceptualization</td>
-<td>Equal</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Data Curation</td>
-<td>Supporting</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>Formal Analysis</td>
-<td>Supporting</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Funding Acquisition</td>
-<td>Lead</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>Investigation</td>
-<td>Equal</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Methodology</td>
-<td>Supporting</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>Project Administration</td>
-<td>Equal</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Resources</td>
-<td>Supporting</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>Supervision</td>
-<td>Supporting</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Validation</td>
-<td>Supporting</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>Writing - Original Draft</td>
-<td>Supporting</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Writing - Review &amp; Editing</td>
-<td>Supporting</td>
-</tr>
-<tr class="odd">
-<td><strong>Akaash Arora</strong></td>
-<td>Conceptualization</td>
-<td>Supporting</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Data Curation</td>
-<td>Supporting</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>Formal Analysis</td>
-<td>Supporting</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Validation</td>
-<td>Supporting</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>Writing - Original Draft</td>
-<td>Supporting</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Writing - Review &amp; Editing</td>
-<td>Supporting</td>
-</tr>
-<tr class="odd">
-<td><strong>Amy Waechter-Versaw</strong></td>
-<td>Conceptualization</td>
-<td>Supporting</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Data Curation</td>
-<td>Supporting</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>Formal Analysis</td>
-<td>Supporting</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Validation</td>
-<td>Supporting</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>Writing - Original Draft</td>
-<td>Supporting</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Writing - Review &amp; Editing</td>
-<td>Supporting</td>
-</tr>
-<tr class="odd">
-<td><strong>Román Graff</strong></td>
-<td>Conceptualization</td>
-<td>Supporting</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Data Curation</td>
-<td>Supporting</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>Formal Analysis</td>
-<td>Supporting</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Validation</td>
-<td>Supporting</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>Writing - Original Draft</td>
-<td>Supporting</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Writing - Review &amp; Editing</td>
-<td>Supporting</td>
-</tr>
-</tbody>
-</table>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p><em>Conceptualization:</em> JFP, CSG; <em>Data Curation:</em> JFP, CSG, AA, AWV, RG;
+<em>Formal Analysis:</em> JFP, CSG, AA, AWV, RG;
+<em>Funding Acquisition:</em> CSG, JFP; <em>Investigation:</em> JFP, CSG;
+<em>Methodology:</em> JFP; <em>Project Administration:</em> CSG, JFP; <em>Software:</em> JFP;
+<em>Supervision:</em> JFP; <em>Visualization:</em> JFP;
+<em>Writing - Original Draft:</em> JFP, CSG, AA, AWV, RG;
+<em>Writing - Review &amp; Editing:</em> JFP, CSG, AA, AWV, RG.
+<a href="aux/credit.xml">[JATS]</a></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-arnold2021ggthemes" class="csl-entry" role="listitem">
 Arnold, Jeffrey B. 2021. <em>Ggthemes: Extra Themes, Scales and Geoms for ’Ggplot2’</em>. <a href="https://CRAN.R-project.org/package=ggthemes">https://CRAN.R-project.org/package=ggthemes</a>.
-</div>
-<div id="ref-ashtiani2019cinna" class="csl-entry" role="listitem">
-Ashtiani, Minoo, Mehdi Mirzaie, and Mohieddin Jafari. 2019. <span>“CINNA: An r/CRAN Package to Decipher Central Informative Nodes in Network Analysis.”</span> <em>Bioinformatics</em> 35 (8): 1436–37. <a href="https://doi.org/10.1093/bioinformatics/bty819">https://doi.org/10.1093/bioinformatics/bty819</a>.
 </div>
 <div id="ref-baker-doyleFirstyearTeachersSupport2012" class="csl-entry" role="listitem">
 Baker-Doyle, Kira J. 2012. <span>“First-Year Teachers’ Support Networks: <span>Intentional</span> Professional Networks and Diverse Professional Allies.”</span> <em>The New Educator</em> 8 (1): 65–85. <a href="https://doi.org/10.1080/1547688X.2012.641870">https://doi.org/10.1080/1547688X.2012.641870</a>.

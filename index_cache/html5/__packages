@@ -4,13 +4,13 @@ ggplot2
 ggraph
 Matrix
 centiserve
-CINNA
 AnthroTools
 readr
 rio
 glue
 tidyr
 dplyr
+gt
 ggthemes
 ggpubr
 ggcorrplot
