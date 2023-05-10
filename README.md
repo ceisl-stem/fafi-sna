@@ -22,6 +22,7 @@ fafi-sna/
 ┃ ┗ fafi-sna-references.bib <- Bibliography for this project in BibTeX format
 ┃ ┗ theme.css               <- Cascading style sheet for the project
 ┃ ┗ fafi-sna-logo.png       <- Project logo
+┃ ┗ credit.xml              <- Author contributions in a JATS XML file
 ┣ docs/                     <- Directory for the rendered literate code
 ┃ ┗ index.html              <- Rendered version of the literate code
 ┣ index_cache/              <- Directory used to serve the rendered literate code

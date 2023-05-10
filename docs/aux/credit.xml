@@ -3,8 +3,8 @@
 <contrib-group>
     <contrib>
         <string-name>
-            <given-names>Jeremy F</given-names>
-            <surname>Price</surname>
+            <given-names>Jeremy F </given-names>
+            <surname>Price </surname>
         </string-name>
         <role vocab="credit" vocab-identifier="https://credit.niso.org/" vocab-term="Conceptualization" vocab-term-identifier="https://credit.niso.org/contributor-roles/conceptualization/">Conceptualization</role>
         <role vocab="credit" vocab-identifier="https://credit.niso.org/" vocab-term="Data Curation" vocab-term-identifier="https://credit.niso.org/contributor-roles/data-curation/">Data Curation</role>
@@ -21,8 +21,8 @@
     </contrib>
     <contrib>
         <string-name>
-            <given-names>Cristina</given-names>
-            <surname>Santamaría Graff</surname>
+            <given-names>Cristina </given-names>
+            <surname>Santamaría Graff </surname>
         </string-name>
         <role vocab="credit" vocab-identifier="https://credit.niso.org/" vocab-term="Conceptualization" vocab-term-identifier="https://credit.niso.org/contributor-roles/conceptualization/">Conceptualization</role>
         <role vocab="credit" vocab-identifier="https://credit.niso.org/" vocab-term="Data Curation" vocab-term-identifier="https://credit.niso.org/contributor-roles/data-curation/">Data Curation</role>
@@ -35,8 +35,8 @@
     </contrib>
     <contrib>
         <string-name>
-            <given-names>Akaash</given-names>
-            <surname>Arora</surname>
+            <given-names>Akaash </given-names>
+            <surname>Arora </surname>
         </string-name>
         <role vocab="credit" vocab-identifier="https://credit.niso.org/" vocab-term="Data Curation" vocab-term-identifier="https://credit.niso.org/contributor-roles/data-curation/">Data Curation</role>
         <role vocab="credit" vocab-identifier="https://credit.niso.org/" vocab-term="Formal Analysis" vocab-term-identifier="https://credit.niso.org/contributor-roles/formal-analysis/">Formal Analysis</role>
@@ -45,8 +45,8 @@
     </contrib>
     <contrib>
         <string-name>
-            <given-names>Amy</given-names>
-            <surname>Waechter-Versaw</surname>
+            <given-names>Amy </given-names>
+            <surname>Waechter-Versaw </surname>
         </string-name>
         <role vocab="credit" vocab-identifier="https://credit.niso.org/" vocab-term="Data Curation" vocab-term-identifier="https://credit.niso.org/contributor-roles/data-curation/">Data Curation</role>
         <role vocab="credit" vocab-identifier="https://credit.niso.org/" vocab-term="Formal Analysis" vocab-term-identifier="https://credit.niso.org/contributor-roles/formal-analysis/">Formal Analysis</role>
@@ -55,8 +55,8 @@
     </contrib>
     <contrib>
         <string-name>
-            <given-names>Román</given-names>
-            <surname>Graff</surname>
+            <given-names>Román </given-names>
+            <surname>Graff </surname>
         </string-name>
         <role vocab="credit" vocab-identifier="https://credit.niso.org/" vocab-term="Data Curation" vocab-term-identifier="https://credit.niso.org/contributor-roles/data-curation/">Data Curation</role>
         <role vocab="credit" vocab-identifier="https://credit.niso.org/" vocab-term="Formal Analysis" vocab-term-identifier="https://credit.niso.org/contributor-roles/formal-analysis/">Formal Analysis</role>
