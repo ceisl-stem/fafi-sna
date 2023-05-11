@@ -13,7 +13,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible&family=JetBrains+Mono&family=Rubik');
 
-
 html {
   /*-- Main font sizes --*/
   --title-size:      36px;
@@ -94,6 +93,6 @@ d-article h2 {
 d-article h4 {
   font-weight: 700;
   text-transform: none;
-  font-size: 1.06rem;
+  font-size: 18px;
   color:   rgba(25, 25, 25, 0.25);
 }

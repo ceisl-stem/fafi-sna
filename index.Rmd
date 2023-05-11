@@ -452,8 +452,15 @@ draw.graph <- function(the.graph, the.file) {
     scale_size_continuous(range = c(2.5, 10)) + # Rescale the node size.
     scale_color_manual(values = the.palette) + # Bring in the color palette.
     geom_node_text(aes(label = label), repel = TRUE) + # Place the actor name on the graph.
-    labs(edge_width = "Letters") +
-    theme_graph() # Set the theme to social network graph which removes all extraneous grids.
+    labs(edge_width = "Letters",
+         title = "Social Network",
+         caption = "Test caption") +
+    #theme_graph() # Set the theme to social network graph which removes all extraneous grids.
+    theme_few() +
+    theme(axis.text = element_blank(),
+          axis.ticks = element_blank(),
+          axis.title = element_blank(),
+          panel.border = element_blank())
   # Save the plot.
   plot.save(the.plot, the.file)
   # Return the plot for further use as necessary.
@@ -778,9 +785,8 @@ full.plot <- draw.graph(full.graph, "full")
 ```{r save-full-sna, echo = FALSE, purl = FALSE, dpi=300}
 # Save a copy of the network to be displayed below
 ggsave(full.plot, filename = "aux/sna_full-plot.png", width = 11.5, height = 8, units = "in", dpi = 300)
+knitr::include_graphics("aux/sna_full-plot.png")
 ```
-
-![Full Social Network Plot](aux/sna_full-plot.png)
 
 ### Process Questions
 
@@ -853,9 +859,8 @@ grid_sna <- ggarrange(pates.q1.plot, pates.q3.plot, pates.q4.plot,
 
 # Save them as a high resolution image.
 ggsave(grid_sna, filename = "aux/grid-sna.png", width = 11, height = 8.5, units = "in", dpi = 300)
+knitr::include_graphics("aux/grid-sna.png")
 ```
-
-![Grid of Social Network Plots](aux/grid-sna.png)
 
 ```{r grid-key, purl=FALSE}
 # This codeblock is here simply to create a high-resolution image for
@@ -870,9 +875,8 @@ grid_sna <- ggarrange(pates.q1.key.plot, pates.q3.key.plot, pates.q4.key.plot,
 
 # Save them as a high resolution image.
 ggsave(grid_sna, filename = "aux/grid-key.png", width = 11, height = 8.5, units = "in", dpi = 300)
+knitr::include_graphics("aux/grid-key.png")
 ```
-
-![Grid of Key Actor Plots](aux/grid-key.png)
 
 # Analyzing the Data
 
@@ -1093,6 +1097,7 @@ overall.plot <- ggstripchart(overall.frame,
   fill = "color_code", label.rectangle = FALSE, show.legend = FALSE,
   label.color = "color_code", xlab = "Network", ylab = "Overall Score"
 ) +
+  ggtitle("Participants") +
   theme_few() +
   theme(legend.position = "none")
 plot.save(overall.plot, "overall-corr")
@@ -1141,12 +1146,11 @@ timeline.plot <- gg_vistime(timeline.frame,
 plot.save(timeline.plot, "timeline")
 ```
 
-```{r save-timeline, echo = FALSE, purl = FALSE, dpi=300}
+```{r save-timeline, echo = FALSE, purl = FALSE, dpi=300, layout = "l-page"}
 # Save a copy of the network to be displayed below
 ggsave(timeline.plot, filename = "aux/timeline-plot.png", width = 18, height = 6, units = "in", dpi = 300)
+knitr::include_graphics("aux/timeline-plot.png")
 ```
-
-!["Unruly" Timeline](aux/timeline-plot.png)
 
 ## Acknowledgments {.appendix}
 
@@ -1155,11 +1159,44 @@ Community Engagement (NAFSCE) Mini-Grant](https://nafsce.org/page/MiniGrant).
 
 ## Author Contributions {.appendix}
 
-*Conceptualization:* JFP, CSG; *Data Curation:* JFP, CSG, AA, AWV, RG;
-*Formal Analysis:* JFP, CSG, AA, AWV, RG;
-*Funding Acquisition:* CSG, JFP; *Investigation:* JFP, CSG;
-*Methodology:* JFP; *Project Administration:* CSG, JFP; *Software:* JFP;
-*Supervision:* JFP; *Visualization:* JFP;
-*Writing - Original Draft:* JFP, CSG, AA, AWV, RG;
-*Writing&nbsp;-&nbsp;Review&nbsp;&amp;&nbsp;Editing:*&nbsp;JFP, CSG, AA, AWV, RG.
-[[JATS]](aux/credit.xml)
+```{r}
+library(kableExtra)
+author_contributions <- data.frame(Role = c("Conceptualization", "Data Curation",
+                                            "Formal Analysis", "Funding Acquisition",
+                                            "Investigation", "Methodology",
+                                            "Project Administration", "Software",
+                                            "Supervision", "Visualization",
+                                            "Writing - Original Draft",
+                                            "Writing - Review & Editing"),
+                                   Authors = c("Jeremy F Price, Cristinia Santamaría Graff", "Jeremy F Price, Cristinia Santamaría Graff, Akaash Arora, Amy Waechter-Versaw, Román Graff",
+                                              "Jeremy F Price, Cristinia Santamaría Graff, Akaash Arora, Amy Waechter-Versaw, Román Graff", "Cristinia Santamaría Graff, Jeremy F Price",
+                                              "Jeremy F Price, Cristinia Santamaría Graff", "Jeremy F Price", "Cristinia Santamaría Graff, Jeremy F Price", "Jeremy F Price",
+                                              "Jeremy F Price", "Jeremy F Price", "Jeremy F Price, Cristinia Santamaría Graff, Akaash Arora, Amy Waechter-Versaw, Román Graff",
+                                              "Jeremy F Price, Cristinia Santamaría Graff, Akaash Arora, Amy Waechter-Versaw, Román Graff"))
+
+author_contributions |>
+  gt() |>
+  opt_table_font(
+    font = list(google_font("Atkinson Hyperlegible"), default_fonts())
+  ) |>
+  tab_style(
+    style = list(
+      "font-weight: bold;"
+    ),
+    locations = cells_body(columns = Role)) |>
+  tab_options(
+    table.font.size = 14,
+    data_row.padding = px(3)
+  ) |>
+  tab_source_note(
+        source_note = md("Available in [JATS](aux/credit.xml) format.")
+    )
+```
+
+## Session Information {.appendix}
+
+The session information is provided for reproducibility purposes.
+
+```{r}
+sessioninfo::session_info(pkgs = "attached")
+```
