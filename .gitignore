@@ -5,3 +5,6 @@ data/
 .Rproj.user
 *Rproj
 *.pdf
+renv.lock
+renv/
+.Rprofile
