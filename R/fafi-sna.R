@@ -22,7 +22,7 @@ library(igraph)
 library(tidygraph)
 library(ggraph)
 library(centiserve)
-library(CINNA)
+#library(CINNA)
 
 library(AnthroTools)
 
@@ -180,15 +180,22 @@ draw.graph <- function(the.graph, the.file) {
     geom_node_point(
       aes(
         color = color_code, # Plot the nodes with the color determined by the
-        size = size_code
+        linewidth = size_code
       ), # participant and the size of the node determined
       show.legend = FALSE
     ) + # by the Smith's S Salience Score.
     scale_size_continuous(range = c(2.5, 10)) + # Rescale the node size.
     scale_color_manual(values = the.palette) + # Bring in the color palette.
     geom_node_text(aes(label = label), repel = TRUE) + # Place the actor name on the graph.
-    labs(edge_width = "Letters") +
-    theme_graph() # Set the theme to social network graph which removes all extraneous grids.
+    labs(edge_width = "Letters",
+         title = "Social Network",
+         caption = "Test caption") +
+    #theme_graph() # Set the theme to social network graph which removes all extraneous grids.
+    theme_few() +
+    theme(axis.text = element_blank(),
+          axis.ticks = element_blank(),
+          axis.title = element_blank(),
+          panel.border = element_blank())
   # Save the plot.
   plot.save(the.plot, the.file)
   # Return the plot for further use as necessary.
@@ -618,6 +625,7 @@ overall.plot <- ggstripchart(overall.frame,
   fill = "color_code", label.rectangle = FALSE, show.legend = FALSE,
   label.color = "color_code", xlab = "Network", ylab = "Overall Score"
 ) +
+  ggtitle("Participants") +
   theme_few() +
   theme(legend.position = "none")
 plot.save(overall.plot, "overall-corr")
@@ -639,20 +647,55 @@ timeline.plot <- gg_vistime(timeline.frame,
       x = as.POSIXct("1954-01-30"), y = 9,
       xend = as.POSIXct("1956-01-30"), yend = 31.5
     ),
-    color = "#A7A9AB", linetype = 2, size = 0.65
+    color = "#A7A9AB", linetype = 2, linewidth = 0.65
   ) +
   geom_segment(
     aes(
       x = as.POSIXct("1959-01-30"), y = 31.75,
       xend = as.POSIXct("1968-01-30"), yend = 31
     ),
-    color = "#A7A9AB", linetype = 2, size = 0.65
+    color = "#A7A9AB", linetype = 2, linewidth = 0.65
   ) +
   geom_segment(
     aes(
       x = as.POSIXct("1970-01-30"), y = 22,
       xend = as.POSIXct("1970-01-30"), yend = 30.5
     ),
-    color = "#A7A9AB", linetype = 2, size = 0.65
+    color = "#A7A9AB", linetype = 2, linewidth = 0.65
   )
 plot.save(timeline.plot, "timeline")
+
+
+
+author_contributions <- data.frame(Role = c("Conceptualization", "Data Curation",
+                                            "Formal Analysis", "Funding Acquisition",
+                                            "Investigation", "Methodology",
+                                            "Project Administration", "Software",
+                                            "Supervision", "Visualization",
+                                            "Writing - Original Draft",
+                                            "Writing - Review & Editing"),
+                                   Authors = c("Jeremy F Price, Cristinia Santamaría Graff", "Jeremy F Price, Cristinia Santamaría Graff, Akaash Arora, Amy Waechter-Versaw, Román Graff",
+                                              "Jeremy F Price, Cristinia Santamaría Graff, Akaash Arora, Amy Waechter-Versaw, Román Graff", "Cristinia Santamaría Graff, Jeremy F Price",
+                                              "Jeremy F Price, Cristinia Santamaría Graff", "Jeremy F Price", "Cristinia Santamaría Graff, Jeremy F Price", "Jeremy F Price",
+                                              "Jeremy F Price", "Jeremy F Price", "Jeremy F Price, Cristinia Santamaría Graff, Akaash Arora, Amy Waechter-Versaw, Román Graff",
+                                              "Jeremy F Price, Cristinia Santamaría Graff, Akaash Arora, Amy Waechter-Versaw, Román Graff"))
+
+author_contributions |>
+  gt() |>
+  opt_table_font(
+    font = list(google_font("Atkinson Hyperlegible"), default_fonts())
+  ) |>
+  tab_style(
+    style = list(
+      "font-weight: bold; vertical-align: top;"
+    ),
+    locations = cells_body(columns = Role)) |>
+  tab_options(
+    table.font.size = 14,
+    data_row.padding = px(3)
+  ) |>
+  tab_source_note(
+        source_note = md("Available in [JATS](aux/credit.xml) format.")
+    )
+
+sessioninfo::session_info(pkgs = "attached")

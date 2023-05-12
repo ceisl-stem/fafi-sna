@@ -700,7 +700,20 @@ calculate.ranks <- function(the.cent) {
 
 ### Calculate Node Flexibility Functions
 
-#### Calculate Jaccard Coefficient Function
+#### Calculate Jaccard Index Function
+
+The Jaccard Similarity Index is a measure of how similar two sets of information are,
+with a range between 0 (nothing is the same) and 1 (everything is the same).
+
+$J$, the Jaccard Similarity Index, is calculated with the following formula:
+
+<p style="text-align: center">$J(p,q) = \frac{|p \cap q|}{|p \cup q|}$</p>
+
+where $p$ and $q$ are sets of information. The absolute value of the union of $p$ and $q$,
+or the number of items they have in common, is divided by the absolute value of the
+intersection of $p$ and $q$, or the number of total unique items across the both sets.
+
+This value is then passed back to the situational degree centrality function for further processing.
 
 ```{r function calculate-jaccard, message=FALSE, warning=FALSE, echo = TRUE, results = FALSE}
 calculate.jaccard <- function(the.set1, the.set2) {
@@ -709,7 +722,22 @@ calculate.jaccard <- function(the.set1, the.set2) {
 }
 ```
 
-#### Calculate Node Flexibility Function
+#### Calculate Situational Degree Centrality Function
+
+Situational Degree Centrality $(deg^\setminus)$ is a measure of the breadth of connections
+actors have to address situational information needs. Expanding upon the in degree and
+out degree centralities, situational degree looks at degree measures in a nuanced
+manner over the layers of a situation-oriented multilayered network graph.
+
+The Actor Situational Connections index is calculated with the following formula:
+
+<p style="text-align: center;">$\text{deg}^\setminus (v) = 1 - \frac{\frac{1}{m(m-1)} \sum_{p\neq q} J(set_p,\ set_q)}{\max_{p,q} J(set_p,\ set_q)}$</p>
+
+where $m$ is the total number of sets, $p$ and $q$ represent the sets, and $J$ represents
+the Jaccard Index. The calculation proceeds by dividing the sum of the Jaccard Indices
+by the possible total sum of Jaccard Indices. In this case, there are three sets,
+so the sum of the three Jaccard Indices is divided by 3. This value is subtracted from 1
+to indicate difference rather than similarity.
 
 ```{r function-calculate-node-flexibility, message=FALSE, warning=FALSE, echo = TRUE, results = FALSE}
 calculate.node.flexibility <- function(the.actor) {
@@ -883,10 +911,6 @@ knitr::include_graphics("aux/grid-key.png")
 ### Preparing the Scores
 
 #### Calculate Actor Flexibility Score
-
-$F_i = \frac{\frac{1}{m(m-1)} \sum_{p\neq q} J(set_p^i,\ set_q^i)}{\max_{p,q} J(set_p,\ set_q)}$
-
-Where $i$ represents a given actor, $m$ is the total number of sets, $p$ and $q$ are indices representing the set of sets, and $J$ represents the Jaccard Coefficient.
 
 ```{r calculate-actor-flexibility, echo = TRUE}
 # Calculating Actor Flexibility Score
@@ -1160,7 +1184,6 @@ Community Engagement (NAFSCE) Mini-Grant](https://nafsce.org/page/MiniGrant).
 ## Author Contributions {.appendix}
 
 ```{r}
-library(kableExtra)
 author_contributions <- data.frame(Role = c("Conceptualization", "Data Curation",
                                             "Formal Analysis", "Funding Acquisition",
                                             "Investigation", "Methodology",
@@ -1181,7 +1204,7 @@ author_contributions |>
   ) |>
   tab_style(
     style = list(
-      "font-weight: bold;"
+      "font-weight: bold; vertical-align: top;"
     ),
     locations = cells_body(columns = Role)) |>
   tab_options(
