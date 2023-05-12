@@ -151,15 +151,14 @@ programming language. This project makes use of three different categories of li
 Network Graph Libraries allow for the construction, analysis, and visualization of
 social network data. The `igraph` library [@csard2006igraph] is the main social network
 analysis engine, while `tidygraph` [@thomas2023tidygraph] and `ggraph` [@pedersen2022ggraph]
-provide functionality for processing and visualizing social network graphs, respectively.
-`Centiserve`&nbsp;[@jalili2017centiserve] provides extended centrality algorithms.
+provide functionality for processing and visualizing social network graphs, respectively. `Centiserve`&nbsp;[@jalili2017centiserve] provides extended centrality
+algorithms.
 
 ```{r graph-libraries, message = FALSE, warning = FALSE, echo = TRUE}
 library(igraph)
 library(tidygraph)
 library(ggraph)
 library(centiserve)
-#library(CINNA)
 ```
 
 ### Quantitative Anthropology Library
