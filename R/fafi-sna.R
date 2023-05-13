@@ -1,14 +1,15 @@
-#  __________________________________________________
-# |                                                  |
-# |     THE ANALYSIS IS NOT THE SOCIAL NETWORK       |
-# |  Illuminating the unruly nature of intentional   |
-# |  social networks in educational justice efforts  |
-# |__________________________________________________|
-# |                                                  |
-# |   Funded in part by a National Association for   |
-# |    Family, School, and Community Engagement      |
-# |                    Mini-Grant.                   |
-# |__________________________________________________|
+# ______________________________________________________________________________
+# |                                                                            |
+# |                  THE ANALYSIS IS NOT THE SOCIAL NETWORK                    |
+# |               Illuminating the unruly nature of intentional                |
+# |               social networks in educational justice efforts               |
+# |                                                                            |
+# |----------------------------------------------------------------------------|
+# |                                                                            |
+# |                Funded in part by a National Association for                |
+# |            Family, School, and Community Engagement Mini-Grant.            |
+# |                                                                            |
+# |____________________________________________________________________________|
 
 # == LOAD LIBRARIES ============================================================
 
