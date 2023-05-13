@@ -40,7 +40,7 @@ citation_url: https://jeremyfprice.github.io/fafi-sna/
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-```{r, eval = FALSE}
+```{r include = FALSE}
 #  __________________________________________________
 # |                                                  |
 # |     THE ANALYSIS IS NOT THE SOCIAL NETWORK       |
@@ -132,7 +132,7 @@ the job done even if there may be more elegant and efficient ways of doing thing
 
 ## Load Libraries
 
-```{r, eval = FALSE}
+```{r, include = FALSE}
 # == LOAD LIBRARIES ============================================================
 ```
 
@@ -193,7 +193,7 @@ library(vistime)
 
 ## Define Constants
 
-```{r, eval = FALSE}
+```{r, include = FALSE}
 # == DEFINE CONSTANTS ==========================================================
 ```
 
@@ -201,7 +201,7 @@ The following constants are utilized across the project.
 
 ### Common Color Pallete
 
-```{r, eval = FALSE}
+```{r, include = FALSE}
 # -- Define the common color palette -------------------------------------------
 ```
 
@@ -221,7 +221,7 @@ the_palette <<- c(
 
 ### Participant Abbreviation List
 
-```{r, eval = FALSE}
+```{r, include = FALSE}
 # -- Define the participant abbreviation list ----------------------------------
 ```
 
@@ -245,7 +245,7 @@ the_abbrev <<- data.frame(
 
 ## Define Functions
 
-```{r, eval = FALSE}
+```{r, include = FALSE}
 # == DEFINE FUNCTIONS ==========================================================
 ```
 
@@ -257,7 +257,7 @@ with different variables, datasets, or networks.
 Helper functions provide functionality to other functions or ongoing analysis and calculations
 across the code.
 
-```{r, eval = FALSE}
+```{r, include = FALSE}
 # -- Save plots as PDF and PNG -------------------------------------------------
 ```
 
@@ -293,7 +293,7 @@ plot_save <- function(the_plot, the_file) {
 }
 ```
 
-```{r, eval = FALSE}
+```{r, include = FALSE}
 # -- Create Correlation Plot ---------------------------------------------------
 ```
 
@@ -324,7 +324,7 @@ plot_corr <- function(the_frame, the_file) {
 }
 ```
 
-```{r, eval = FALSE}
+```{r, include = FALSE}
 # -- Calculate Tukey's Fences --------------------------------------------------
 ```
 
@@ -350,7 +350,7 @@ calculate_tukey <- function(the_cent) {
 
 ### Network Graph Functions
 
-```{r, eval = FALSE}
+```{r, include = FALSE}
 # -- Prepare the data and initialize the graph object --------------------------
 ```
 
@@ -404,7 +404,7 @@ set_graph <- function(the_frame, the_salience) {
 ```
 
 
-```{r, eval = FALSE}
+```{r, include = FALSE}
 # -- Plot the graph object -----------------------------------------------------
 ```
 
@@ -1169,7 +1169,7 @@ and his efforts to re-situate model-based research in historical and sociocultur
 
 ### Consider Sociohistorical Context
 
-```{r unruly-timeline, echo = TRUE, results = TRUE, eval = TRUE, warning = FALSE, message=FALSE}
+```{r unruly-timeline, echo = TRUE, results = TRUE, warning = FALSE, message=FALSE}
 timeline_frame <- read_csv("data/timeline-data.csv",
   col_names = TRUE,
   show_col_types = FALSE

@@ -1,16 +1,16 @@
-## #  __________________________________________________
-## # |                                                  |
-## # |     THE ANALYSIS IS NOT THE SOCIAL NETWORK       |
-## # |  Illuminating the unruly nature of intentional   |
-## # |  social networks in educational justice efforts  |
-## # |__________________________________________________|
-## # |                                                  |
-## # |   Funded in part by a National Association for   |
-## # |    Family, School, and Community Engagement      |
-## # |                    Mini-Grant.                   |
-## # |__________________________________________________|
+#  __________________________________________________
+# |                                                  |
+# |     THE ANALYSIS IS NOT THE SOCIAL NETWORK       |
+# |  Illuminating the unruly nature of intentional   |
+# |  social networks in educational justice efforts  |
+# |__________________________________________________|
+# |                                                  |
+# |   Funded in part by a National Association for   |
+# |    Family, School, and Community Engagement      |
+# |                    Mini-Grant.                   |
+# |__________________________________________________|
 
-## # == LOAD LIBRARIES ============================================================
+# == LOAD LIBRARIES ============================================================
 
 library(igraph)
 library(tidygraph)
@@ -30,9 +30,9 @@ library(ggpubr)
 library(ggcorrplot)
 library(vistime)
 
-## # == DEFINE CONSTANTS ==========================================================
+# == DEFINE CONSTANTS ==========================================================
 
-## # -- Define the common color palette -------------------------------------------
+# -- Define the common color palette -------------------------------------------
 
 the_palette <<- c(
   "FL" = "#6929c4", "NC" = "#1192e8", "PA" = "#005d5d",
@@ -42,7 +42,7 @@ the_palette <<- c(
   "US" = "#8a3800"
 )
 
-## # -- Define the participant abbreviation list ----------------------------------
+# -- Define the participant abbreviation list ----------------------------------
 
 the_abbrev <<- data.frame(
   color_code = c(
@@ -57,9 +57,9 @@ the_abbrev <<- data.frame(
   )
 )
 
-## # == DEFINE FUNCTIONS ==========================================================
+# == DEFINE FUNCTIONS ==========================================================
 
-## # -- Save plots as PDF and PNG -------------------------------------------------
+# -- Save plots as PDF and PNG -------------------------------------------------
 
 plot_save <- function(the_plot, the_file) {
   # Set the filename for the PDF.
@@ -84,7 +84,7 @@ plot_save <- function(the_plot, the_file) {
   )
 }
 
-## # -- Create Correlation Plot ---------------------------------------------------
+# -- Create Correlation Plot ---------------------------------------------------
 
 plot_corr <- function(the_frame, the_file) {
   # Calculate the correlation of the provided dataframe.
@@ -104,7 +104,7 @@ plot_corr <- function(the_frame, the_file) {
   return(corr_plot)
 }
 
-## # -- Calculate Tukey's Fences --------------------------------------------------
+# -- Calculate Tukey's Fences --------------------------------------------------
 
 calculate_tukey <- function(the_cent) {
   # Calculate Tukey's fences
@@ -117,7 +117,7 @@ calculate_tukey <- function(the_cent) {
   return(the_fence)
 }
 
-## # -- Prepare the data and initialize the graph object --------------------------
+# -- Prepare the data and initialize the graph object --------------------------
 
 set_graph <- function(the_frame, the_salience) {
   # Reduce the edge list to just i (from) and j (to).
@@ -148,7 +148,7 @@ set_graph <- function(the_frame, the_salience) {
   return(the_graph)
 }
 
-## # -- Plot the graph object -----------------------------------------------------
+# -- Plot the graph object -----------------------------------------------------
 
 draw_graph <- function(the_graph, the_file) {
   # Set the filename for saving the graph.
