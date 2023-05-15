@@ -571,7 +571,9 @@ write_csv(keyactors_frame, file = "output/csv/keyactors_analysis.csv")
 
 
 keyactors_corr <- keyactors_frame |>
-  select(positionality_score, reachability_score, reputation_score) |>
+  select(positionality_score,
+         reachability_score,
+         reputation_score) |>
   plot_corr("keyactors-corr")
 print(keyactors_corr)
 
@@ -617,8 +619,6 @@ participants_frame <- participants_frame |>
 write_csv(participants_frame,
   file = "output/csv/participants_analysis.csv"
 )
-
-
 
 participants_corr <- participants_frame |>
   select(
@@ -689,45 +689,3 @@ timeline_plot <- gg_vistime(timeline_frame,
     color = "#A7A9AB", linetype = 2, linewidth = 0.65
   )
 plot_save(timeline_plot, "timeline")
-
-
-
-author_contributions <- data.frame(
-  Role = c(
-    "Conceptualization", "Data Curation",
-    "Formal Analysis", "Funding Acquisition",
-    "Investigation", "Methodology",
-    "Project Administration", "Software",
-    "Supervision", "Visualization",
-    "Writing - Original Draft",
-    "Writing - Review & Editing"
-  ),
-  Authors = c(
-    "Jeremy F Price, Cristinia Santamaría Graff", "Jeremy F Price, Cristinia Santamaría Graff, Akaash Arora, Amy Waechter-Versaw, Román Graff",
-    "Jeremy F Price, Cristinia Santamaría Graff, Akaash Arora, Amy Waechter-Versaw, Román Graff", "Cristinia Santamaría Graff, Jeremy F Price",
-    "Jeremy F Price, Cristinia Santamaría Graff", "Jeremy F Price", "Cristinia Santamaría Graff, Jeremy F Price", "Jeremy F Price",
-    "Jeremy F Price", "Jeremy F Price", "Jeremy F Price, Cristinia Santamaría Graff, Akaash Arora, Amy Waechter-Versaw, Román Graff",
-    "Jeremy F Price, Cristinia Santamaría Graff, Akaash Arora, Amy Waechter-Versaw, Román Graff"
-  )
-)
-
-author_contributions |>
-  gt() |>
-  opt_table_font(
-    font = list(google_font("Atkinson Hyperlegible"), default_fonts())
-  ) |>
-  tab_style(
-    style = list(
-      "font-weight: bold; vertical-align: top;"
-    ),
-    locations = cells_body(columns = Role)
-  ) |>
-  tab_options(
-    table.font.size = 14,
-    data_row.padding = px(3)
-  ) |>
-  tab_source_note(
-    source_note = md("Available in [JATS](aux/credit.xml) format.")
-  )
-
-sessioninfo::session_info(pkgs = "attached")

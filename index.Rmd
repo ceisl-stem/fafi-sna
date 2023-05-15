@@ -1,5 +1,5 @@
 ---
-title: "The Analysis Is Not The Social Network"
+title: "The Archaeology of Social Network Analysis"
 description: |
   Illuminating the unruly nature of intentional social networks in educational justice efforts.
 repository_url: https://github.com/jeremyfprice/fafi-sna/
@@ -40,7 +40,7 @@ citation_url: https://jeremyfprice.github.io/fafi-sna/
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-```{r include = FALSE}
+```{r project-identifier, include = FALSE}
 # ______________________________________________________________________________
 # |                                                                            |
 # |                  THE ANALYSIS IS NOT THE SOCIAL NETWORK                    |
@@ -805,6 +805,7 @@ full_plot <- draw_graph(full_graph, "full")
 # Save a copy of the network to be displayed below
 ggsave(full_plot, filename = "aux/sna_full-plot.png", width = 11.5, height = 8, units = "in", dpi = 300)
 knitr::include_graphics("aux/sna_full-plot.png")
+print(full_frame)
 ```
 
 ### Process Questions
@@ -1164,9 +1165,29 @@ print(overall_plot)
 and his efforts to re-situate model-based research in historical and sociocultural contexts
 [@taylorUnrulyComplexityEcology2010; @taylorComplexityConstructionIntersecting2018].
 
-### Consider Sociocultural Ontologies
+### Consider Sociocultural Ontological and Phenomenological Contexts
+
+<dfn>Ontological contexts</dfn> refer to structural and infrastructural
+elements of social life.
+
+<dfn>Phenomenological contexts</dfn> refer to personal experiential
+considerations.
 
 [@dorpinghausSocialNetworksKnowledge2022; @porterCommunitiesNetworks2009]
+
+* Ontological
+  - White Flight
+  - Focus on Testing
+  - SoE Mission and Vision
+  - FAPE
+* Phenomenological
+  - Educator Preparation
+  - Schooling Experiences
+  - Learning Agendas [@ashDialogicInquiryLife2003]
+
+Ontological and phenomenological contexts can inform one another, for example
+`FAPE` and `Schooling Experiences` inform `Learning Agendas` but we consider
+these separately.
 
 ### Consider Sociohistorical Context
 
@@ -1228,7 +1249,7 @@ Community Engagement (NAFSCE) Mini-Grant](https://nafsce.org/page/MiniGrant).
 
 ## Author Contributions {.appendix}
 
-```{r}
+```{r author-contributions, purl=FALSE}
 author_contributions <- data.frame(
   Role = c(
     "Conceptualization", "Data Curation",
@@ -1272,6 +1293,6 @@ author_contributions |>
 
 The session information is provided for reproducibility purposes.
 
-```{r print-session-info}
+```{r print-session-info, purl=FALSE}
 sessioninfo::session_info(pkgs = "attached")
 ```
