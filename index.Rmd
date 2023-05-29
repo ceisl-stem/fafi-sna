@@ -3,7 +3,7 @@ title: "The Archaeology of Social Network Analysis"
 description: |
   Illuminating the unruly nature of intentional social networks in educational justice efforts.
 repository_url: https://github.com/jeremyfprice/fafi-sna/
-preview: aux/fafi-sna-git-logo.png
+preview: assets/fafi-sna-git-logo.png
 author:
   - name: Jeremy F Price 
     url: https://www.jeremyfprice.info/
@@ -28,11 +28,11 @@ date: "`r Sys.Date()`"
 output:
   distill::distill_article:
     self_contained: false
-    theme: aux/theme.css
+    theme: assets/theme.css
 navbar:
   source_url: https://github.com/jeremyfprice/fafi-sna/
 creative_commons: CC BY-NC-SA
-bibliography: aux/fafi-sna-references.bib
+bibliography: assets/fafi-sna-references.bib
 citation_url: https://jeremyfprice.github.io/fafi-sna/
 ---
 
@@ -55,7 +55,7 @@ knitr::opts_chunk$set(echo = FALSE)
 # |____________________________________________________________________________|
 ```
 
-![Family as Faculty as an Infrastructure Social Network Analysis Project](aux/fafi-sna-git-logo.png)
+![Family as Faculty as an Infrastructure Social Network Analysis Project](assets/fafi-sna-git-logo.png)
 
 # Introduction
 
@@ -89,7 +89,7 @@ All components of this work can be found at the project's [OSF repository](https
 
 ```
 fafi-sna/
-┣ aux/                      <- Directory for storing auxiliary files
+┣ assets/                      <- Directory for storing auxiliary files
 ┃ ┗ fafi-sna-references.bib <- Bibliography for this project in BibTeX format
 ┃ ┗ theme.css               <- Cascading style sheet for the project
 ┃ ┗ fafi-sna-logo.png       <- Project logo
@@ -803,8 +803,8 @@ full_plot <- draw_graph(full_graph, "full")
 
 ```{r save-full-sna, echo = FALSE, purl = FALSE, dpi=300}
 # Save a copy of the network to be displayed below
-ggsave(full_plot, filename = "aux/sna_full-plot.png", width = 11.5, height = 8, units = "in", dpi = 300)
-knitr::include_graphics("aux/sna_full-plot.png")
+ggsave(full_plot, filename = "assets/sna_full-plot.png", width = 11.5, height = 8, units = "in", dpi = 300)
+knitr::include_graphics("assets/sna_full-plot.png")
 print(full_frame)
 ```
 
@@ -878,8 +878,8 @@ grid_sna <- ggarrange(pates_q1_plot, pates_q3_plot, pates_q4_plot,
 )
 
 # Save them as a high resolution image.
-ggsave(grid_sna, filename = "aux/grid-sna.png", width = 11, height = 8.5, units = "in", dpi = 300)
-knitr::include_graphics("aux/grid-sna.png")
+ggsave(grid_sna, filename = "assets/grid-sna.png", width = 11, height = 8.5, units = "in", dpi = 300)
+knitr::include_graphics("assets/grid-sna.png")
 ```
 
 ```{r grid-key, purl=FALSE}
@@ -894,8 +894,8 @@ grid_sna <- ggarrange(pates_q1_key_plot, pates_q3_key_plot, pates_q4_key_plot,
 )
 
 # Save them as a high resolution image.
-ggsave(grid_sna, filename = "aux/grid-key.png", width = 11, height = 8.5, units = "in", dpi = 300)
-knitr::include_graphics("aux/grid-key.png")
+ggsave(grid_sna, filename = "assets/grid-key.png", width = 11, height = 8.5, units = "in", dpi = 300)
+knitr::include_graphics("assets/grid-key.png")
 ```
 
 # Analyzing the Data
@@ -1191,61 +1191,105 @@ these separately.
 
 ### Consider Sociohistorical Context
 
-```{r unruly-timeline, echo = TRUE, results = TRUE, warning = FALSE, message=FALSE}
+```{r neighborhood-sparkline, echo=FALSE, results=FALSE, warning=FALSE, message=FALSE}
+historic_census <- read_csv("data/historic_census.csv") |>
+  filter(year != 1940)
+historic_sparkline <- ggplot(
+  historic_census,
+  aes(
+    x = year,
+    y = population,
+    group = race_ethnicity,
+    color = race_ethnicity
+  )
+) +
+  geom_line() +
+  theme_light() +
+  labs(caption = "Chart: The Polis Center at IUPUI - Source: NHGIS.") +
+  theme(
+    legend.position = "top",
+    legend.justification = "right",
+    axis.text.x = element_blank(),
+    axis.title = element_blank(),
+    axis.ticks = element_blank(),
+    panel.border = element_blank(),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank()
+  )
+```
+
+```{r unruly-timeline, echo = FALSE, results = TRUE, warning = FALSE, message=FALSE}
 timeline_frame <- read_csv("data/timeline-data.csv",
   col_names = TRUE,
   show_col_types = FALSE
 )
 timeline_frame$layer <- factor(timeline_frame$layer,
-  levels = c("act", "local", "sped", "policy", "epoch")
+  levels = c("outcome", "local", "sped", "national", "epoch")
 )
 timeline_plot <- gg_vistime(timeline_frame,
   col.event = "event", col.group = "layer",
   col.start = "start", col.end = "end", optimize_y = FALSE,
-  title = "Multilayered Timeline",
   background_lines = NULL
 ) +
-  theme_few() +
-  geom_segment(
-    aes(
-      x = as.POSIXct("1954-01-30"), y = 9,
-      xend = as.POSIXct("1956-01-30"), yend = 31.5
-    ),
-    color = "#A7A9AB", linetype = 2, linewidth = 0.65
-  ) +
-  geom_segment(
-    aes(
-      x = as.POSIXct("1959-01-30"), y = 31.75,
-      xend = as.POSIXct("1968-01-30"), yend = 31
-    ),
-    color = "#A7A9AB", linetype = 2, linewidth = 0.65
-  ) +
-  geom_segment(
-    aes(
-      x = as.POSIXct("1970-01-30"), y = 22,
-      xend = as.POSIXct("1970-01-30"), yend = 30.5
-    ),
-    color = "#A7A9AB", linetype = 2, linewidth = 0.65
-  )
-plot_save(timeline_plot, "timeline")
+  theme_light() +
+  theme(
+    legend.position = "none",
+    axis.title = element_blank(),
+    axis.ticks = element_blank(),
+    panel.border = element_blank(),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank()
+  ) #+
+  # geom_segment(
+  #   aes(
+  #     x = as.POSIXct("1954-01-30"), y = 10,
+  #     xend = as.POSIXct("1956-01-30"), yend = 34
+  #   ),
+  #   color = "#A7A9AB", linetype = 2, linewidth = 0.65
+  # ) +
+  # geom_segment(
+  #   aes(
+  #     x = as.POSIXct("1959-01-30"), y = 36,
+  #     xend = as.POSIXct("1968-01-30"), yend = 35
+  #   ),
+  #   color = "#A7A9AB", linetype = 2, linewidth = 0.65
+  # ) +
+  # geom_segment(
+  #   aes(
+  #     x = as.POSIXct("1970-01-30"), y = 22,
+  #     xend = as.POSIXct("1970-01-30"), yend = 35
+  #   ),
+  #   color = "#A7A9AB", linetype = 2, linewidth = 0.65
+  # )
+multilayered_chart <- ggarrange(historic_sparkline, timeline_plot, ncol = 1, nrow = 2, heights = c(2.5,6.5))
+#plot_save(timeline_plot, "timeline")
 ```
 
 ```{r save-timeline, echo = FALSE, purl = FALSE, dpi=300, layout = "l-page"}
 # Save a copy of the network to be displayed below
-ggsave(timeline_plot,
-  filename = "aux/timeline-plot.png",
+ggsave(multilayered_chart,
+  filename = "assets/timeline-plot.png",
   width = 18,
-  height = 6,
+  height = 10,
   units = "in",
   dpi = 300
 )
-knitr::include_graphics("aux/timeline-plot.png")
+ggsave(multilayered_chart,
+  filename = "assets/timeline-plot.pdf",
+  width = 18,
+  height = 10,
+  units = "in",
+  dpi = 300
+)
+knitr::include_graphics("assets/timeline-plot.png")
 ```
 
 ## Acknowledgments {.appendix}
 
 This is work is funded in part by a [National Association for Family, School, and 
 Community Engagement (NAFSCE) Mini-Grant](https://nafsce.org/page/MiniGrant).
+Appreciation to Harish Gadde and Jay Colbert of the [Polis Center at IUPUI](https://polis.iupui.edu/)
+for providing the historical census data.
 
 ## Author Contributions {.appendix}
 
@@ -1285,7 +1329,7 @@ author_contributions |>
     data_row.padding = px(3)
   ) |>
   tab_source_note(
-    source_note = md("Available in [JATS](aux/credit.xml) format.")
+    source_note = md("Available in [JATS](assets/credit.xml) format.")
   )
 ```
 
