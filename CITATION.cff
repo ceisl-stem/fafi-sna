@@ -1,8 +1,8 @@
 cff-version: 1.1.0
 message: "If you use this software, please cite it as below."
 authors:
-  - family-names: Jeremy
-    given-names: Price
+  - family-names: Price
+    given-names: Jeremy F
     orcid: https://orcid.org/0000-0002-6506-3526
 title: "Family as Faculty Social Network Analysis"
 doi: 10.5281/zenodo.8000078
