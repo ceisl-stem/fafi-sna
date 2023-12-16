@@ -19,48 +19,4 @@
         <role vocab="credit" vocab-identifier="https://credit.niso.org/" vocab-term="Writing - Original Draft" vocab-term-identifier="https://credit.niso.org/contributor-roles/writing-original-draft/">Writing - Original Draft</role>
         <role vocab="credit" vocab-identifier="https://credit.niso.org/" vocab-term="Writing - Review &amp; Editing" vocab-term-identifier="https://credit.niso.org/contributor-roles/writing-review-editing/">Writing - Review &amp; Editing</role>
     </contrib>
-    <contrib>
-        <string-name>
-            <given-names>Cristina </given-names>
-            <surname>Santamaría Graff </surname>
-        </string-name>
-        <role vocab="credit" vocab-identifier="https://credit.niso.org/" vocab-term="Conceptualization" vocab-term-identifier="https://credit.niso.org/contributor-roles/conceptualization/">Conceptualization</role>
-        <role vocab="credit" vocab-identifier="https://credit.niso.org/" vocab-term="Data Curation" vocab-term-identifier="https://credit.niso.org/contributor-roles/data-curation/">Data Curation</role>
-        <role vocab="credit" vocab-identifier="https://credit.niso.org/" vocab-term="Formal Analysis" vocab-term-identifier="https://credit.niso.org/contributor-roles/formal-analysis/">Formal Analysis</role>
-        <role vocab="credit" vocab-identifier="https://credit.niso.org/" vocab-term="Funding Acquisition" vocab-term-identifier="https://credit.niso.org/contributor-roles/funding-acquisition/">Funding Acquisition</role>
-        <role vocab="credit" vocab-identifier="https://credit.niso.org/" vocab-term="Investigation" vocab-term-identifier="https://credit.niso.org/contributor-roles/investigation/">Investigation</role>
-        <role vocab="credit" vocab-identifier="https://credit.niso.org/" vocab-term="Project Administration" vocab-term-identifier="https://credit.niso.org/contributor-roles/project-administration/">Project Administration</role>
-        <role vocab="credit" vocab-identifier="https://credit.niso.org/" vocab-term="Writing - Original Draft" vocab-term-identifier="https://credit.niso.org/contributor-roles/writing-original-draft/">Writing - Original Draft</role>
-        <role vocab="credit" vocab-identifier="https://credit.niso.org/" vocab-term="Writing - Review &amp; Editing" vocab-term-identifier="https://credit.niso.org/contributor-roles/writing-review-editing/">Writing - Review &amp; Editing</role>
-    </contrib>
-    <contrib>
-        <string-name>
-            <given-names>Akaash </given-names>
-            <surname>Arora </surname>
-        </string-name>
-        <role vocab="credit" vocab-identifier="https://credit.niso.org/" vocab-term="Data Curation" vocab-term-identifier="https://credit.niso.org/contributor-roles/data-curation/">Data Curation</role>
-        <role vocab="credit" vocab-identifier="https://credit.niso.org/" vocab-term="Formal Analysis" vocab-term-identifier="https://credit.niso.org/contributor-roles/formal-analysis/">Formal Analysis</role>
-        <role vocab="credit" vocab-identifier="https://credit.niso.org/" vocab-term="Writing - Original Draft" vocab-term-identifier="https://credit.niso.org/contributor-roles/writing-original-draft/">Writing - Original Draft</role>
-        <role vocab="credit" vocab-identifier="https://credit.niso.org/" vocab-term="Writing - Review &amp; Editing" vocab-term-identifier="https://credit.niso.org/contributor-roles/writing-review-editing/">Writing - Review &amp; Editing</role>
-    </contrib>
-    <contrib>
-        <string-name>
-            <given-names>Amy </given-names>
-            <surname>Waechter-Versaw </surname>
-        </string-name>
-        <role vocab="credit" vocab-identifier="https://credit.niso.org/" vocab-term="Data Curation" vocab-term-identifier="https://credit.niso.org/contributor-roles/data-curation/">Data Curation</role>
-        <role vocab="credit" vocab-identifier="https://credit.niso.org/" vocab-term="Formal Analysis" vocab-term-identifier="https://credit.niso.org/contributor-roles/formal-analysis/">Formal Analysis</role>
-        <role vocab="credit" vocab-identifier="https://credit.niso.org/" vocab-term="Writing - Original Draft" vocab-term-identifier="https://credit.niso.org/contributor-roles/writing-original-draft/">Writing - Original Draft</role>
-        <role vocab="credit" vocab-identifier="https://credit.niso.org/" vocab-term="Writing - Review &amp; Editing" vocab-term-identifier="https://credit.niso.org/contributor-roles/writing-review-editing/">Writing - Review &amp; Editing</role>
-    </contrib>
-    <contrib>
-        <string-name>
-            <given-names>Román </given-names>
-            <surname>Graff </surname>
-        </string-name>
-        <role vocab="credit" vocab-identifier="https://credit.niso.org/" vocab-term="Data Curation" vocab-term-identifier="https://credit.niso.org/contributor-roles/data-curation/">Data Curation</role>
-        <role vocab="credit" vocab-identifier="https://credit.niso.org/" vocab-term="Formal Analysis" vocab-term-identifier="https://credit.niso.org/contributor-roles/formal-analysis/">Formal Analysis</role>
-        <role vocab="credit" vocab-identifier="https://credit.niso.org/" vocab-term="Writing - Original Draft" vocab-term-identifier="https://credit.niso.org/contributor-roles/writing-original-draft/">Writing - Original Draft</role>
-        <role vocab="credit" vocab-identifier="https://credit.niso.org/" vocab-term="Writing - Review &amp; Editing" vocab-term-identifier="https://credit.niso.org/contributor-roles/writing-review-editing/">Writing - Review &amp; Editing</role>
-    </contrib>
 </contrib-group>

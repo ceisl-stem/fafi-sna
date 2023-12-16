@@ -89,7 +89,7 @@ All components of this work can be found at the project's [OSF repository](https
 
 ```
 fafi-sna/
-┣ assets/                      <- Directory for storing auxiliary files
+┣ assets/                   <- Directory for storing auxiliary files
 ┃ ┗ fafi-sna-references.bib <- Bibliography for this project in BibTeX format
 ┃ ┗ theme.css               <- Cascading style sheet for the project
 ┃ ┗ fafi-sna-logo.png       <- Project logo
@@ -969,19 +969,10 @@ full_avg_cent <- q_cent |>
   as.data.frame()
 ```
 
-Put in a correlation plot here that compares all the ranks.
-
-```{r, cache = TRUE}
-corr_avg <- full_avg_cent |>
-  select(-flexibility, -keyscore, -actor) |>
-  plot_corr("rank-corr")
-print(corr_avg)
-```
-
 ### Analyze Key Actors
 
 We look at the key actors in this project as contributors to the social network through 
-three **perspectives** (really need to come up with a better word than that):
+three **dimensions**:
 
 * **Positionality.** Laplacian Centrality and Leverage Centrality
 * **Reachability.** Latora Closeness Centrality and In Degree Centrality
@@ -1031,15 +1022,6 @@ keyactors_frame |>
   sub_missing(missing_text = " ") |>
   tab_spanner(label = "Key Actor Roles", columns = 6:8) |>
   tab_spanner(label = "Network Scores", columns = 3:5)
-```
-
-It is important to recognize that it's all OK, and I hope this works.
-
-```{r keyactor-analysis-corr-plot, echo = TRUE, cache=TRUE}
-keyactors_corr <- keyactors_frame |>
-  select(positionality_score, reachability_score, reputation_score) |>
-  plot_corr("keyactors-corr")
-print(keyactors_corr)
 ```
 
 ### Analyze Participant Actors
@@ -1116,19 +1098,6 @@ participants_frame |>
     row.striping.include_table_body = TRUE,
     row.striping.background_color = "#00000011"
   )
-```
-
-It is important to recognize that it's all OK, and I hope this works.
-
-```{r participant-analysis-corr-plot, echo = TRUE, cache=TRUE}
-participants_corr <- participants_frame |>
-  select(
-    positionality_score,
-    reachability_score,
-    potentiality_score
-  ) |>
-  plot_corr("participants-corr")
-print(participants_corr)
 ```
 
 # Initial Reflections
